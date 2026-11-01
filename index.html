@@ -25,6 +25,7 @@
       --amber-bg: rgba(245, 158, 11, 0.12);
       --amber-border: rgba(245, 158, 11, 0.35);
       --green: #10b981;
+      --purple: #a855f7;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,7 +39,7 @@
       overflow-x: hidden;
     }
 
-    /* 頂部固定狀態列 (雙時區 + 快捷) */
+    /* 頂部固定狀態列 */
     .top-bar {
       position: fixed;
       top: 0;
@@ -61,9 +62,14 @@
       font-size: 15px;
       color: #fff;
     }
+    .top-right-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
     .clocks-wrap {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       background: #0b0f17;
@@ -83,7 +89,7 @@
 
     /* 左側清單目錄 (Sidebar) */
     aside.sidebar {
-      width: 300px;
+      width: 310px;
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border);
       position: fixed;
@@ -94,7 +100,7 @@
       padding: 16px 14px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       z-index: 40;
     }
 
@@ -103,12 +109,12 @@
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.25) 100%);
       border: 1px solid var(--amber-border);
       border-radius: 10px;
-      padding: 14px;
+      padding: 12px 14px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
       transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);
     }
@@ -130,7 +136,7 @@
       width: fit-content;
     }
     .salon-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       color: #fef08a;
       display: flex;
@@ -138,15 +144,222 @@
       align-items: center;
     }
     .salon-desc {
-      font-size: 12px;
+      font-size: 11px;
       color: #cbd5e1;
-      line-height: 1.4;
+      line-height: 1.35;
     }
 
-    /* 側邊欄過濾輸入框 */
-    .sidebar-filter {
+    /* 觀賞者榮譽徽章卡片 (Honor Rank System) */
+    .honor-card {
+      background: linear-gradient(135deg, #162032 0%, #1a273e 100%);
+      border: 1px solid #2e3e5c;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       position: relative;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
     }
+    .honor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .honor-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.15);
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .honor-btn-rule {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .honor-btn-rule:hover { color: var(--accent); }
+
+    .honor-rank-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .honor-badge-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+      flex-shrink: 0;
+    }
+    .honor-details {
+      flex: 1;
+      min-width: 0;
+    }
+    .honor-level-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .honor-lvl-num {
+      color: #38bdf8;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+    .honor-exp-text {
+      font-size: 11px;
+      color: var(--text-sub);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 2px;
+    }
+
+    .honor-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #0b0f17;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #223048;
+    }
+    .honor-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+      transition: width 0.3s ease;
+    }
+
+    .honor-action-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 2px;
+    }
+    .btn-checkin {
+      flex: 1;
+      background: #2563eb;
+      color: #fff;
+      border: 1px solid #3b82f6;
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .btn-checkin:hover:not(:disabled) {
+      background: #1d4ed8;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+    }
+    .btn-checkin:disabled {
+      background: #1e293b;
+      color: #64748b;
+      border-color: #334155;
+      cursor: not-allowed;
+    }
+    .btn-read-exp {
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* 浮動經驗值獲得提示 (Toast) */
+    .exp-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.25);
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+    .exp-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 榮譽等級 20 階彈窗 (Modal) */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 99;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal-box {
+      background: #131b2c;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 20px;
+      color: #fff;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    .modal-title { font-size: 16px; font-weight: 700; color: #38bdf8; }
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .rank-list-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .rank-list-table th, .rank-list-table td {
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .rank-list-table th { color: var(--text-muted); font-weight: 600; }
+    .rank-row-active { background: rgba(56, 189, 248, 0.12); color: #38bdf8; font-weight: 700; }
+
+    /* 側邊欄過濾輸入框 */
+    .sidebar-filter { position: relative; }
     .sidebar-input {
       width: 100%;
       background: #0b0f17;
@@ -206,16 +419,14 @@
 
     /* 右側主要內容區 */
     main.content {
-      margin-left: 300px;
+      margin-left: 310px;
       flex: 1;
       padding: 24px 32px 60px;
       min-height: calc(100vh - 48px);
     }
 
     /* 頂部搜尋與分類按鈕 */
-    .header-section {
-      margin-bottom: 24px;
-    }
+    .header-section { margin-bottom: 24px; }
     .search-row {
       display: flex;
       gap: 12px;
@@ -328,6 +539,7 @@
     .badge-finance  { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
     .badge-news     { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
     .badge-global   { background: rgba(139, 92, 246, 0.2); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
+    .badge-media    { background: rgba(236, 72, 153, 0.2); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.3); }
 
     .star-btn {
       background: transparent;
@@ -414,9 +626,11 @@
       <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()">☰ 目錄</button>
       <span>🚀 火星人的便當 · 財經資訊導航站</span>
     </div>
-    <div class="clocks-wrap">
-      <div class="clock-item"><span class="clock-dot"></span> 台北: <span id="clock-tw">--:--:--</span></div>
-      <div class="clock-item"><span class="clock-dot" style="background:#38bdf8;"></span> 紐約: <span id="clock-ny">--:--:--</span></div>
+    <div class="top-right-group">
+      <div class="clocks-wrap">
+        <div class="clock-item"><span class="clock-dot"></span> 台北: <span id="clock-tw">--:--:--</span></div>
+        <div class="clock-item"><span class="clock-dot" style="background:#38bdf8;"></span> 紐約: <span id="clock-ny">--:--:--</span></div>
+      </div>
     </div>
   </div>
 
@@ -429,6 +643,33 @@
         <div class="salon-title">火星人的便當 <span>↗</span></div>
         <div class="salon-desc">個人文章、產業觀測、市場數據與心得筆記累積處。</div>
       </a>
+
+      <!-- 觀賞者榮譽等級卡片 (Honor Rank System) -->
+      <div class="honor-card">
+        <div class="honor-header">
+          <span class="honor-tag">🎖️ 觀賞者榮譽殿堂</span>
+          <button class="honor-btn-rule" onclick="openHonorModal()">查看 20 階 ➔</button>
+        </div>
+        <div class="honor-rank-row">
+          <div class="honor-badge-icon" id="honorBadgeIcon">🌱</div>
+          <div class="honor-details">
+            <div class="honor-level-title">
+              <span class="honor-lvl-num" id="honorLvlNum">Lv.01</span>
+              <span id="honorTitle">股市小白</span>
+            </div>
+            <div class="honor-exp-text">
+              經驗值: <span id="honorExpCur">0</span> / <span id="honorExpMax">100</span>
+            </div>
+          </div>
+        </div>
+        <div class="honor-progress-bar">
+          <div class="honor-progress-fill" id="honorProgressFill"></div>
+        </div>
+        <div class="honor-action-row">
+          <button class="btn-checkin" id="btnCheckin" onclick="dailyCheckIn()">📅 每日簽到 (+30 EXP)</button>
+          <div class="btn-read-exp" title="點擊任意網站卡片可自動獲得 +5 EXP">點擊站點 +5</div>
+        </div>
+      </div>
 
       <!-- 快速過濾 -->
       <div class="sidebar-filter">
@@ -443,12 +684,13 @@
     <main class="content">
       <div class="header-section">
         <div class="search-row">
-          <input type="text" id="mainSearch" class="main-search-input" placeholder="🔍 搜尋網站名稱、功能或關鍵字（如：月營收、VIX、三大法人、殖利率、期貨）...">
+          <input type="text" id="mainSearch" class="main-search-input" placeholder="🔍 搜尋網站名稱、功能或關鍵字（如：Bloomberg、CNBC、WSJ、月營收、VIX、殖利率）...">
         </div>
 
         <div class="tabs-wrap" id="categoryTabs">
-          <button class="filter-tab active" data-cat="all">全部收錄 (17)</button>
+          <button class="filter-tab active" data-cat="all">全部收錄 (23)</button>
           <button class="filter-tab" data-cat="favorites">⭐ 我的常用收藏 (<span id="favCount">0</span>)</button>
+          <button class="filter-tab" data-cat="media">📺 國際財經名牌 (6)</button>
           <button class="filter-tab" data-cat="official">🏛️ 官方第一手 (4)</button>
           <button class="filter-tab" data-cat="realtime">⚡ 即時看盤熱度 (4)</button>
           <button class="filter-tab" data-cat="finance">📊 基本面與籌碼 (3)</button>
@@ -466,6 +708,35 @@
     </main>
   </div>
 
+  <!-- 浮動獲得經驗值 Toast -->
+  <div class="exp-toast" id="expToast">+5 EXP 知識累積中！</div>
+
+  <!-- 榮譽等級 20 階 Modal 彈窗 -->
+  <div class="modal-overlay" id="honorModal" onclick="closeHonorModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">🎖️ 觀賞者榮譽等級體系 (共 20 階)</div>
+        <button class="modal-close" onclick="closeHonorModal()">✕</button>
+      </div>
+      <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
+        累積方式：每日簽到可獲 <b>+30 EXP</b>，點擊查閱任一財經網站可獲 <b>+5 EXP</b>。進度將儲存於您的瀏覽器！
+      </p>
+      <table class="rank-list-table">
+        <thead>
+          <tr>
+            <th>等級</th>
+            <th>榮譽稱號</th>
+            <th>所需累積 EXP</th>
+            <th>階級象徵</th>
+          </tr>
+        </thead>
+        <tbody id="rankTableBody">
+          <!-- 由 JavaScript 動態生成 20 階 -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <script>
     // 雙時區時鐘
     function updateClocks() {
@@ -476,8 +747,208 @@
     setInterval(updateClocks, 1000);
     updateClocks();
 
-    // 17 大權威財經網站數據
+    // 20 階榮譽等級定義表 (Lv.01 股市小白 ➔ Lv.20 股市知識王)
+    const honorRanks = [
+      { lvl: 1,  name: "股市小白",       expReq: 0,     icon: "🌱" },
+      { lvl: 2,  name: "開戶見習生",     expReq: 100,   icon: "🐣" },
+      { lvl: 3,  name: "看盤打卡員",     expReq: 250,   icon: "📱" },
+      { lvl: 4,  name: "零股探險家",     expReq: 450,   icon: "🪙" },
+      { lvl: 5,  name: "均線初學者",     expReq: 700,   icon: "📈" },
+      { lvl: 6,  name: "籌碼尋寶人",     expReq: 1000,  icon: "🔍" },
+      { lvl: 7,  name: "殖利率獵人",     expReq: 1350,  icon: "🏹" },
+      { lvl: 8,  name: "財報研讀生",     expReq: 1750,  icon: "📑" },
+      { lvl: 9,  name: "波段修煉者",     expReq: 2200,  icon: "🏄" },
+      { lvl: 10, name: "盤感覺醒者",     expReq: 2700,  icon: "⚡" },
+      { lvl: 11, name: "恐慌克服大師",   expReq: 3300,  icon: "🧘" },
+      { lvl: 12, name: "趨勢掌舵手",     expReq: 4000,  icon: "🧭" },
+      { lvl: 13, name: "護城河辨析師",   expReq: 4800,  icon: "🏰" },
+      { lvl: 14, name: "總經洞察先鋒",   expReq: 5700,  icon: "🌐" },
+      { lvl: 15, name: "逆風價值操盤手", expReq: 6700,  icon: "🦅" },
+      { lvl: 16, name: "多空對沖戰將",   expReq: 7800,  icon: "⚔️" },
+      { lvl: 17, name: "資產配置擘劃師", expReq: 9000,  icon: "⚖️" },
+      { lvl: 18, name: "華爾街漫步者",   expReq: 10500, icon: "🎩" },
+      { lvl: 19, name: "複利鍊金術師",   expReq: 12500, icon: "🔮" },
+      { lvl: 20, name: "股市知識王",     expReq: 15000, icon: "👑" }
+    ];
+
+    // 榮譽系統儲存與邏輯 (LocalStorage)
+    let userHonor = JSON.parse(localStorage.getItem('mars_viewer_honor_v1')) || {
+      totalExp: 0,
+      lastCheckinDate: ""
+    };
+
+    function saveUserHonor() {
+      localStorage.setItem('mars_viewer_honor_v1', JSON.stringify(userHonor));
+    }
+
+    function getCurrentRank() {
+      let current = honorRanks[0];
+      let next = honorRanks[1];
+      for (let i = honorRanks.length - 1; i >= 0; i--) {
+        if (userHonor.totalExp >= honorRanks[i].expReq) {
+          current = honorRanks[i];
+          next = honorRanks[i + 1] || null;
+          break;
+        }
+      }
+      return { current, next };
+    }
+
+    function showExpToast(msg) {
+      const toast = document.getElementById('expToast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 1600);
+    }
+
+    function addExp(points, reason = '') {
+      userHonor.totalExp += points;
+      saveUserHonor();
+      updateHonorUI();
+      showExpToast(`+${points} EXP ${reason}！`);
+    }
+
+    function dailyCheckIn() {
+      const todayStr = new Date().toISOString().slice(0, 10);
+      if (userHonor.lastCheckinDate === todayStr) return;
+
+      userHonor.lastCheckinDate = todayStr;
+      addExp(30, "簽到成功");
+    }
+
+    function onSiteClick(siteName) {
+      // 每次點開網站增加 5 點經驗值 (冷卻 1 秒)
+      addExp(5, `探索「${siteName.split(' ')[0]}」`);
+    }
+
+    function updateHonorUI() {
+      const { current, next } = getCurrentRank();
+      const lvlStr = current.lvl < 10 ? `Lv.0${current.lvl}` : `Lv.${current.lvl}`;
+      
+      document.getElementById('honorBadgeIcon').innerText = current.icon;
+      document.getElementById('honorLvlNum').innerText = lvlStr;
+      document.getElementById('honorTitle').innerText = current.name;
+
+      const curExpEl = document.getElementById('honorExpCur');
+      const maxExpEl = document.getElementById('honorExpMax');
+      const fillEl = document.getElementById('honorProgressFill');
+
+      if (next) {
+        const span = next.expReq - current.expReq;
+        const progress = userHonor.totalExp - current.expReq;
+        const pct = Math.min(100, Math.max(0, (progress / span) * 100));
+        curExpEl.innerText = userHonor.totalExp;
+        maxExpEl.innerText = next.expReq;
+        fillEl.style.width = `${pct}%`;
+      } else {
+        curExpEl.innerText = userHonor.totalExp;
+        maxExpEl.innerText = "MAX";
+        fillEl.style.width = "100%";
+      }
+
+      // 簽到按鈕狀態
+      const todayStr = new Date().toISOString().slice(0, 10);
+      const btnCheckin = document.getElementById('btnCheckin');
+      if (userHonor.lastCheckinDate === todayStr) {
+        btnCheckin.disabled = true;
+        btnCheckin.innerText = "✅ 今日已簽到 (+30)";
+      } else {
+        btnCheckin.disabled = false;
+        btnCheckin.innerText = "📅 每日簽到 (+30 EXP)";
+      }
+    }
+
+    function openHonorModal() {
+      const modal = document.getElementById('honorModal');
+      const tbody = document.getElementById('rankTableBody');
+      const { current } = getCurrentRank();
+
+      tbody.innerHTML = honorRanks.map(r => {
+        const isActive = r.lvl === current.lvl;
+        const lvlDisplay = r.lvl < 10 ? `Lv.0${r.lvl}` : `Lv.${r.lvl}`;
+        return `
+          <tr class="${isActive ? 'rank-row-active' : ''}">
+            <td>${lvlDisplay}</td>
+            <td>${r.icon} ${r.name} ${isActive ? '👈 當前' : ''}</td>
+            <td>${r.expReq.toLocaleString()} EXP</td>
+            <td>${r.lvl === 20 ? '👑 最高殊榮' : (r.lvl >= 15 ? '💎 傳奇' : (r.lvl >= 10 ? '⭐ 達人' : '🌱 初階'))}</td>
+          </tr>
+        `;
+      }).join('');
+
+      modal.classList.add('show');
+    }
+
+    function closeHonorModal(e) {
+      document.getElementById('honorModal').classList.remove('show');
+    }
+
+    // 總收錄網站數據（23 站）
     const sites = [
+      // 國際權威財經頻道
+      {
+        id: "bloomberg",
+        name: "Bloomberg (彭博社)",
+        url: "https://www.bloomberg.com",
+        cat: "media",
+        badge: "國際權威",
+        bClass: "badge-media",
+        desc: "全球頂級金融機構與專業操盤手的資訊風向球，掌握華爾街第一線獨家快訊與深度分析。",
+        feature: "華爾街動向、全球央行政策、彭博深度專題"
+      },
+      {
+        id: "cnbc",
+        name: "CNBC",
+        url: "https://www.cnbc.com",
+        cat: "media",
+        badge: "即時電視",
+        bClass: "badge-media",
+        desc: "全球知名度最高的商業與金融電視頻道，開盤盤前預測、重大併購與CEO專訪最為即時。",
+        feature: "美股開盤直播速報、企業高層專訪、市場情緒"
+      },
+      {
+        id: "wsj",
+        name: "The Wall Street Journal (華爾街日報)",
+        url: "https://www.wsj.com",
+        cat: "media",
+        badge: "百年老牌",
+        bClass: "badge-media",
+        desc: "全球商業財經報導的黃金標竿，調查報導扎實，深入剖析聯準會貨幣政策與地緣政治經濟。",
+        feature: "聯準會內幕風向球（Fed Watcher）、政經深度專題"
+      },
+      {
+        id: "marketwatch",
+        name: "MarketWatch",
+        url: "https://www.marketwatch.com",
+        cat: "media",
+        badge: "盤前夜盤",
+        bClass: "badge-media",
+        desc: "道瓊旗下的即時股市動態門戶，期指走勢、盤前盤後大漲大跌榜與經濟日曆一目了然。",
+        feature: "盤前期貨異動、熱門個股排行、即時財經日曆"
+      },
+      {
+        id: "seekingalpha",
+        name: "Seeking Alpha",
+        url: "https://seekingalpha.com",
+        cat: "media",
+        badge: "買方研報",
+        bClass: "badge-media",
+        desc: "全球最大的美股獨立投資人與機構分析師社群，提供極其豐富的個股多空深度評級研報。",
+        feature: "美股個股多空分析、財報逐字稿（Transcripts）"
+      },
+      {
+        id: "ft",
+        name: "Financial Times (英國金融時報)",
+        url: "https://www.ft.com",
+        cat: "media",
+        badge: "歐洲全球",
+        bClass: "badge-media",
+        desc: "總部位於倫敦的世界級財經大報，具備超越美股單一視角、宏觀覆蓋歐洲與亞洲跨國局勢。",
+        feature: "全球大宗商品動向、跨國宏觀經濟、地緣政治"
+      },
+
       // 官方權威
       {
         id: "mops",
@@ -660,6 +1131,7 @@
     ];
 
     const categoryNames = {
+      media: "📺 國際財經名牌",
       official: "🏛️ 官方第一手",
       realtime: "⚡ 即時看盤熱度",
       finance: "📊 基本面與籌碼",
@@ -696,7 +1168,7 @@
       const q = filterTxt.toLowerCase().trim();
       let html = '';
 
-      const cats = ['official', 'realtime', 'finance', 'news', 'global'];
+      const cats = ['media', 'official', 'realtime', 'finance', 'news', 'global'];
       cats.forEach(c => {
         const groupSites = sites.filter(s => s.cat === c && (!q || s.name.toLowerCase().includes(q) || s.feature.toLowerCase().includes(q)));
         if (groupSites.length > 0) {
@@ -707,7 +1179,7 @@
               <li>
                 <button class="nav-item-btn" onclick="scrollToSite('${s.id}')">
                   <span>${isFav ? '⭐ ' : ''}${s.name.split(' ')[0]}</span>
-                  <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="outlink" onclick="event.stopPropagation()">↗</a>
+                  <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="outlink" onclick="event.stopPropagation(); onSiteClick('${s.name}')">↗</a>
                 </button>
               </li>
             `;
@@ -725,7 +1197,6 @@
 
     // 平滑滾動並高亮卡片
     function scrollToSite(id) {
-      // 確保分類設為 all 以防目標卡片被隱藏
       if (currentCat !== 'all' && currentCat !== 'favorites') {
         currentCat = 'all';
         document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
@@ -773,7 +1244,7 @@
       grid.innerHTML = filtered.map(s => {
         const isFav = favorites.includes(s.id);
         return `
-          <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="site-card" id="card-${s.id}">
+          <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="site-card" id="card-${s.id}" onclick="onSiteClick('${s.name}')">
             <div>
               <div class="card-head">
                 <span class="card-title">${s.name}</span>
@@ -820,6 +1291,7 @@
     updateFavCount();
     renderSidebarMenu();
     renderCards();
+    updateHonorUI();
   </script>
 </body>
 </html>

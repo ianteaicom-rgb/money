@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>火星人的便當 · 財經與投資導航儀表板</title>
+  <title>火星人的地球便當 · 全球即時監控 & 財經導航旗艦站</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -69,6 +69,33 @@
       align-items: center;
       gap: 8px;
     }
+
+    /* 右上角強推分享連結 (日月光投控法說會解讀) */
+    .top-share-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(217, 119, 6, 0.35) 100%);
+      border: 1px solid #f59e0b;
+      color: #fef08a;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .top-share-link:hover {
+      background: #f59e0b;
+      color: #0b0f17;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.6);
+      transform: translateY(-1px);
+    }
+    .top-share-link .share-icon { font-size: 13px; }
+
     .clocks-wrap {
       display: flex;
       gap: 10px;
@@ -113,6 +140,7 @@
       color: #fbbf24;
     }
 
+    /* 頂部一體化登入/頭像膠囊 */
     .top-auth-capsule {
       display: inline-flex;
       align-items: center;
@@ -173,20 +201,6 @@
       box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
     }
 
-    .auth-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #2563eb;
-      color: #fff;
-      border: 1px solid #3b82f6;
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
     .user-profile-badge {
       display: none;
       align-items: center;
@@ -282,7 +296,7 @@
     }
     .sidebar-overlay.active { display: block; }
 
-    /* 左上角特製：火星人的便當沙龍卡片 */
+    /* 左上角特製：火星人的地球便當沙龍卡片 */
     .salon-card {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.25) 100%);
       border: 1px solid var(--amber-border);
@@ -316,7 +330,51 @@
     }
     .salon-desc { font-size: 11px; color: #cbd5e1; line-height: 1.35; }
 
-    /* 觀賞者榮譽等級卡片 (分層排版不擠字) */
+    /* 側欄熱推文章卡片 (日月光法說解讀) */
+    .sidebar-feature-card {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.18) 0%, rgba(220, 38, 38, 0.22) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .sidebar-feature-card:hover {
+      border-color: #f59e0b;
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.35);
+      transform: translateY(-1px);
+    }
+    .sfc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: #f59e0b;
+      color: #0b0f17;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+    .sfc-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fef08a;
+      line-height: 1.45;
+    }
+    .sfc-cta {
+      font-size: 11px;
+      color: #38bdf8;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    /* 觀賞者便當榮譽等級卡片 (分層排版不擠字) */
     .honor-card {
       background: linear-gradient(135deg, #162032 0%, #1a273e 100%);
       border: 1px solid #2e3e5c;
@@ -698,7 +756,7 @@
     }
     .nav-item-btn:hover .outlink { opacity: 1; color: var(--accent); }
 
-    /* 右側主區域 (RWD 自適應) */
+    /* 右側主區域 */
     main.content {
       margin-left: 330px;
       flex: 1;
@@ -706,6 +764,53 @@
       min-height: calc(100vh - 52px);
     }
     .header-section { margin-bottom: 20px; }
+
+    /* 頂部強推文章橫幅 (主內容區) */
+    .featured-banner-wrap {
+      margin-bottom: 16px;
+    }
+    .featured-banner-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: linear-gradient(90deg, rgba(245, 158, 11, 0.16) 0%, rgba(220, 38, 38, 0.18) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      border-radius: 10px;
+      padding: 10px 16px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.2s ease;
+      flex-wrap: wrap;
+    }
+    .featured-banner-link:hover {
+      border-color: #f59e0b;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.35);
+      background: linear-gradient(90deg, rgba(245, 158, 11, 0.25) 0%, rgba(220, 38, 38, 0.28) 100%);
+    }
+    .fb-tag {
+      background: #f59e0b;
+      color: #0b0f17;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .fb-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fef08a;
+      flex: 1;
+      min-width: 220px;
+    }
+    .fb-arrow {
+      font-size: 12px;
+      font-weight: 700;
+      color: #38bdf8;
+      white-space: nowrap;
+    }
+
     .search-row {
       display: flex;
       gap: 12px;
@@ -751,7 +856,7 @@
       border-color: var(--accent);
     }
 
-    /* 卡片網格 (手機自適應) */
+    /* 卡片網格 */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -983,79 +1088,27 @@
       .top-bar { padding: 0 10px; }
       .top-brand span.full-title { display: none; }
       .top-brand span.short-title { display: inline; }
+      
       /* 手機版隱藏整個頂部時鐘與次要按鈕，釋放空間給抽獎與會員頭像 */
       .clocks-wrap { display: none !important; }
       .top-action-btn.btn-hide-mobile { display: none; }
       .top-action-btn.btn-lottery {
-        padding: 6px 12px;
-        font-size: 12px;
+        padding: 5px 9px;
+        font-size: 11px;
         font-weight: 700;
-        box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
       }
-      .top-auth-capsule {
-      display: inline-flex;
-      align-items: center;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .top-guest-block {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: #2563eb;
-      color: #fff;
-      border: 1px solid #3b82f6;
-      border-radius: 20px;
-      padding: 4px 10px 4px 6px;
-      font-size: 11.5px;
-      font-weight: 600;
-      transition: all 0.15s ease;
-      white-space: nowrap;
-    }
-    .top-guest-block:hover {
-      background: #1d4ed8;
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
-    }
-    .top-guest-avatar {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-    }
-    .top-login-label {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .sidebar-login-btn {
-      display: inline-flex;
-      align-items: center;
-      background: #2563eb;
-      color: #fff;
-      border: 1px solid #3b82f6;
-      border-radius: 6px;
-      padding: 3px 8px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 4px;
-      transition: all 0.15s ease;
-      white-space: nowrap;
-      width: fit-content;
-    }
-    .sidebar-login-btn:hover {
-      background: #1d4ed8;
-      box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
-    }
-
-    .auth-btn { padding: 6px 10px; font-size: 11px; }
+      .top-share-link {
+        padding: 5px 9px;
+        font-size: 11px;
+      }
+      .top-share-link span.share-text-desktop { display: none; }
+      .top-share-link span.share-text-mobile { display: inline; }
+      .auth-btn { padding: 6px 10px; font-size: 11px; }
     }
     @media (min-width: 881px) {
       .top-brand span.short-title { display: none; }
+      .top-share-link span.share-text-mobile { display: none; }
+      .top-share-link span.share-text-desktop { display: inline; }
     }
   </style>
 </head>
@@ -1065,10 +1118,17 @@
   <div class="top-bar">
     <div class="top-brand">
       <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-      <span class="full-title">🚀 火星人的便當 · 財經導航</span>
-      <span class="short-title">🚀 火星便當</span>
+      <span class="full-title">🍱 火星人的地球便當 · 財經導航</span>
+      <span class="short-title">🍱 火星人的地球便當</span>
     </div>
     <div class="top-right-group">
+      <!-- 右上角分享連結 (直接點擊導流方格子) -->
+      <a href="https://vocus.cc/article/6ae6e46dfd89780001c59f56?modal=likes" target="_blank" rel="noopener noreferrer" class="top-share-link" title="【Mars 觀測日誌】日月光投控（3711）第三季法說會解讀：空間卡位戰開打，封測天花板如何變成新地板？">
+        <span class="share-icon">🔥</span>
+        <span class="share-text-desktop">【Mars 觀測日誌】日月光法說解讀 ↗</span>
+        <span class="share-text-mobile">日月光法說 ↗</span>
+      </a>
+
       <div class="clocks-wrap">
         <div class="clock-item"><span class="clock-dot"></span> 台北: <span id="clock-tw">--:--:--</span></div>
         <div class="clock-item ny-clock"><span class="clock-dot" style="background:#38bdf8;"></span> 紐約: <span id="clock-ny">--:--:--</span></div>
@@ -1078,7 +1138,7 @@
       <button class="top-action-btn btn-hide-mobile" onclick="openCommunityModal()">📝 火星文章</button>
       <button class="top-action-btn btn-hide-mobile" onclick="openRecommendModal()">💡 推薦好站</button>
 
-      <!-- 頂部頭像與登入一體化膠囊 (未登入點擊直接登入，已登入點擊查看資料) -->
+      <!-- 頂部頭像與登入一體化膠囊 -->
       <div class="top-auth-capsule" id="topAuthCapsule" onclick="handleTopAuthClick()" title="點擊登入或查看個人資料">
         <div class="top-guest-block" id="topGuestBlock">
           <span class="top-guest-avatar">👤</span>
@@ -1101,14 +1161,21 @@
     <aside class="sidebar" id="sidebar">
       <a href="https://vocus.cc/salon/6a80591abc13239b2cad93c5" target="_blank" rel="noopener noreferrer" class="salon-card">
         <div class="salon-badge">🍱 資訊基地 · 方格子</div>
-        <div class="salon-title">火星人的便當 <span>↗</span></div>
+        <div class="salon-title">火星人的地球便當 <span>↗</span></div>
         <div class="salon-desc">個人文章、產業觀測、市場數據與心得筆記累積處。</div>
       </a>
 
-      <!-- 觀賞者榮譽等級卡片 (分層排版不擠字) -->
+      <!-- 方格子本週主打推薦文章卡片 (側欄常駐) -->
+      <a href="https://vocus.cc/article/6ae6e46dfd89780001c59f56?modal=likes" target="_blank" rel="noopener noreferrer" class="sidebar-feature-card">
+        <div class="sfc-badge">🔥 最新法說深度解讀</div>
+        <div class="sfc-title">【Mars 觀測日誌】日月光投控（3711）第三季法說會解讀：空間卡位戰開打，封測天花板如何變成新地板？</div>
+        <div class="sfc-cta">前往方格子閱讀完整分析 ➔</div>
+      </a>
+
+      <!-- 觀賞者便當榮譽等級卡片 (分層排版不擠字) -->
       <div class="honor-card">
         <div class="honor-header-row">
-          <span class="honor-tag">🎖️ 榮譽殿堂</span>
+          <span class="honor-tag">🎖️ 便當榮譽殿堂</span>
           <span class="sidebar-dwell-badge">⏱️ 在線: <b id="sidebarDwellClock">00:00</b></span>
         </div>
 
@@ -1116,24 +1183,24 @@
         <div class="honor-action-toolbar">
           <button class="honor-tool-btn" onclick="openExpGuideModal()">📖 攻略</button>
           <button class="honor-tool-btn" onclick="openLeaderboardModal()">🏆 排行</button>
-          <button class="honor-tool-btn" onclick="openHonorModal()">📜 99階</button>
+          <button class="honor-tool-btn" onclick="openHonorModal()">🍱 99階便當</button>
           <button class="honor-tool-btn" onclick="openCommunityModal()">📝 文章</button>
         </div>
 
         <div class="honor-rank-row">
           <div class="honor-avatar-wrap" onclick="handleSidebarAvatarClick()" title="點擊更換頭像或 Google 登入">
-            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='18' font-size='18'>🌱</text></svg>" class="honor-avatar-img" id="sidebarAvatar">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='18' font-size='18'>🍙</text></svg>" class="honor-avatar-img" id="sidebarAvatar">
             <span class="honor-avatar-edit-hint" id="sidebarAvatarEditHint">🔑</span>
           </div>
           <div class="honor-details">
             <div class="honor-level-title">
               <span class="honor-lvl-num" id="honorLvlNum">Lv.01</span>
-              <span id="honorTitle">股市小白</span>
+              <span id="honorTitle">白飯梅子便當</span>
             </div>
             <div class="honor-exp-text">
               EXP: <span id="honorExpCur">0</span> / <span id="honorExpMax">100</span>
             </div>
-            <!-- 大頭貼旁 Google 登入按鈕 (未登入時明顯展示) -->
+            <!-- 大頭貼旁 Google 登入按鈕 -->
             <button class="sidebar-login-btn" id="sidebarLoginBtn" onclick="loginWithGoogle()">
               <svg width="12" height="12" viewBox="0 0 24 24" style="margin-right:3px; vertical-align:-1px;"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
               Google 登入
@@ -1221,6 +1288,15 @@
     <!-- 右側主要內容區 -->
     <main class="content">
       <div class="header-section">
+        <!-- 頂部強推文章橫幅 (主內容區) -->
+        <div class="featured-banner-wrap">
+          <a href="https://vocus.cc/article/6ae6e46dfd89780001c59f56?modal=likes" target="_blank" rel="noopener noreferrer" class="featured-banner-link">
+            <span class="fb-tag">🔥 方格子最新觀測特報</span>
+            <span class="fb-text">【Mars 觀測日誌】日月光投控（3711）第三季法說會解讀：空間卡位戰開打，封測天花板如何變成新地板？</span>
+            <span class="fb-arrow">前往閱讀 ➔</span>
+          </a>
+        </div>
+
         <div class="search-row">
           <input type="text" id="mainSearch" class="main-search-input" placeholder="🔍 搜尋網站名稱、功能或關鍵字（如：Bloomberg、CNBC、WSJ、月營收、VIX、殖利率）...">
         </div>
@@ -1322,7 +1398,7 @@
   <div class="modal-overlay" id="leaderboardModal" onclick="closeLeaderboardModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <div class="modal-title">🏆 觀賞者全體榮譽排行榜 (Top 50)</div>
+        <div class="modal-title">🏆 觀賞者全體便當排行榜 (Top 50)</div>
         <button class="modal-close" onclick="closeLeaderboardModal()">✕</button>
       </div>
       <div id="adminNoticeBar" style="display:none; background:rgba(239,68,68,0.15); border:1px solid #ef4444; color:#f87171; padding:6px 10px; border-radius:6px; font-size:11px; margin-bottom:10px;">
@@ -1334,7 +1410,7 @@
             <tr>
               <th>名次</th>
               <th>投資人</th>
-              <th>階級稱號</th>
+              <th>便當階級</th>
               <th>累積 EXP</th>
               <th id="thAdminAction" style="display:none;">站長權限操作</th>
             </tr>
@@ -1372,16 +1448,16 @@
     </div>
   </div>
 
-  <!-- 榮譽等級 99 階 Modal 彈窗 -->
+  <!-- 榮譽等級 99 階 Modal 彈窗 (便當階級進化全覽) -->
   <div class="modal-overlay" id="honorModal" onclick="closeHonorModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <div class="modal-title">🎖️ 觀賞者榮譽等級體系 (共 99 階 · 最高 990 萬)</div>
+        <div class="modal-title">🍱 觀賞者便當榮譽體系 (共 99 階 · 最高 990 萬)</div>
         <button class="modal-close" onclick="closeHonorModal()">✕</button>
       </div>
       <div class="table-scroll-wrap">
         <table class="lb-table">
-          <thead><tr><th>等級</th><th>榮譽稱號</th><th>所需 EXP</th><th>階級象徵與特效</th></tr></thead>
+          <thead><tr><th>等級</th><th>便當稱號</th><th>所需 EXP</th><th>便當類型與發光特效</th></tr></thead>
           <tbody id="rankTableBody"></tbody>
         </table>
       </div>
@@ -1396,7 +1472,7 @@
         <div class="modal-title">📖 觀賞者榮譽積分 (EXP) 完整獲取攻略</div>
         <button class="modal-close" onclick="closeExpGuideModal()">✕</button>
       </div>
-      <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">累積經驗值逐步晉升至最高榮譽 <b>Lv.99 股市知識王 (990萬 EXP)</b>！</p>
+      <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">累積經驗值逐步晉升至最高榮譽 <b>Lv.99 地球便當征服王 (990萬 EXP)</b>！</p>
       <div class="table-scroll-wrap">
         <table class="lb-table">
           <thead>
@@ -1455,18 +1531,28 @@
       console.warn("Firebase 初始化提示：", e);
     }
 
-    // 99 階榮譽等級定義
+    // 99 階便當榮譽等級定義 (Lv.50 約 300 萬，Lv.99 為 990 萬)
     const baseTitles = [
-      "股市小白", "開戶見習生", "看盤打卡員", "零股探險家", "均線學員", "K線研讀員", "量價初習者", "支撐壓力手", "隔日觀察員", "初級操盤生",
-      "籌碼尋寶人", "法人跟單者", "融資監控手", "外資動態客", "投信追蹤師", "除填息獵手", "殖利率達人", "財報初審員", "營收追蹤員", "盤感覺醒者",
-      "波段修煉者", "技術突破手", "形態辨析師", "分時判讀員", "轉折狙擊手", "量價突破將", "回檔抄底手", "突破追價員", "停損守護者", "實戰進階者",
-      "產業分析師", "題材挖掘手", "AI概念獵人", "半導體追蹤客", "航運週期者", "車電觀察員", "生技探針員", "綠能研判師", "景氣循環手", "護城河辨析師",
-      "價值投資研習", "自由現金流探員", "本益比河流使", "股東權益掌舵", "總經洞察先鋒", "降息預期判官", "美債殖利率守護", "美元指數解讀", "全球通膨偵測", "火星核心操盤大師",
-      "逆風價值操盤手", "恐慌逢低進場者", "VIX情緒大師", "跨市場聯動者", "台美股雙修客", "期現貨對沖者", "選擇權避險師", "資產守門人", "多空雙向將", "趨勢巨浪掌舵手",
-      "資金配置戰略家", "跨國套利先驅", "動態平衡大師", "黑天鵝防禦者", "地緣政經策士", "大宗商品導航", "能源期貨巡弋", "全球宏觀掌門", "星際資金操盤官", "市場洞察先知",
-      "無懼牛熊者", "心態澄澈智者", "冷靜止損神針", "暴跌獵金獵人", "歷史循環見證者", "複利加速推進師", "長期複利實踐家", "資產幾何增長手", "無風險套利策劃", "華爾街漫步者",
-      "投資哲學導師", "大師思維傳承", "極致專注操盤客", "頂級護城河領主", "週期輪動統帥", "資產配置宗師", "全天候策略主帥", "全方位市場總督", "星辰交易指揮使", "火星戰隊巡弋官",
-      "火星領航執旗手", "星系資金調度長", "無上智慧操盤宗師", "市場規律化身", "萬象牛熊定海神針", "終極金融思維者", "超凡複利鍊金術師", "火星神級大導師", "股市知識王"
+      "白飯梅子便當", "菜脯蛋素雅便當", "香滷豆干便當", "肉燥酸菜便當", "陽春海苔壽司便當",
+      "鮮炒高麗菜便當", "玉米雙蛋精力便當", "什錦田園時蔬便當", "古早味香腸便當", "活力三明治早午便當",
+      "蒜香鹹豬肉便當", "酥嫩香蔥油雞便當", "塔香三杯雞便當", "蜜汁碳烤叉燒便當", "招牌燒臘三寶便當",
+      "懷舊古早味排骨便當", "經典台鐵木盒便當", "阿嬤金黃控肉便當", "金牌黃金大雞腿便當", "香脆酥炸大雞排便當",
+      "廣式脆皮燒肉便當", "紅燒牛腩精燉便當", "黑椒鐵板牛柳便當", "香濃咖哩嫩雞便當", "糖醋咕咾肉特選便當",
+      "日式厚切炸豬排便當", "韓式泡菜雪花牛便當", "泰式香辣打拋豬便當", "越式香茅烤雞腿便當", "照燒炙燒鮭魚便當",
+      "薄鹽嫩烤鯖魚便當", "義式香草嫩烤春雞便當", "日式唐揚炸雞丼便當", "法式紅酒燉牛肉便當", "港式明爐燒鴨便當",
+      "炭烤蒲燒鯛魚便當", "新加坡海南雞飯便當", "炭火雪花牛五花便當", "美式低溫慢烤豬肋便當", "雙饗豪邁海陸雙拼便當",
+      "澎湖透抽海鮮炒便當", "宜蘭櫻桃鴨胸精製便當", "日本極品蒲燒白鰻便當", "炙燒干貝天使紅蝦便當", "豪氣戰斧厚切豬排便當",
+      "紐西蘭嚴選嫩菲力便當", "黑松露野蕈安格斯便當", "頂級霜降和牛極盛便當", "宮廷御膳九宮格便當", "🔥 火星特級極品海陸便當",
+      "法式油封功夫鴨腿便當", "北海道松葉蟹鉗特級便當", "炙燒野生頂級烏魚子便當", "波士頓活龍蝦鮑魚雙饗便當", "澳洲M9純血和牛紐約克便當",
+      "日本近江A5雪花和牛便當", "頂級藍鰭黑鮪魚大腹便當", "西班牙伊比利黑豬橡子便當", "帝王蟹腿滿漢全席便當", "官府濃汁黃燜花膠便當",
+      "金絲燕窩極品滋補便當", "頂級白松露炙燒和牛便當", "珍品極黑鱘魚子醬便當", "日本神戶A5沙朗御膳便當", "南非極品溏心鮑魚便當",
+      "琉璃海膽三色璀璨便當", "米其林三星主廚盛宴便當", "乾隆御膳千叟宴百珍便當", "龍騰四海極致無雙便當", "鳳凰展翅傳奇國宴便當",
+      "天山雪蓮養生仙品便當", "萬壽無疆至高金尊便當", "紫禁城滿漢御極全席便當", "星瀚四海無雙饌玉便當", "星際銀河巡弋旗艦便當",
+      "暗物質高能滋補便當", "脈衝星能量超載便當", "超新星爆發璀璨便當", "曲率引擎躍遷特級便當", "引力透鏡時空珍饈便當",
+      "量子糾纏美味共振便當", "獵戶座星雲特產盛宴便當", "仙女座星系珍饈便當", "太陽黑子炙烤超熱便當", "星際聯合艦隊總督便當",
+      "宇宙時空摺疊神饌便當", "恆星核心聚變能量便當", "引力奇異點黑洞極饗便當", "光速次元超維度珍品便當", "宇宙大霹靂原初便當",
+      "火星基地最高統帥便當", "萬象星系能量統治者便當", "銀河系主宰至高神便當", "虛空超弦究極造物便當", "宇宙因果律神級便當",
+      "永恆時空無窮無盡便當", "超維度無上食神便當", "火星神級征服者便當", "👑 地球便當征服王"
     ];
 
     window.honorRanks = [];
@@ -1483,7 +1569,7 @@
         req = Math.round((3000000 + (9900000 - 3000000) * Math.pow(t, 1.2)) / 10000) * 10000;
       } else req = 9900000;
 
-      let icon = l >= 99 ? "👑" : (l >= 75 ? "🔮" : (l >= 50 ? "🔥" : (l >= 25 ? "📈" : "🌱")));
+      let icon = l >= 99 ? "👑" : (l >= 76 ? "🛸" : (l >= 51 ? "🦞" : (l >= 41 ? "🥩" : (l >= 26 ? "🍛" : (l >= 11 ? "🍱" : "🍙")))));
       window.honorRanks.push({ lvl: l, name: baseTitles[l - 1], expReq: req, icon: icon });
     }
 
@@ -1503,7 +1589,7 @@
     };
 
     let currentUser = null;
-    let localUserData = JSON.parse(localStorage.getItem('mars_viewer_v5')) || {
+    let localUserData = JSON.parse(localStorage.getItem('mars_viewer_v6')) || {
       uid: 'guest',
       displayName: '股市投資人',
       photoURL: "https://api.dicebear.com/7.x/bottts/svg?seed=MarsGuest",
@@ -1517,7 +1603,7 @@
       isRepresentative: false
     };
 
-    function saveLocal() { localStorage.setItem('mars_viewer_v5', JSON.stringify(localUserData)); }
+    function saveLocal() { localStorage.setItem('mars_viewer_v6', JSON.stringify(localUserData)); }
 
     function checkIsAdmin(user, data) {
       if (!user) return false;
@@ -1537,7 +1623,6 @@
       } catch(e) {}
     }
 
-    
     window.handleTopAuthClick = function() {
       if (currentUser) {
         openProfileModal();
@@ -1737,7 +1822,7 @@
       const sign = localUserData.zodiac || 'aries';
       const data = zodiacDatabase[sign];
       const today = new Date().toLocaleDateString('zh-TW');
-      const shareText = `【${today} 火星人的便當 · ${data.name} 投資運勢】\n⭐ 財富指數：${data.stars}\n🎯 幸運資產：${data.luckAsset}\n💡 策略心態：${data.tip}\n🚀 來看台美股導航站：https://ianteaicom-rgb.github.io/money/`;
+      const shareText = `【${today} 火星人的地球便當 · ${data.name} 投資運勢】\n⭐ 財富指數：${data.stars}\n🎯 幸運資產：${data.luckAsset}\n💡 策略心態：${data.tip}\n🚀 來看台美股導航站：https://ianteaicom-rgb.github.io/money/`;
       navigator.clipboard.writeText(shareText).then(() => alert("✅ 已複製今日運勢卡！可貼至 LINE 分享！")).catch(() => alert(shareText));
     };
 
@@ -2104,7 +2189,6 @@
         img.onload = function() {
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
-          // 自動正方形等比置中裁切 (Center Crop)，任何長寬比照片上傳均自動滿格不留白
           const minSide = Math.min(img.width, img.height);
           const sx = (img.width - minSide) / 2;
           const sy = (img.height - minSide) / 2;
@@ -2182,7 +2266,7 @@
       adminNotice.style.display = localUserData.isAdmin ? 'block' : 'none';
 
       if (!isFirebaseReady || !db) {
-        tbody.innerHTML = `<tr><td class="rank-num-1">🥇 1</td><td><div class="lb-user-cell"><img src="${localUserData.photoURL}" class="lb-avatar">${localUserData.displayName} (您)</div></td><td>Lv.01 股市小白</td><td>${localUserData.totalExp} EXP</td>${localUserData.isAdmin ? '<td>--</td>' : ''}</tr>`;
+        tbody.innerHTML = `<tr><td class="rank-num-1">🥇 1</td><td><div class="lb-user-cell"><img src="${localUserData.photoURL}" class="lb-avatar">${localUserData.displayName} (您)</div></td><td>Lv.01 白飯梅子便當</td><td>${localUserData.totalExp} EXP</td>${localUserData.isAdmin ? '<td>--</td>' : ''}</tr>`;
         return;
       }
       tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:16px;">正在取得排行榜...</td></tr>';
@@ -2199,7 +2283,7 @@
           const medal = rank === 1 ? '🥇 ' : (rank === 2 ? '🥈 ' : (rank === 3 ? '🥉 ' : ''));
           const isUserRep = representativesCache.includes(uid);
 
-          let title = "股市小白";
+          let title = "白飯梅子便當";
           for (let i = window.honorRanks.length - 1; i >= 0; i--) {
             if ((u.totalExp || 0) >= window.honorRanks[i].expReq) {
               title = `Lv.${window.honorRanks[i].lvl < 10 ? '0' : ''}${window.honorRanks[i].lvl} ${window.honorRanks[i].name}`;
@@ -2248,7 +2332,7 @@
       tbody.innerHTML = window.honorRanks.map(r => {
         const isActive = r.lvl === current.lvl;
         const lvlDisplay = r.lvl < 10 ? `Lv.0${r.lvl}` : `Lv.${r.lvl}`;
-        let glowDesc = r.lvl >= 99 ? '👑 至尊七彩極光' : (r.lvl >= 75 ? '🔮 紫晶星雲' : (r.lvl >= 50 ? '🔥 脈衝金環' : (r.lvl >= 25 ? '📈 耀金光暈' : (r.lvl >= 11 ? '✨ 青藍星輝' : '🌱 清新初階'))));
+        let glowDesc = r.lvl >= 99 ? '👑 至尊七彩極光 · 便當征服王' : (r.lvl >= 76 ? '🛸 宇宙星系能量便當' : (r.lvl >= 51 ? '🦞 御膳米其林便當' : (r.lvl >= 41 ? '🥩 豪華極品海陸便當' : (r.lvl >= 26 ? '🍛 異國炙燒便當' : (r.lvl >= 11 ? '🍱 經典道地台味便當' : '🍙 樸素小資日常便當')))));
         return `
           <tr style="${isActive ? 'background:rgba(56,189,248,0.12); color:#38bdf8; font-weight:700;' : ''}">
             <td>${lvlDisplay}</td>
@@ -2282,7 +2366,7 @@
       { id: "bloomberg", name: "Bloomberg (彭博社)", url: "https://www.bloomberg.com", cat: "media", badge: "國際權威", bClass: "badge-media", desc: "全球頂級金融機構操盤手風向球，華爾街第一線快訊與深度分析。", feature: "央行政策、華爾街動向、彭博深度專題" },
       { id: "cnbc", name: "CNBC", url: "https://www.cnbc.com", cat: "media", badge: "即時電視", bClass: "badge-media", desc: "全球知名度最高商業金融頻道，開盤盤前預測與CEO專訪最即時。", feature: "美股開盤直播速報、企業高層專訪" },
       { id: "wsj", name: "The Wall Street Journal (華爾街日報)", url: "https://www.wsj.com", cat: "media", badge: "百年老牌", bClass: "badge-media", desc: "商業財經報導黃金標竿，深入剖析聯準會貨幣政策與地緣政治。", feature: "Fed Watcher 聯準會內幕、政經深度" },
-      { id: "marketwatch", name: "MarketWatch", url: "https://www.marketwatch.com", cat: "media", badge: "盤前夜盤", bClass: "badge-media", desc: "道瓊旗下即時股市動態，期指走勢、盤前異動榜與經濟日曆一目了然。", feature: "期指異動、熱門個股榜、財經日曆" },
+      { id: "marketwatch", name: "MarketWatch", url: "https://www.marketwatch.com", cat: "media", badge: "盤前夜盤", bClass: "badge-media", desc: "道瓊旗下即時股市動態，期指走勢、盤前異動榜與經濟日曆一目了然。", feature: "期指重挫異動、熱門個股榜、財經日曆" },
       { id: "seekingalpha", name: "Seeking Alpha", url: "https://seekingalpha.com", cat: "media", badge: "買方研報", bClass: "badge-media", desc: "全球最大美股獨立投資人社群，海量個股多空評級與財報逐字稿。", feature: "美股多空分析、財報逐字稿" },
       { id: "ft", name: "Financial Times (英國金融時報)", url: "https://www.ft.com", cat: "media", badge: "歐洲全球", bClass: "badge-media", desc: "總部倫敦世界級財經大報，宏觀覆蓋歐洲與亞洲跨國局勢。", feature: "全球大宗商品動向、跨國宏觀經濟" },
       { id: "mops", name: "公開資訊觀測站 (MOPS)", url: "https://mops.twse.com.tw", cat: "official", badge: "官方權威", bClass: "badge-official", desc: "證交所官方平台，最權威第一手資訊，所有法定公告以此為準。", feature: "每月10日前查營收、季報、法說簡報" },

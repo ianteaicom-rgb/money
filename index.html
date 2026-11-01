@@ -6,7 +6,7 @@
   <title>火星人的便當 · 財經與投資導航儀表板</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-body: #0b0f17;
@@ -42,17 +42,15 @@
     /* 頂部固定狀態列 */
     .top-bar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 48px;
+      top: 0; left: 0; right: 0;
+      height: 52px;
       background: var(--bg-header);
       border-bottom: 1px solid var(--border);
       z-index: 50;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 16px;
     }
     .top-brand {
       display: flex;
@@ -65,42 +63,86 @@
     .top-right-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .clocks-wrap {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       background: #0b0f17;
-      padding: 4px 12px;
+      padding: 4px 10px;
       border-radius: 20px;
       border: 1px solid var(--border);
     }
-    .clock-item { display: flex; align-items: center; gap: 6px; }
+    .clock-item { display: flex; align-items: center; gap: 5px; }
     .clock-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+    /* 登入區塊按鈕 */
+    .auth-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #2563eb;
+      color: #fff;
+      border: 1px solid #3b82f6;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .auth-btn:hover {
+      background: #1d4ed8;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+    }
+    .user-profile-badge {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: #162032;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3px 10px 3px 4px;
+      cursor: pointer;
+    }
+    .user-avatar-img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--accent);
+    }
+    .user-name-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
 
     /* 佈局容器 */
     .layout-wrapper {
       display: flex;
       width: 100%;
-      margin-top: 48px;
+      margin-top: 52px;
     }
 
     /* 左側清單目錄 (Sidebar) */
     aside.sidebar {
-      width: 310px;
+      width: 320px;
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border);
       position: fixed;
-      top: 48px;
-      bottom: 0;
-      left: 0;
+      top: 52px; bottom: 0; left: 0;
       overflow-y: auto;
-      padding: 16px 14px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       z-index: 40;
     }
 
@@ -109,18 +151,16 @@
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.25) 100%);
       border: 1px solid var(--amber-border);
       border-radius: 10px;
-      padding: 12px 14px;
+      padding: 12px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
       gap: 4px;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);
     }
     .salon-card:hover {
       border-color: var(--amber);
-      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
       transform: translateY(-1px);
     }
     .salon-badge {
@@ -149,17 +189,15 @@
       line-height: 1.35;
     }
 
-    /* 觀賞者榮譽徽章卡片 (Honor Rank System) */
+    /* 觀賞者榮譽等級卡片 */
     .honor-card {
       background: linear-gradient(135deg, #162032 0%, #1a273e 100%);
       border: 1px solid #2e3e5c;
       border-radius: 10px;
-      padding: 12px 14px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      position: relative;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
     }
     .honor-header {
       display: flex;
@@ -175,39 +213,52 @@
       border-radius: 4px;
       border: 1px solid rgba(56, 189, 248, 0.3);
     }
-    .honor-btn-rule {
+    .honor-links {
+      display: flex;
+      gap: 8px;
       font-size: 11px;
-      color: var(--text-muted);
+    }
+    .honor-link-btn {
+      color: var(--accent);
       background: transparent;
       border: none;
       cursor: pointer;
       text-decoration: underline;
     }
-    .honor-btn-rule:hover { color: var(--accent); }
 
     .honor-rank-row {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .honor-badge-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #38bdf8, #818cf8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
-      flex-shrink: 0;
+    .honor-avatar-wrap {
+      position: relative;
+      cursor: pointer;
     }
-    .honor-details {
-      flex: 1;
-      min-width: 0;
+    .honor-avatar-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      background: #0b0f17;
+      display: block;
     }
+    .honor-avatar-edit-hint {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      background: #0b0f17;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      font-size: 9px;
+      padding: 2px;
+      line-height: 1;
+    }
+
+    .honor-details { flex: 1; min-width: 0; }
     .honor-level-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: #fff;
       display: flex;
@@ -217,7 +268,7 @@
     .honor-lvl-num {
       color: #38bdf8;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
+      font-size: 12px;
     }
     .honor-exp-text {
       font-size: 11px;
@@ -256,20 +307,17 @@
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.15s ease;
       text-align: center;
+      transition: all 0.15s;
     }
-    .btn-checkin:hover:not(:disabled) {
-      background: #1d4ed8;
-      box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
-    }
+    .btn-checkin:hover:not(:disabled) { background: #1d4ed8; }
     .btn-checkin:disabled {
       background: #1e293b;
       color: #64748b;
       border-color: #334155;
       cursor: not-allowed;
     }
-    .btn-read-exp {
+    .btn-side-rule {
       background: #1e293b;
       color: #94a3b8;
       border: 1px solid #334155;
@@ -277,88 +325,86 @@
       padding: 5px 8px;
       font-size: 11px;
       font-weight: 500;
-      white-space: nowrap;
+      cursor: pointer;
     }
+    .btn-side-rule:hover { color: #fff; border-color: var(--accent); }
 
-    /* 浮動經驗值獲得提示 (Toast) */
-    .exp-toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: #0f172a;
-      border: 1px solid #38bdf8;
-      color: #38bdf8;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.25);
-      z-index: 100;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: all 0.25s ease;
-      pointer-events: none;
-    }
-    .exp-toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* 榮譽等級 20 階彈窗 (Modal) */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(4px);
-      z-index: 99;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .modal-overlay.show { display: flex; }
-    .modal-box {
-      background: #131b2c;
+    /* 每日個股提問卡片 (Stock Question Box) */
+    .ask-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      max-width: 520px;
-      width: 100%;
-      max-height: 80vh;
-      overflow-y: auto;
-      padding: 20px;
-      color: #fff;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .modal-header {
+    .ask-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
     }
-    .modal-title { font-size: 16px; font-weight: 700; color: #38bdf8; }
-    .modal-close {
-      background: transparent;
-      border: none;
-      color: #94a3b8;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .rank-list-table {
-      width: 100%;
-      border-collapse: collapse;
+    .ask-title {
       font-size: 12px;
+      font-weight: 700;
+      color: #f59e0b;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
-    .rank-list-table th, .rank-list-table td {
-      padding: 8px 10px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    .ask-status-badge {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 600;
     }
-    .rank-list-table th { color: var(--text-muted); font-weight: 600; }
-    .rank-row-active { background: rgba(56, 189, 248, 0.12); color: #38bdf8; font-weight: 700; }
+    .status-ready { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .status-done { background: rgba(100, 116, 139, 0.2); color: #94a3b8; }
 
-    /* 側邊欄過濾輸入框 */
+    .ask-input {
+      width: 100%;
+      background: #0b0f17;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: #fff;
+      outline: none;
+    }
+    .ask-textarea {
+      width: 100%;
+      height: 52px;
+      background: #0b0f17;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: #fff;
+      outline: none;
+      resize: none;
+    }
+    .ask-input:focus, .ask-textarea:focus { border-color: #f59e0b; }
+    .btn-submit-ask {
+      background: #d97706;
+      color: #fff;
+      border: 1px solid #f59e0b;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.15s;
+    }
+    .btn-submit-ask:hover:not(:disabled) { background: #b45309; }
+    .btn-submit-ask:disabled {
+      background: #1e293b;
+      color: #64748b;
+      border-color: #334155;
+      cursor: not-allowed;
+    }
+
+    /* 側欄搜尋與導航清單 */
     .sidebar-filter { position: relative; }
     .sidebar-input {
       width: 100%;
@@ -369,18 +415,16 @@
       color: #fff;
       font-size: 13px;
       outline: none;
-      transition: border-color 0.2s;
     }
     .sidebar-input:focus { border-color: var(--accent); }
 
-    /* 目錄分組 */
     .nav-group-title {
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: var(--text-muted);
-      margin: 10px 0 6px 4px;
+      margin: 8px 0 4px 4px;
     }
     .nav-list {
       list-style: none;
@@ -393,44 +437,37 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding: 7px 10px;
+      padding: 6px 8px;
       border-radius: 6px;
       color: var(--text-sub);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       background: transparent;
       border: none;
       cursor: pointer;
       text-align: left;
-      transition: all 0.15s ease;
     }
-    .nav-item-btn:hover {
-      background: #1b263a;
-      color: #fff;
-    }
+    .nav-item-btn:hover { background: #1b263a; color: #fff; }
     .nav-item-btn .outlink {
       font-size: 11px;
       color: var(--text-muted);
       opacity: 0;
-      transition: opacity 0.15s;
     }
     .nav-item-btn:hover .outlink { opacity: 1; color: var(--accent); }
 
-    /* 右側主要內容區 */
+    /* 右側主區域 */
     main.content {
-      margin-left: 310px;
+      margin-left: 320px;
       flex: 1;
-      padding: 24px 32px 60px;
-      min-height: calc(100vh - 48px);
+      padding: 20px 28px 60px;
+      min-height: calc(100vh - 52px);
     }
-
-    /* 頂部搜尋與分類按鈕 */
-    .header-section { margin-bottom: 24px; }
+    .header-section { margin-bottom: 20px; }
     .search-row {
       display: flex;
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
     .main-search-input {
@@ -443,7 +480,6 @@
       font-size: 14px;
       color: #fff;
       outline: none;
-      transition: all 0.2s;
     }
     .main-search-input:focus {
       border-color: var(--accent);
@@ -461,10 +497,9 @@
       color: var(--text-sub);
       padding: 6px 14px;
       border-radius: 20px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.15s;
     }
     .filter-tab:hover { color: #fff; border-color: var(--accent); }
     .filter-tab.active {
@@ -477,120 +512,194 @@
     /* 卡片網格 */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
     }
     .site-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 18px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       text-decoration: none;
       color: inherit;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
+      transition: transform 0.15s ease, border-color 0.15s ease;
     }
     .site-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       border-color: var(--accent);
       box-shadow: 0 8px 24px var(--accent-glow);
       background: var(--bg-card-hover);
     }
     .site-card.target-highlight {
       border-color: #38bdf8 !important;
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.35), 0 8px 24px rgba(56, 189, 248, 0.3) !important;
-      animation: pulseHighlight 1.5s ease-out;
-    }
-    @keyframes pulseHighlight {
-      0% { transform: scale(1.02); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.35) !important;
     }
 
     .card-head {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 10px;
-      gap: 8px;
+      margin-bottom: 8px;
     }
-    .card-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-    }
-    .card-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .card-title { font-size: 15px; font-weight: 700; color: #fff; }
+    .card-actions { display: flex; align-items: center; gap: 6px; }
     .card-badge {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       padding: 2px 7px;
       border-radius: 4px;
-      white-space: nowrap;
     }
-    .badge-official { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
-    .badge-realtime { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
-    .badge-finance  { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .badge-news     { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .badge-global   { background: rgba(139, 92, 246, 0.2); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
-    .badge-media    { background: rgba(236, 72, 153, 0.2); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.3); }
+    .badge-official { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .badge-realtime { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .badge-finance  { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .badge-news     { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .badge-global   { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
+    .badge-media    { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
 
     .star-btn {
       background: transparent;
       border: none;
       color: #475569;
       cursor: pointer;
-      font-size: 15px;
-      line-height: 1;
-      padding: 2px;
-      transition: color 0.15s;
+      font-size: 14px;
     }
     .star-btn:hover, .star-btn.active { color: #f59e0b; }
 
     .card-body {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-sub);
       line-height: 1.5;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       flex-grow: 1;
     }
     .card-foot {
       border-top: 1px dashed var(--border);
-      padding-top: 10px;
+      padding-top: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 12px;
-    }
-    .card-feature {
-      color: var(--accent);
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .card-open {
-      color: var(--text-muted);
       font-size: 11px;
     }
-    .site-card:hover .card-open { color: var(--accent); }
+    .card-feature { color: var(--accent); font-weight: 500; }
+    .card-open { color: var(--text-muted); font-size: 11px; }
 
-    /* 空狀態 */
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--text-muted);
-      grid-column: 1 / -1;
+    /* Toast */
+    .exp-toast {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      background: #0f172a;
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.25);
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+    .exp-toast.show { opacity: 1; transform: translateY(0); }
+
+    /* Modal 通用樣式 */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 99;
       display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal-box {
+      background: #131b2c;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 540px;
+      width: 100%;
+      max-height: 82vh;
+      overflow-y: auto;
+      padding: 20px;
+      color: #fff;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    .modal-title { font-size: 16px; font-weight: 700; color: #38bdf8; }
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 18px;
+      cursor: pointer;
     }
 
-    /* RWD 漢堡選單 */
+    /* 排行榜表格 */
+    .lb-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .lb-table th, .lb-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: left;
+    }
+    .lb-table th { color: var(--text-muted); font-size: 11px; }
+    .lb-user-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lb-avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--accent);
+    }
+    .rank-num-1 { color: #f59e0b; font-weight: 700; }
+    .rank-num-2 { color: #94a3b8; font-weight: 700; }
+    .rank-num-3 { color: #d97706; font-weight: 700; }
+
+    /* 修改個人資料 / 頭像彈窗樣式 */
+    .avatar-preview-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .avatar-large-preview {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      background: #0b0f17;
+    }
+    .file-input-label {
+      background: #1e293b;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      color: #38bdf8;
+    }
+    .file-input-label:hover { background: #2e3e5c; }
+
     .menu-toggle {
       display: none;
       background: transparent;
@@ -598,22 +707,13 @@
       color: #fff;
       padding: 4px 8px;
       border-radius: 6px;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
     }
-
-    @media (max-width: 860px) {
-      aside.sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.25s ease;
-      }
-      aside.sidebar.open {
-        transform: translateX(0);
-      }
-      main.content {
-        margin-left: 0;
-        padding: 16px;
-      }
+    @media (max-width: 880px) {
+      aside.sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+      aside.sidebar.open { transform: translateX(0); }
+      main.content { margin-left: 0; padding: 14px; }
       .menu-toggle { display: block; }
     }
   </style>
@@ -623,13 +723,22 @@
   <!-- 頂部固定狀態列 -->
   <div class="top-bar">
     <div class="top-brand">
-      <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()">☰ 目錄</button>
-      <span>🚀 火星人的便當 · 財經資訊導航站</span>
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <span>🚀 火星人的便當 · 財經導航</span>
     </div>
     <div class="top-right-group">
       <div class="clocks-wrap">
         <div class="clock-item"><span class="clock-dot"></span> 台北: <span id="clock-tw">--:--:--</span></div>
         <div class="clock-item"><span class="clock-dot" style="background:#38bdf8;"></span> 紐約: <span id="clock-ny">--:--:--</span></div>
+      </div>
+      <!-- 登入按鈕 / 已登入個人徽章 -->
+      <button class="auth-btn" id="btnLogin" onclick="loginWithGoogle()">
+        <svg width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        <span>Google 登入</span>
+      </button>
+      <div class="user-profile-badge" id="userBadge" onclick="openProfileModal()">
+        <img src="" id="topUserAvatar" class="user-avatar-img">
+        <span class="user-name-text" id="topUserName">投資訪客</span>
       </div>
     </div>
   </div>
@@ -647,18 +756,24 @@
       <!-- 觀賞者榮譽等級卡片 (Honor Rank System) -->
       <div class="honor-card">
         <div class="honor-header">
-          <span class="honor-tag">🎖️ 觀賞者榮譽殿堂</span>
-          <button class="honor-btn-rule" onclick="openHonorModal()">查看 20 階 ➔</button>
+          <span class="honor-tag">🎖️ 榮譽殿堂</span>
+          <div class="honor-links">
+            <button class="honor-link-btn" onclick="openLeaderboardModal()">🏆 排行榜</button>
+            <button class="honor-link-btn" onclick="openHonorModal()">20 階 ➔</button>
+          </div>
         </div>
         <div class="honor-rank-row">
-          <div class="honor-badge-icon" id="honorBadgeIcon">🌱</div>
+          <div class="honor-avatar-wrap" onclick="openProfileModal()" title="點擊更換頭像與暱稱">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='18' font-size='18'>🌱</text></svg>" class="honor-avatar-img" id="sidebarAvatar">
+            <span class="honor-avatar-edit-hint">✏️</span>
+          </div>
           <div class="honor-details">
             <div class="honor-level-title">
               <span class="honor-lvl-num" id="honorLvlNum">Lv.01</span>
               <span id="honorTitle">股市小白</span>
             </div>
             <div class="honor-exp-text">
-              經驗值: <span id="honorExpCur">0</span> / <span id="honorExpMax">100</span>
+              EXP: <span id="honorExpCur">0</span> / <span id="honorExpMax">100</span>
             </div>
           </div>
         </div>
@@ -666,9 +781,20 @@
           <div class="honor-progress-fill" id="honorProgressFill"></div>
         </div>
         <div class="honor-action-row">
-          <button class="btn-checkin" id="btnCheckin" onclick="dailyCheckIn()">📅 每日簽到 (+30 EXP)</button>
-          <div class="btn-read-exp" title="點擊任意網站卡片可自動獲得 +5 EXP">點擊站點 +5</div>
+          <button class="btn-checkin" id="btnCheckin" onclick="dailyCheckIn()">📅 每日簽到 (+30)</button>
+          <button class="btn-side-rule" onclick="openProfileModal()">頭像/資料</button>
         </div>
+      </div>
+
+      <!-- 每日 1 次股票提問卡片 -->
+      <div class="ask-card">
+        <div class="ask-head">
+          <div class="ask-title">💬 每日 1 檔股票提問</div>
+          <span class="ask-status-badge status-ready" id="askStatusBadge">今日可問 (1/1)</span>
+        </div>
+        <input type="text" id="askStockCode" class="ask-input" placeholder="股票代號或名稱 (如 2330 台積電)">
+        <textarea id="askQuestionText" class="ask-textarea" placeholder="想詢問的問題 (例：跌破半年線籌碼如何？)"></textarea>
+        <button class="btn-submit-ask" id="btnSubmitAsk" onclick="submitStockQuestion()">送出提問 (每日限 1 次)</button>
       </div>
 
       <!-- 快速過濾 -->
@@ -680,7 +806,7 @@
       <div id="sidebarMenu"></div>
     </aside>
 
-    <!-- 右側主要內容區 (Main Content) -->
+    <!-- 右側主要內容區 -->
     <main class="content">
       <div class="header-section">
         <div class="search-row">
@@ -701,15 +827,64 @@
 
       <!-- 卡片網格 -->
       <div class="cards-grid" id="cardsGrid"></div>
-      <div class="empty-state" id="emptyState">
-        <p style="font-size: 16px; margin-bottom: 6px;">查無符合的網站</p>
-        <p style="font-size: 13px;">請嘗試更換搜尋關鍵字或切換分類標籤。</p>
+      <div class="empty-state" id="emptyState" style="display:none; text-align:center; padding:50px; color:#64748b;">
+        查無符合的網站，請更換關鍵字或切換分類標籤。
       </div>
     </main>
   </div>
 
   <!-- 浮動獲得經驗值 Toast -->
   <div class="exp-toast" id="expToast">+5 EXP 知識累積中！</div>
+
+  <!-- 排行榜 Modal 彈窗 -->
+  <div class="modal-overlay" id="leaderboardModal" onclick="closeLeaderboardModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">🏆 觀賞者全體榮譽排行榜 (Top 50)</div>
+        <button class="modal-close" onclick="closeLeaderboardModal()">✕</button>
+      </div>
+      <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
+        登入 Google 帳號後，您的簽到與每日點擊經驗將自動同步至雲端排行榜！
+      </p>
+      <table class="lb-table">
+        <thead>
+          <tr>
+            <th>名次</th>
+            <th>投資人</th>
+            <th>階級稱號</th>
+            <th>累積 EXP</th>
+          </tr>
+        </thead>
+        <tbody id="lbTableBody">
+          <tr><td colspan="4" style="text-align:center; color:#64748b; padding:20px;">正在載入全體排名...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 個人資料與自訂頭像 Modal 彈窗 -->
+  <div class="modal-overlay" id="profileModal" onclick="closeProfileModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">👤 修改個人頭像與暱稱</div>
+        <button class="modal-close" onclick="closeProfileModal()">✕</button>
+      </div>
+      <div class="avatar-preview-box">
+        <img src="" id="profileAvatarPreview" class="avatar-large-preview">
+        <label class="file-input-label">
+          📁 選擇本機圖片更換頭像
+          <input type="file" id="avatarFileInput" accept="image/*" style="display:none;" onchange="handleAvatarFile(event)">
+        </label>
+        <span style="font-size:11px; color:#64748b;">支援 JPG/PNG，系統將自動最佳化壓縮儲存</span>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="font-size:12px; color:var(--text-sub); display:block; margin-bottom:4px;">顯示暱稱：</label>
+        <input type="text" id="profileNameInput" class="ask-input" placeholder="輸入您的自訂名稱">
+      </div>
+      <button class="btn-checkin" style="width:100%; padding:8px;" onclick="saveProfileChanges()">💾 儲存修改</button>
+      <button class="btn-side-rule" id="btnLogoutBtn" style="width:100%; margin-top:8px; padding:6px; color:#f87171; display:none;" onclick="logout()">登出帳號</button>
+    </div>
+  </div>
 
   <!-- 榮譽等級 20 階 Modal 彈窗 -->
   <div class="modal-overlay" id="honorModal" onclick="closeHonorModal(event)">
@@ -718,37 +893,49 @@
         <div class="modal-title">🎖️ 觀賞者榮譽等級體系 (共 20 階)</div>
         <button class="modal-close" onclick="closeHonorModal()">✕</button>
       </div>
-      <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
-        累積方式：每日簽到可獲 <b>+30 EXP</b>，點擊查閱任一財經網站可獲 <b>+5 EXP</b>。進度將儲存於您的瀏覽器！
-      </p>
-      <table class="rank-list-table">
-        <thead>
-          <tr>
-            <th>等級</th>
-            <th>榮譽稱號</th>
-            <th>所需累積 EXP</th>
-            <th>階級象徵</th>
-          </tr>
-        </thead>
-        <tbody id="rankTableBody">
-          <!-- 由 JavaScript 動態生成 20 階 -->
-        </tbody>
+      <table class="lb-table">
+        <thead><tr><th>等級</th><th>榮譽稱號</th><th>所需 EXP</th><th>階級象徵</th></tr></thead>
+        <tbody id="rankTableBody"></tbody>
       </table>
     </div>
   </div>
 
-  <script>
-    // 雙時區時鐘
-    function updateClocks() {
-      const now = new Date();
-      document.getElementById('clock-tw').innerText = now.toLocaleTimeString('zh-TW', { timeZone: 'Asia/Taipei', hour12: false });
-      document.getElementById('clock-ny').innerText = now.toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: false });
-    }
-    setInterval(updateClocks, 1000);
-    updateClocks();
+  <!-- Firebase 模組化 SDK (CDN) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // 20 階榮譽等級定義表 (Lv.01 股市小白 ➔ Lv.20 股市知識王)
-    const honorRanks = [
+    // ==========================================
+    // ⚙️ 請在此處填入您的 Firebase 設定金鑰
+    // ==========================================
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET.appspot.com",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    let app = null;
+    let auth = null;
+    let db = null;
+    let isFirebaseReady = false;
+
+    try {
+      if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+        isFirebaseReady = true;
+      }
+    } catch(e) {
+      console.warn("Firebase 初始化提示：尚未填入完整金鑰，目前以本機 LocalStorage 離線模式運行。");
+    }
+
+    // 20 階榮譽等級定義表
+    window.honorRanks = [
       { lvl: 1,  name: "股市小白",       expReq: 0,     icon: "🌱" },
       { lvl: 2,  name: "開戶見習生",     expReq: 100,   icon: "🐣" },
       { lvl: 3,  name: "看盤打卡員",     expReq: 250,   icon: "📱" },
@@ -771,65 +958,211 @@
       { lvl: 20, name: "股市知識王",     expReq: 15000, icon: "👑" }
     ];
 
-    // 榮譽系統儲存與邏輯 (LocalStorage)
-    let userHonor = JSON.parse(localStorage.getItem('mars_viewer_honor_v1')) || {
+    // 本機預設資料 (離線/未登入或未配金鑰時運作)
+    let currentUser = null;
+    let localUserData = JSON.parse(localStorage.getItem('mars_viewer_v3')) || {
+      uid: 'guest',
+      displayName: '股市投資人',
+      photoURL: "https://api.dicebear.com/7.x/bottts/svg?seed=MarsGuest",
       totalExp: 0,
-      lastCheckinDate: ""
+      lastCheckinDate: "",
+      lastClickDate: "",
+      lastQuestionDate: ""
     };
 
-    function saveUserHonor() {
-      localStorage.setItem('mars_viewer_honor_v1', JSON.stringify(userHonor));
+    function saveLocal() {
+      localStorage.setItem('mars_viewer_v3', JSON.stringify(localUserData));
+    }
+
+    // Google 登入
+    window.loginWithGoogle = async function() {
+      if (!isFirebaseReady) {
+        alert("提示：尚未在程式碼中填入 Firebase 金鑰！目前正在使用本機模擬模式。請先建立 Firebase 專案並填入 apiKey。");
+        return;
+      }
+      const provider = new GoogleAuthProvider();
+      try {
+        await signInWithPopup(auth, provider);
+      } catch(err) {
+        console.error(err);
+        alert("登入失敗：" + err.message);
+      }
+    };
+
+    window.logout = async function() {
+      if (isFirebaseReady && auth) {
+        await signOut(auth);
+      }
+      location.reload();
+    };
+
+    // 監聽登入狀態
+    if (isFirebaseReady && auth) {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          currentUser = user;
+          document.getElementById('btnLogin').style.display = 'none';
+          document.getElementById('userBadge').style.display = 'flex';
+          document.getElementById('btnLogoutBtn').style.display = 'block';
+
+          // 從 Firestore 讀取或建立使用者資料
+          const userDocRef = doc(db, 'users', user.uid);
+          const snap = await getDoc(userDocRef);
+
+          if (snap.exists()) {
+            const data = snap.data();
+            localUserData = {
+              uid: user.uid,
+              displayName: data.displayName || user.displayName || '股市投資人',
+              photoURL: data.photoURL || user.photoURL,
+              totalExp: data.totalExp || 0,
+              lastCheckinDate: data.lastCheckinDate || "",
+              lastClickDate: data.lastClickDate || "",
+              lastQuestionDate: data.lastQuestionDate || ""
+            };
+          } else {
+            localUserData = {
+              uid: user.uid,
+              displayName: user.displayName || '股市投資人',
+              photoURL: user.photoURL || "https://api.dicebear.com/7.x/bottts/svg?seed=" + user.uid,
+              totalExp: 0,
+              lastCheckinDate: "",
+              lastClickDate: "",
+              lastQuestionDate: ""
+            };
+            await setDoc(userDocRef, localUserData);
+          }
+          saveLocal();
+          updateUI();
+        } else {
+          currentUser = null;
+          document.getElementById('btnLogin').style.display = 'inline-flex';
+          document.getElementById('userBadge').style.display = 'none';
+          document.getElementById('btnLogoutBtn').style.display = 'none';
+          updateUI();
+        }
+      });
+    }
+
+    // 同步資料至 Firestore (若已登入)
+    async function syncToCloud() {
+      saveLocal();
+      if (isFirebaseReady && currentUser && db) {
+        try {
+          const userDocRef = doc(db, 'users', currentUser.uid);
+          await updateDoc(userDocRef, {
+            displayName: localUserData.displayName,
+            photoURL: localUserData.photoURL,
+            totalExp: localUserData.totalExp,
+            lastCheckinDate: localUserData.lastCheckinDate,
+            lastClickDate: localUserData.lastClickDate,
+            lastQuestionDate: localUserData.lastQuestionDate
+          });
+        } catch(e) {
+          console.error("同步至雲端失敗", e);
+        }
+      }
     }
 
     function getCurrentRank() {
-      let current = honorRanks[0];
-      let next = honorRanks[1];
-      for (let i = honorRanks.length - 1; i >= 0; i--) {
-        if (userHonor.totalExp >= honorRanks[i].expReq) {
-          current = honorRanks[i];
-          next = honorRanks[i + 1] || null;
+      let current = window.honorRanks[0];
+      let next = window.honorRanks[1];
+      for (let i = window.honorRanks.length - 1; i >= 0; i--) {
+        if (localUserData.totalExp >= window.honorRanks[i].expReq) {
+          current = window.honorRanks[i];
+          next = window.honorRanks[i + 1] || null;
           break;
         }
       }
       return { current, next };
     }
 
-    function showExpToast(msg) {
+    function showToast(msg) {
       const toast = document.getElementById('expToast');
       toast.innerText = msg;
       toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 1600);
+      setTimeout(() => toast.classList.remove('show'), 2000);
     }
 
-    function addExp(points, reason = '') {
-      userHonor.totalExp += points;
-      saveUserHonor();
-      updateHonorUI();
-      showExpToast(`+${points} EXP ${reason}！`);
+    function addExp(pts, reason) {
+      localUserData.totalExp += pts;
+      syncToCloud();
+      updateUI();
+      showToast(`+${pts} EXP ${reason}！`);
     }
 
-    function dailyCheckIn() {
-      const todayStr = new Date().toISOString().slice(0, 10);
-      if (userHonor.lastCheckinDate === todayStr) return;
+    // 每日簽到 (+30 EXP)
+    window.dailyCheckIn = function() {
+      const today = new Date().toISOString().slice(0, 10);
+      if (localUserData.lastCheckinDate === today) {
+        alert("今日已完成簽到囉！明天再來～");
+        return;
+      }
+      localUserData.lastCheckinDate = today;
+      addExp(30, "每日簽到");
+    };
 
-      userHonor.lastCheckinDate = todayStr;
-      addExp(30, "簽到成功");
-    }
+    // 每日點擊站點經驗值：每天限領一次 +5 分
+    window.onSiteClick = function(name) {
+      const today = new Date().toISOString().slice(0, 10);
+      if (localUserData.lastClickDate === today) {
+        // 今日已經領過 +5 分，純開網頁不加分
+        return;
+      }
+      localUserData.lastClickDate = today;
+      addExp(5, `今日首次查閱站點（${name.split(' ')[0]}）`);
+    };
 
-    function onSiteClick(siteName) {
-      // 每次點開網站增加 5 點經驗值 (冷卻 1 秒)
-      addExp(5, `探索「${siteName.split(' ')[0]}」`);
-    }
+    // 每日提問 1 次
+    window.submitStockQuestion = async function() {
+      const today = new Date().toISOString().slice(0, 10);
+      if (localUserData.lastQuestionDate === today) {
+        alert("您今天已經提問過 1 次囉！每天限問 1 檔股票，明天 00:00 將重新開放。");
+        return;
+      }
 
-    function updateHonorUI() {
+      const code = document.getElementById('askStockCode').value.trim();
+      const qText = document.getElementById('askQuestionText').value.trim();
+
+      if (!code || !qText) {
+        alert("請輸入股票代號/名稱以及想詢問的具體問題！");
+        return;
+      }
+
+      if (isFirebaseReady && currentUser && db) {
+        try {
+          await addDoc(collection(db, 'stock_questions'), {
+            uid: currentUser.uid,
+            userName: localUserData.displayName,
+            userPhoto: localUserData.photoURL,
+            stockCode: code,
+            question: qText,
+            date: today,
+            createdAt: serverTimestamp()
+          });
+        } catch(e) {
+          console.error(e);
+        }
+      }
+
+      localUserData.lastQuestionDate = today;
+      addExp(10, "提問成功獎勵");
+      document.getElementById('askStockCode').value = '';
+      document.getElementById('askQuestionText').value = '';
+      alert("✅ 提問已成功送出！Mars 將會在專欄日誌中依序解讀。今日額度已使用。");
+      updateUI();
+    };
+
+    // 更新介面狀態
+    function updateUI() {
       const { current, next } = getCurrentRank();
       const lvlStr = current.lvl < 10 ? `Lv.0${current.lvl}` : `Lv.${current.lvl}`;
       
-      document.getElementById('honorBadgeIcon').innerText = current.icon;
       document.getElementById('honorLvlNum').innerText = lvlStr;
       document.getElementById('honorTitle').innerText = current.name;
+      document.getElementById('topUserName').innerText = localUserData.displayName;
+      document.getElementById('topUserAvatar').src = localUserData.photoURL;
+      document.getElementById('sidebarAvatar').src = localUserData.photoURL;
 
       const curExpEl = document.getElementById('honorExpCur');
       const maxExpEl = document.getElementById('honorExpMax');
@@ -837,297 +1170,209 @@
 
       if (next) {
         const span = next.expReq - current.expReq;
-        const progress = userHonor.totalExp - current.expReq;
-        const pct = Math.min(100, Math.max(0, (progress / span) * 100));
-        curExpEl.innerText = userHonor.totalExp;
+        const prog = localUserData.totalExp - current.expReq;
+        const pct = Math.min(100, Math.max(0, (prog / span) * 100));
+        curExpEl.innerText = localUserData.totalExp;
         maxExpEl.innerText = next.expReq;
         fillEl.style.width = `${pct}%`;
       } else {
-        curExpEl.innerText = userHonor.totalExp;
+        curExpEl.innerText = localUserData.totalExp;
         maxExpEl.innerText = "MAX";
         fillEl.style.width = "100%";
       }
 
-      // 簽到按鈕狀態
-      const todayStr = new Date().toISOString().slice(0, 10);
+      const today = new Date().toISOString().slice(0, 10);
       const btnCheckin = document.getElementById('btnCheckin');
-      if (userHonor.lastCheckinDate === todayStr) {
+      if (localUserData.lastCheckinDate === today) {
         btnCheckin.disabled = true;
-        btnCheckin.innerText = "✅ 今日已簽到 (+30)";
+        btnCheckin.innerText = "✅ 今日已簽到";
       } else {
         btnCheckin.disabled = false;
-        btnCheckin.innerText = "📅 每日簽到 (+30 EXP)";
+        btnCheckin.innerText = "📅 每日簽到 (+30)";
+      }
+
+      // 提問狀態更新
+      const askBadge = document.getElementById('askStatusBadge');
+      const btnAsk = document.getElementById('btnSubmitAsk');
+      if (localUserData.lastQuestionDate === today) {
+        askBadge.className = "ask-status-badge status-done";
+        askBadge.innerText = "今日已用完 (0/1)";
+        btnAsk.disabled = true;
+        btnAsk.innerText = "今日提問已送出 (明日重置)";
+      } else {
+        askBadge.className = "ask-status-badge status-ready";
+        askBadge.innerText = "今日可問 (1/1)";
+        btnAsk.disabled = false;
+        btnAsk.innerText = "送出提問 (每日限 1 次)";
       }
     }
 
-    function openHonorModal() {
+    // 處理自訂上傳頭像檔案 (壓縮成 Base64)
+    window.handleAvatarFile = function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = function() {
+          // 透過 Canvas 壓縮為 120x120 JPEG
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = 120;
+          canvas.height = 120;
+          ctx.drawImage(img, 0, 0, 120, 120);
+          const base64 = canvas.toDataURL('image/jpeg', 0.85);
+
+          document.getElementById('profileAvatarPreview').src = base64;
+          window.tempAvatarBase64 = base64;
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    };
+
+    window.openProfileModal = function() {
+      document.getElementById('profileNameInput').value = localUserData.displayName;
+      document.getElementById('profileAvatarPreview').src = localUserData.photoURL;
+      window.tempAvatarBase64 = localUserData.photoURL;
+      document.getElementById('profileModal').classList.add('show');
+    };
+    window.closeProfileModal = function() {
+      document.getElementById('profileModal').classList.remove('show');
+    };
+
+    window.saveProfileChanges = function() {
+      const newName = document.getElementById('profileNameInput').value.trim();
+      if (newName) localUserData.displayName = newName;
+      if (window.tempAvatarBase64) localUserData.photoURL = window.tempAvatarBase64;
+      syncToCloud();
+      updateUI();
+      closeProfileModal();
+      showToast("個人資料已更新！");
+    };
+
+    // 載入全體排行榜 (Top 50)
+    window.openLeaderboardModal = async function() {
+      const modal = document.getElementById('leaderboardModal');
+      const tbody = document.getElementById('lbTableBody');
+      modal.classList.add('show');
+
+      if (!isFirebaseReady || !db) {
+        // 未設定金鑰時展示離線排行榜
+        tbody.innerHTML = `
+          <tr><td class="rank-num-1">🥇 1</td><td><div class="lb-user-cell"><img src="${localUserData.photoURL}" class="lb-avatar">${localUserData.displayName} (您)</div></td><td>Lv.01 股市小白</td><td>${localUserData.totalExp} EXP</td></tr>
+          <tr><td class="rank-num-2">🥈 2</td><td><div class="lb-user-cell"><img src="https://api.dicebear.com/7.x/bottts/svg?seed=Sample1" class="lb-avatar">波段領航員</div></td><td>Lv.12 趨勢掌舵手</td><td>4,250 EXP</td></tr>
+          <tr><td class="rank-num-3">🥉 3</td><td><div class="lb-user-cell"><img src="https://api.dicebear.com/7.x/bottts/svg?seed=Sample2" class="lb-avatar">ETF存股達人</div></td><td>Lv.08 財報研讀生</td><td>1,980 EXP</td></tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:16px;">正在取得即時排行榜...</td></tr>';
+      try {
+        const q = query(collection(db, 'users'), orderBy('totalExp', 'desc'), limit(50));
+        const snap = await getDocs(q);
+        let html = '';
+        let rank = 1;
+
+        snap.forEach(docSnap => {
+          const u = docSnap.data();
+          const rClass = rank === 1 ? 'rank-num-1' : (rank === 2 ? 'rank-num-2' : (rank === 3 ? 'rank-num-3' : ''));
+          const medal = rank === 1 ? '🥇 ' : (rank === 2 ? '🥈 ' : (rank === 3 ? '🥉 ' : ''));
+          
+          let title = "股市小白";
+          for (let i = window.honorRanks.length - 1; i >= 0; i--) {
+            if ((u.totalExp || 0) >= window.honorRanks[i].expReq) {
+              title = `Lv.${window.honorRanks[i].lvl < 10 ? '0' : ''}${window.honorRanks[i].lvl} ${window.honorRanks[i].name}`;
+              break;
+            }
+          }
+
+          html += `
+            <tr>
+              <td class="${rClass}">${medal}${rank}</td>
+              <td>
+                <div class="lb-user-cell">
+                  <img src="${u.photoURL || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + u.displayName}" class="lb-avatar">
+                  <span>${u.displayName || '神秘投資人'}</span>
+                </div>
+              </td>
+              <td>${title}</td>
+              <td style="font-family:'JetBrains Mono',monospace;">${(u.totalExp || 0).toLocaleString()} EXP</td>
+            </tr>
+          `;
+          rank++;
+        });
+
+        tbody.innerHTML = html || '<tr><td colspan="4" style="text-align:center; padding:16px;">暫無排行資料</td></tr>';
+      } catch(e) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#f87171; padding:16px;">讀取排行榜失敗：${e.message}</td></tr>`;
+      }
+    };
+    window.closeLeaderboardModal = function() {
+      document.getElementById('leaderboardModal').classList.remove('show');
+    };
+
+    window.openHonorModal = function() {
       const modal = document.getElementById('honorModal');
       const tbody = document.getElementById('rankTableBody');
       const { current } = getCurrentRank();
-
-      tbody.innerHTML = honorRanks.map(r => {
+      tbody.innerHTML = window.honorRanks.map(r => {
         const isActive = r.lvl === current.lvl;
         const lvlDisplay = r.lvl < 10 ? `Lv.0${r.lvl}` : `Lv.${r.lvl}`;
         return `
-          <tr class="${isActive ? 'rank-row-active' : ''}">
+          <tr style="${isActive ? 'background:rgba(56,189,248,0.12); color:#38bdf8; font-weight:700;' : ''}">
             <td>${lvlDisplay}</td>
-            <td>${r.icon} ${r.name} ${isActive ? '👈 當前' : ''}</td>
+            <td>${r.icon} ${r.name} ${isActive ? '👈 您在此' : ''}</td>
             <td>${r.expReq.toLocaleString()} EXP</td>
             <td>${r.lvl === 20 ? '👑 最高殊榮' : (r.lvl >= 15 ? '💎 傳奇' : (r.lvl >= 10 ? '⭐ 達人' : '🌱 初階'))}</td>
           </tr>
         `;
       }).join('');
-
       modal.classList.add('show');
-    }
-
-    function closeHonorModal(e) {
+    };
+    window.closeHonorModal = function() {
       document.getElementById('honorModal').classList.remove('show');
+    };
+
+    // 初始 UI 繪製
+    updateUI();
+  </script>
+
+  <!-- 原生網站渲染與導航邏輯 (純靜態極速運行) -->
+  <script>
+    function updateClocks() {
+      const now = new Date();
+      document.getElementById('clock-tw').innerText = now.toLocaleTimeString('zh-TW', { timeZone: 'Asia/Taipei', hour12: false });
+      document.getElementById('clock-ny').innerText = now.toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: false });
     }
+    setInterval(updateClocks, 1000);
+    updateClocks();
 
-    // 總收錄網站數據（23 站）
     const sites = [
-      // 國際權威財經頻道
-      {
-        id: "bloomberg",
-        name: "Bloomberg (彭博社)",
-        url: "https://www.bloomberg.com",
-        cat: "media",
-        badge: "國際權威",
-        bClass: "badge-media",
-        desc: "全球頂級金融機構與專業操盤手的資訊風向球，掌握華爾街第一線獨家快訊與深度分析。",
-        feature: "華爾街動向、全球央行政策、彭博深度專題"
-      },
-      {
-        id: "cnbc",
-        name: "CNBC",
-        url: "https://www.cnbc.com",
-        cat: "media",
-        badge: "即時電視",
-        bClass: "badge-media",
-        desc: "全球知名度最高的商業與金融電視頻道，開盤盤前預測、重大併購與CEO專訪最為即時。",
-        feature: "美股開盤直播速報、企業高層專訪、市場情緒"
-      },
-      {
-        id: "wsj",
-        name: "The Wall Street Journal (華爾街日報)",
-        url: "https://www.wsj.com",
-        cat: "media",
-        badge: "百年老牌",
-        bClass: "badge-media",
-        desc: "全球商業財經報導的黃金標竿，調查報導扎實，深入剖析聯準會貨幣政策與地緣政治經濟。",
-        feature: "聯準會內幕風向球（Fed Watcher）、政經深度專題"
-      },
-      {
-        id: "marketwatch",
-        name: "MarketWatch",
-        url: "https://www.marketwatch.com",
-        cat: "media",
-        badge: "盤前夜盤",
-        bClass: "badge-media",
-        desc: "道瓊旗下的即時股市動態門戶，期指走勢、盤前盤後大漲大跌榜與經濟日曆一目了然。",
-        feature: "盤前期貨異動、熱門個股排行、即時財經日曆"
-      },
-      {
-        id: "seekingalpha",
-        name: "Seeking Alpha",
-        url: "https://seekingalpha.com",
-        cat: "media",
-        badge: "買方研報",
-        bClass: "badge-media",
-        desc: "全球最大的美股獨立投資人與機構分析師社群，提供極其豐富的個股多空深度評級研報。",
-        feature: "美股個股多空分析、財報逐字稿（Transcripts）"
-      },
-      {
-        id: "ft",
-        name: "Financial Times (英國金融時報)",
-        url: "https://www.ft.com",
-        cat: "media",
-        badge: "歐洲全球",
-        bClass: "badge-media",
-        desc: "總部位於倫敦的世界級財經大報，具備超越美股單一視角、宏觀覆蓋歐洲與亞洲跨國局勢。",
-        feature: "全球大宗商品動向、跨國宏觀經濟、地緣政治"
-      },
-
-      // 官方權威
-      {
-        id: "mops",
-        name: "公開資訊觀測站 (MOPS)",
-        url: "https://mops.twse.com.tw",
-        cat: "official",
-        badge: "官方權威",
-        bClass: "badge-official",
-        desc: "台灣證交所與金管會官方平台，最權威的第一手資訊來源。所有公司重大訊息均以此為準。",
-        feature: "每月10日前查月營收、季財報、法說簡報"
-      },
-      {
-        id: "twse",
-        name: "臺灣證券交易所 (TWSE)",
-        url: "https://www.twse.com.tw",
-        cat: "official",
-        badge: "官方權威",
-        bClass: "badge-official",
-        desc: "集中市場官方網站，提供每日最權威的加權指數、成交金額、法人買賣超與融資融券數據。",
-        feature: "三大法人買賣超、大盤成交量、融資融券"
-      },
-      {
-        id: "tpex",
-        name: "證券櫃檯買賣中心 (TPEx)",
-        url: "https://www.tpex.org.tw",
-        cat: "official",
-        badge: "官方權威",
-        bClass: "badge-official",
-        desc: "專注上櫃與興櫃市場的官方資訊站，中小型潛力成長股的搖籃與追蹤基地。",
-        feature: "櫃買指數、上櫃法人籌碼、興櫃登錄"
-      },
-      {
-        id: "tdcc",
-        name: "集保戶股權分散表 (TDCC)",
-        url: "https://www.tdcc.com.tw",
-        cat: "official",
-        badge: "官方權威",
-        bClass: "badge-official",
-        desc: "臺灣集中保管結算所官方數據，每週定期公布各級距持股比例與股東人數增減。",
-        feature: "每週五看千張大戶持股比例變化"
-      },
-
-      // 即時看盤與市場熱度
-      {
-        id: "yahoo",
-        name: "Yahoo 奇摩股市",
-        url: "https://tw.stock.yahoo.com",
-        cat: "realtime",
-        badge: "即時看盤",
-        bClass: "badge-realtime",
-        desc: "全台普及率最高看盤門戶，介面乾淨好讀，適合隨時快速掃描持股現況與即時走勢。",
-        feature: "即時走勢、自選股雲端監控、當日排行"
-      },
-      {
-        id: "wantgoo",
-        name: "玩股網 (Wantgoo)",
-        url: "https://www.wantgoo.com",
-        cat: "realtime",
-        badge: "即時看盤",
-        bClass: "badge-realtime",
-        desc: "整合台股、期指、國際指數與籌碼變化的強大投資平台，提供專業的恐慌情緒與期貨指標。",
-        feature: "VIX 恐慌指數、外資台指期未平倉、楚狂人指標"
-      },
-      {
-        id: "tradingview",
-        name: "TradingView",
-        url: "https://tw.tradingview.com",
-        cat: "realtime",
-        badge: "專業圖表",
-        bClass: "badge-realtime",
-        desc: "全球頂尖跨市場專業繪圖工具，支援台股、美股、期指與匯率，多商品疊圖與畫線首選。",
-        feature: "專業K線分析、多商品走勢疊圖、自訂指標"
-      },
-      {
-        id: "cmoney",
-        name: "股市爆料同學會",
-        url: "https://www.cmoney.tw/forum/",
-        cat: "realtime",
-        badge: "社群討論",
-        bClass: "badge-realtime",
-        desc: "全台最大的投資人即時交流社群，掌握當日盤中話題性個股與散戶市場心理風向。",
-        feature: "散戶情緒溫度計、熱門標的即時心得"
-      },
-
-      // 基本面與財報籌碼
-      {
-        id: "goodinfo",
-        name: "Goodinfo! 股市資訊網",
-        url: "https://goodinfo.tw",
-        cat: "finance",
-        badge: "數據寶庫",
-        bClass: "badge-finance",
-        desc: "台股歷史數據最完整的資料庫，資料維度齊全，老手必備的深度基本面與除權息查詢站。",
-        feature: "歷年殖利率與配息、本益比河流圖、主力籌碼"
-      },
-      {
-        id: "statementdog",
-        name: "財報狗 (StatementDog)",
-        url: "https://statementdog.com",
-        cat: "finance",
-        badge: "財務視覺化",
-        bClass: "badge-finance",
-        desc: "將複雜難懂的財務三大表轉換為直觀折線圖，一眼快速掃描公司長期獲利體質。",
-        feature: "近5年ROE走勢、毛利率/營利率、自由現金流"
-      },
-      {
-        id: "histock",
-        name: "嗨投資 (HiStock)",
-        url: "https://histock.tw",
-        cat: "finance",
-        badge: "籌碼選股",
-        bClass: "badge-finance",
-        desc: "結合量化選股與籌碼追蹤的多功能資訊網，提供清晰的外資與投信連續買超天數篩選。",
-        feature: "外資/投信連買排行、資券同步變化、智慧選股"
-      },
-
-      // 產業趨勢與即時新聞
-      {
-        id: "cnyes",
-        name: "Anue 鉅亨網",
-        url: "https://www.cnyes.com",
-        cat: "news",
-        badge: "即時新聞",
-        bClass: "badge-news",
-        desc: "專業華文財經媒體，新聞更新速度快，涵蓋晨間盤前重點整理與外資機構觀點。",
-        feature: "盤前重點整理、法說會即時要點、外資目標價"
-      },
-      {
-        id: "moneydj",
-        name: "MoneyDJ 理財網",
-        url: "https://www.moneydj.com",
-        cat: "news",
-        badge: "產業鏈庫",
-        bClass: "badge-news",
-        desc: "嘉實資訊旗下資深財經網站，其「產業知識庫」將全球與台灣產業鏈上下游梳理得最清楚。",
-        feature: "產業上下游關聯圖、概念股清單、營收比重"
-      },
-      {
-        id: "digitimes",
-        name: "DIGITIMES 電子時報",
-        url: "https://www.digitimes.com.tw",
-        cat: "news",
-        badge: "科技權威",
-        bClass: "badge-news",
-        desc: "專注科技硬體、半導體晶圓代工與先進封裝供應鏈的權威調研媒體，深度洞察產業景氣。",
-        feature: "先進封裝/AI伺服器供應鏈動態、晶圓產能利用率"
-      },
-
-      // 全球總經與美股觀測
-      {
-        id: "macromicro",
-        name: "財經 M 平方",
-        url: "https://www.macromicro.me",
-        cat: "global",
-        badge: "總經權威",
-        bClass: "badge-global",
-        desc: "華人圈最優質的總體經濟圖表研究平台，用數據圖表看清景氣循環週期與央行貨幣政策。",
-        feature: "聯準會利率點陣圖、CPI通膨、全球製造業PMI"
-      },
-      {
-        id: "finviz",
-        name: "Finviz",
-        url: "https://finviz.com",
-        cat: "global",
-        badge: "美股熱力圖",
-        bClass: "badge-global",
-        desc: "美股投資必看網站，其標普 500 熱力圖（S&P 500 Map）能在一秒內掌握全美各板塊強弱。",
-        feature: "S&P 500 熱力圖、美股板塊即時漲跌、形態篩選"
-      },
-      {
-        id: "investing",
-        name: "Investing.com",
-        url: "https://tw.investing.com",
-        cat: "global",
-        badge: "全球金融",
-        bClass: "badge-global",
-        desc: "夜間與開盤前必看的全球金融入口，全面涵蓋美股夜盤期貨、美債殖利率與原油大宗商品。",
-        feature: "小道瓊/小那期指、美債10年期殖利率、美元指數"
-      }
+      { id: "bloomberg", name: "Bloomberg (彭博社)", url: "https://www.bloomberg.com", cat: "media", badge: "國際權威", bClass: "badge-media", desc: "全球頂級金融機構與專業操盤手的資訊風向球，掌握華爾街第一線獨家快訊與深度分析。", feature: "華爾街動向、全球央行政策、彭博深度專題" },
+      { id: "cnbc", name: "CNBC", url: "https://www.cnbc.com", cat: "media", badge: "即時電視", bClass: "badge-media", desc: "全球知名度最高的商業與金融電視頻道，開盤盤前預測、重大併購與CEO專訪最為即時。", feature: "美股開盤直播速報、企業高層專訪、市場情緒" },
+      { id: "wsj", name: "The Wall Street Journal (華爾街日報)", url: "https://www.wsj.com", cat: "media", badge: "百年老牌", bClass: "badge-media", desc: "全球商業財經報導的黃金標竿，調查報導扎實，深入剖析聯準會貨幣政策與地緣政治經濟。", feature: "聯準會內幕風向球（Fed Watcher）、政經深度專題" },
+      { id: "marketwatch", name: "MarketWatch", url: "https://www.marketwatch.com", cat: "media", badge: "盤前夜盤", bClass: "badge-media", desc: "道瓊旗下的即時股市動態門戶，期指走勢、盤前盤後大漲大跌榜與經濟日曆一目了然。", feature: "盤前期貨異動、熱門個股排行、即時財經日曆" },
+      { id: "seekingalpha", name: "Seeking Alpha", url: "https://seekingalpha.com", cat: "media", badge: "買方研報", bClass: "badge-media", desc: "全球最大的美股獨立投資人與機構分析師社群，提供極其豐富的個股多空深度評級研報。", feature: "美股個股多空分析、財報逐字稿（Transcripts）" },
+      { id: "ft", name: "Financial Times (英國金融時報)", url: "https://www.ft.com", cat: "media", badge: "歐洲全球", bClass: "badge-media", desc: "總部位於倫敦的世界級財經大報，具備超越美股單一視角、宏觀覆蓋歐洲與亞洲跨國局勢。", feature: "全球大宗商品動向、跨國宏觀經濟、地緣政治" },
+      { id: "mops", name: "公開資訊觀測站 (MOPS)", url: "https://mops.twse.com.tw", cat: "official", badge: "官方權威", bClass: "badge-official", desc: "台灣證交所與金管會官方平台，最權威的第一手資訊來源。所有公司重大訊息均以此為準。", feature: "每月10日前查月營收、季財報、法說簡報" },
+      { id: "twse", name: "臺灣證券交易所 (TWSE)", url: "https://www.twse.com.tw", cat: "official", badge: "官方權威", bClass: "badge-official", desc: "集中市場官方網站，提供每日最權威的加權指數、成交金額、法人買賣超與融資融券數據。", feature: "三大法人買賣超、大盤成交量、融資融券" },
+      { id: "tpex", name: "證券櫃檯買賣中心 (TPEx)", url: "https://www.tpex.org.tw", cat: "official", badge: "官方權威", bClass: "badge-official", desc: "專注上櫃與興櫃市場的官方資訊站，中小型潛力成長股的搖籃與追蹤基地。", feature: "櫃買指數、上櫃法人籌碼、興櫃登錄" },
+      { id: "tdcc", name: "集保戶股權分散表 (TDCC)", url: "https://www.tdcc.com.tw", cat: "official", badge: "官方權威", bClass: "badge-official", desc: "臺灣集中保管結算所官方數據，每週定期公布各級距持股比例與股東人數增減。", feature: "每週五看千張大戶持股比例變化" },
+      { id: "yahoo", name: "Yahoo 奇摩股市", url: "https://tw.stock.yahoo.com", cat: "realtime", badge: "即時看盤", bClass: "badge-realtime", desc: "全台普及率最高看盤門戶，介面乾淨好讀，適合隨時快速掃描持股現況與即時走勢。", feature: "即時走勢、自選股雲端監控、當日排行" },
+      { id: "wantgoo", name: "玩股網 (Wantgoo)", url: "https://www.wantgoo.com", cat: "realtime", badge: "即時看盤", bClass: "badge-realtime", desc: "整合台股、期指、國際指數與籌碼變化的強大投資平台，提供專業的恐慌情緒與期貨指標。", feature: "VIX 恐慌指數、外資台指期未平倉、楚狂人指標" },
+      { id: "tradingview", name: "TradingView", url: "https://tw.tradingview.com", cat: "realtime", badge: "專業圖表", bClass: "badge-realtime", desc: "全球頂尖跨市場專業繪圖工具，支援台股、美股、期指與匯率，多商品疊圖與畫線首選。", feature: "專業K線分析、多商品走勢疊圖、自訂指標" },
+      { id: "cmoney", name: "股市爆料同學會", url: "https://www.cmoney.tw/forum/", cat: "realtime", badge: "社群討論", bClass: "badge-realtime", desc: "全台最大的投資人即時交流社群，掌握當日盤中話題性個股與散戶市場心理風向。", feature: "散戶情緒溫度計、熱門標的即時心得" },
+      { id: "goodinfo", name: "Goodinfo! 股市資訊網", url: "https://goodinfo.tw", cat: "finance", badge: "數據寶庫", bClass: "badge-finance", desc: "台股歷史數據最完整的資料庫，資料維度齊全，老手必備的深度基本面與除權息查詢站。", feature: "歷年殖利率與配息、本益比河流圖、主力籌碼" },
+      { id: "statementdog", name: "財報狗 (StatementDog)", url: "https://statementdog.com", cat: "finance", badge: "財務視覺化", bClass: "badge-finance", desc: "將複雜難懂的財務三大表轉換為直觀折線圖，一眼快速掃描公司長期獲利體質。", feature: "近5年ROE走勢、毛利率/營利率、自由現金流" },
+      { id: "histock", name: "嗨投資 (HiStock)", url: "https://histock.tw", cat: "finance", badge: "籌碼選股", bClass: "badge-finance", desc: "結合量化選股與籌碼追蹤的多功能資訊網，提供清晰的外資與投信連續買超天數篩選。", feature: "外資/投信連買排行、資券同步變化、智慧選股" },
+      { id: "cnyes", name: "Anue 鉅亨網", url: "https://www.cnyes.com", cat: "news", badge: "即時新聞", bClass: "badge-news", desc: "專業華文財經媒體，新聞更新速度快，涵蓋晨間盤前重點整理與外資機構觀點。", feature: "盤前重點整理、法說會即時要點、外資目標價" },
+      { id: "moneydj", name: "MoneyDJ 理財網", url: "https://www.moneydj.com", cat: "news", badge: "產業鏈庫", bClass: "badge-news", desc: "嘉實資訊旗下資深財經網站，其「產業知識庫」將全球與台灣產業鏈上下游梳理得最清楚。", feature: "產業上下游關聯圖、概念股清單、營收比重" },
+      { id: "digitimes", name: "DIGITIMES 電子時報", url: "https://www.digitimes.com.tw", cat: "news", badge: "科技權威", bClass: "badge-news", desc: "專注科技硬體、半導體晶圓代工與先進封裝供應鏈的權威調研媒體，深度洞察產業景氣。", feature: "先進封裝/AI伺服器供應鏈動態、晶圓產能利用率" },
+      { id: "macromicro", name: "財經 M 平方", url: "https://www.macromicro.me", cat: "global", badge: "總經權威", bClass: "badge-global", desc: "華人圈最優質的總體經濟圖表研究平台，用數據圖表看清景氣循環週期與央行貨幣政策。", feature: "聯準會利率點陣圖、CPI通膨、全球製造業PMI" },
+      { id: "finviz", name: "Finviz", url: "https://finviz.com", cat: "global", badge: "美股熱力圖", bClass: "badge-global", desc: "美股投資必看網站，其標普 500 熱力圖（S&P 500 Map）能在一秒內掌握全美各板塊強弱。", feature: "S&P 500 熱力圖、美股板塊即時漲跌、形態篩選" },
+      { id: "investing", name: "Investing.com", url: "https://tw.investing.com", cat: "global", badge: "全球金融", bClass: "badge-global", desc: "夜間與開盤前必看的全球金融入口，全面涵蓋美股夜盤期貨、美債殖利率與原油大宗商品。", feature: "小道瓊/小那期指、美債10年期殖利率、美元指數" }
     ];
 
     const categoryNames = {
@@ -1139,18 +1384,13 @@
       global: "🌐 全球總經美股"
     };
 
-    // 收藏機制
     let favorites = JSON.parse(localStorage.getItem('mars_fav_sites_v2') || '[]');
-
     function updateFavCount() {
       document.getElementById('favCount').innerText = favorites.length;
     }
 
     function toggleFavorite(id, e) {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
+      if (e) { e.preventDefault(); e.stopPropagation(); }
       if (favorites.includes(id)) {
         favorites = favorites.filter(item => item !== id);
       } else {
@@ -1162,12 +1402,10 @@
       renderSidebarMenu();
     }
 
-    // 渲染左側目錄
     function renderSidebarMenu(filterTxt = '') {
       const menuEl = document.getElementById('sidebarMenu');
       const q = filterTxt.toLowerCase().trim();
       let html = '';
-
       const cats = ['media', 'official', 'realtime', 'finance', 'news', 'global'];
       cats.forEach(c => {
         const groupSites = sites.filter(s => s.cat === c && (!q || s.name.toLowerCase().includes(q) || s.feature.toLowerCase().includes(q)));
@@ -1179,7 +1417,7 @@
               <li>
                 <button class="nav-item-btn" onclick="scrollToSite('${s.id}')">
                   <span>${isFav ? '⭐ ' : ''}${s.name.split(' ')[0]}</span>
-                  <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="outlink" onclick="event.stopPropagation(); onSiteClick('${s.name}')">↗</a>
+                  <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="outlink" onclick="event.stopPropagation(); window.onSiteClick('${s.name}')">↗</a>
                 </button>
               </li>
             `;
@@ -1187,15 +1425,11 @@
           html += `</ul>`;
         }
       });
-
       menuEl.innerHTML = html;
     }
 
-    function filterSidebar(val) {
-      renderSidebarMenu(val);
-    }
+    function filterSidebar(val) { renderSidebarMenu(val); }
 
-    // 平滑滾動並高亮卡片
     function scrollToSite(id) {
       if (currentCat !== 'all' && currentCat !== 'favorites') {
         currentCat = 'all';
@@ -1203,34 +1437,24 @@
         document.querySelector('.filter-tab[data-cat="all"]').classList.add('active');
         renderCards();
       }
-
       const card = document.getElementById(`card-${id}`);
       if (card) {
         card.scrollIntoView({ behavior: 'smooth', block: 'center' });
         card.classList.add('target-highlight');
-        setTimeout(() => {
-          card.classList.remove('target-highlight');
-        }, 1800);
+        setTimeout(() => card.classList.remove('target-highlight'), 1800);
       }
     }
 
-    // 渲染右側卡片
     let currentCat = 'all';
     let searchQuery = '';
 
     function renderCards() {
       const grid = document.getElementById('cardsGrid');
       const emptyState = document.getElementById('emptyState');
-
       const filtered = sites.filter(s => {
-        const matchesCat = (currentCat === 'all') || 
-                           (currentCat === 'favorites' && favorites.includes(s.id)) || 
-                           (s.cat === currentCat);
+        const matchesCat = (currentCat === 'all') || (currentCat === 'favorites' && favorites.includes(s.id)) || (s.cat === currentCat);
         const q = searchQuery.toLowerCase().trim();
-        const matchesSearch = !q || 
-                              s.name.toLowerCase().includes(q) || 
-                              s.desc.toLowerCase().includes(q) || 
-                              s.feature.toLowerCase().includes(q);
+        const matchesSearch = !q || s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q) || s.feature.toLowerCase().includes(q);
         return matchesCat && matchesSearch;
       });
 
@@ -1239,12 +1463,11 @@
         emptyState.style.display = 'block';
         return;
       }
-
       emptyState.style.display = 'none';
       grid.innerHTML = filtered.map(s => {
         const isFav = favorites.includes(s.id);
         return `
-          <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="site-card" id="card-${s.id}" onclick="onSiteClick('${s.name}')">
+          <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="site-card" id="card-${s.id}" onclick="window.onSiteClick('${s.name}')">
             <div>
               <div class="card-head">
                 <span class="card-title">${s.name}</span>
@@ -1266,13 +1489,11 @@
       }).join('');
     }
 
-    // 事件監聽：搜尋
     document.getElementById('mainSearch').addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderCards();
     });
 
-    // 事件監聽：分類切換
     document.getElementById('categoryTabs').addEventListener('click', (e) => {
       if (e.target.tagName === 'BUTTON') {
         document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
@@ -1282,16 +1503,11 @@
       }
     });
 
-    // 行動版側邊欄開關
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('open');
-    }
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
 
-    // 初始載入
     updateFavCount();
     renderSidebarMenu();
     renderCards();
-    updateHonorUI();
   </script>
 </body>
 </html>

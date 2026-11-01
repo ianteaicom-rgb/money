@@ -113,6 +113,66 @@
       color: #fbbf24;
     }
 
+    .top-auth-capsule {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .top-guest-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #2563eb;
+      color: #fff;
+      border: 1px solid #3b82f6;
+      border-radius: 20px;
+      padding: 4px 10px 4px 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .top-guest-block:hover {
+      background: #1d4ed8;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+    }
+    .top-guest-avatar {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+    .top-login-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .sidebar-login-btn {
+      display: inline-flex;
+      align-items: center;
+      background: #2563eb;
+      color: #fff;
+      border: 1px solid #3b82f6;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      width: fit-content;
+    }
+    .sidebar-login-btn:hover {
+      background: #1d4ed8;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+    }
+
     .auth-btn {
       display: inline-flex;
       align-items: center;
@@ -923,10 +983,76 @@
       .top-bar { padding: 0 10px; }
       .top-brand span.full-title { display: none; }
       .top-brand span.short-title { display: inline; }
-      .clocks-wrap .clock-item.ny-clock { display: none; }
+      /* 手機版隱藏整個頂部時鐘與次要按鈕，釋放空間給抽獎與會員頭像 */
+      .clocks-wrap { display: none !important; }
       .top-action-btn.btn-hide-mobile { display: none; }
-      .top-action-btn.btn-lottery { padding: 4px 8px; font-size: 11px; }
-      .auth-btn { padding: 5px 9px; font-size: 11px; }
+      .top-action-btn.btn-lottery {
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+      }
+      .top-auth-capsule {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .top-guest-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #2563eb;
+      color: #fff;
+      border: 1px solid #3b82f6;
+      border-radius: 20px;
+      padding: 4px 10px 4px 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .top-guest-block:hover {
+      background: #1d4ed8;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+    }
+    .top-guest-avatar {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+    .top-login-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .sidebar-login-btn {
+      display: inline-flex;
+      align-items: center;
+      background: #2563eb;
+      color: #fff;
+      border: 1px solid #3b82f6;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      width: fit-content;
+    }
+    .sidebar-login-btn:hover {
+      background: #1d4ed8;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+    }
+
+    .auth-btn { padding: 6px 10px; font-size: 11px; }
     }
     @media (min-width: 881px) {
       .top-brand span.short-title { display: none; }
@@ -952,14 +1078,18 @@
       <button class="top-action-btn btn-hide-mobile" onclick="openCommunityModal()">📝 火星文章</button>
       <button class="top-action-btn btn-hide-mobile" onclick="openRecommendModal()">💡 推薦好站</button>
 
-      <button class="auth-btn" id="btnLogin" onclick="loginWithGoogle()">
-        <span>Google 登入</span>
-      </button>
-      <div class="user-profile-badge" id="userBadge" onclick="openProfileModal()">
-        <img src="" id="topUserAvatar" class="user-avatar-img">
-        <span class="user-name-text" id="topUserName">投資訪客</span>
-        <span class="badge-role badge-admin" id="adminTag" style="display:none;">站長 Mars</span>
-        <span class="badge-role badge-rep" id="repTag" style="display:none;">火星代表</span>
+      <!-- 頂部頭像與登入一體化膠囊 (未登入點擊直接登入，已登入點擊查看資料) -->
+      <div class="top-auth-capsule" id="topAuthCapsule" onclick="handleTopAuthClick()" title="點擊登入或查看個人資料">
+        <div class="top-guest-block" id="topGuestBlock">
+          <span class="top-guest-avatar">👤</span>
+          <span class="top-login-label">登入</span>
+        </div>
+        <div class="user-profile-badge" id="userBadge" style="display:none;">
+          <img src="" id="topUserAvatar" class="user-avatar-img">
+          <span class="user-name-text" id="topUserName">投資訪客</span>
+          <span class="badge-role badge-admin" id="adminTag" style="display:none;">站長 Mars</span>
+          <span class="badge-role badge-rep" id="repTag" style="display:none;">火星代表</span>
+        </div>
       </div>
     </div>
   </div>
@@ -991,9 +1121,9 @@
         </div>
 
         <div class="honor-rank-row">
-          <div class="honor-avatar-wrap" onclick="openProfileModal()" title="點擊更換頭像與暱稱">
+          <div class="honor-avatar-wrap" onclick="handleSidebarAvatarClick()" title="點擊更換頭像或 Google 登入">
             <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='18' font-size='18'>🌱</text></svg>" class="honor-avatar-img" id="sidebarAvatar">
-            <span class="honor-avatar-edit-hint">✏️</span>
+            <span class="honor-avatar-edit-hint" id="sidebarAvatarEditHint">🔑</span>
           </div>
           <div class="honor-details">
             <div class="honor-level-title">
@@ -1003,6 +1133,11 @@
             <div class="honor-exp-text">
               EXP: <span id="honorExpCur">0</span> / <span id="honorExpMax">100</span>
             </div>
+            <!-- 大頭貼旁 Google 登入按鈕 (未登入時明顯展示) -->
+            <button class="sidebar-login-btn" id="sidebarLoginBtn" onclick="loginWithGoogle()">
+              <svg width="12" height="12" viewBox="0 0 24 24" style="margin-right:3px; vertical-align:-1px;"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+              Google 登入
+            </button>
           </div>
         </div>
         <div class="honor-progress-bar">
@@ -1402,6 +1537,23 @@
       } catch(e) {}
     }
 
+    
+    window.handleTopAuthClick = function() {
+      if (currentUser) {
+        openProfileModal();
+      } else {
+        loginWithGoogle();
+      }
+    };
+
+    window.handleSidebarAvatarClick = function() {
+      if (currentUser) {
+        openProfileModal();
+      } else {
+        loginWithGoogle();
+      }
+    };
+
     window.loginWithGoogle = async function() {
       if (!isFirebaseReady) { alert("Firebase 尚未就緒。"); return; }
       const provider = new GoogleAuthProvider();
@@ -1418,8 +1570,13 @@
         await loadRepresentatives();
         if (user) {
           currentUser = user;
-          document.getElementById('btnLogin').style.display = 'none';
+          const guestEl = document.getElementById('topGuestBlock');
+          if (guestEl) guestEl.style.display = 'none';
           document.getElementById('userBadge').style.display = 'flex';
+          const sideLoginBtn = document.getElementById('sidebarLoginBtn');
+          if (sideLoginBtn) sideLoginBtn.style.display = 'none';
+          const sideHint = document.getElementById('sidebarAvatarEditHint');
+          if (sideHint) sideHint.innerText = '✏️';
           document.getElementById('btnLogoutBtn').style.display = 'block';
 
           const userDocRef = doc(db, 'users', user.uid);
@@ -1462,9 +1619,14 @@
           updateUI();
         } else {
           currentUser = null;
-          document.getElementById('btnLogin').style.display = 'inline-flex';
+          const guestEl = document.getElementById('topGuestBlock');
+          if (guestEl) guestEl.style.display = 'inline-flex';
           document.getElementById('userBadge').style.display = 'none';
           document.getElementById('btnLogoutBtn').style.display = 'none';
+          const sideLoginBtn = document.getElementById('sidebarLoginBtn');
+          if (sideLoginBtn) sideLoginBtn.style.display = 'inline-flex';
+          const sideHint = document.getElementById('sidebarAvatarEditHint');
+          if (sideHint) sideHint.innerText = '🔑';
           updateUI();
         }
       });
@@ -1942,9 +2104,14 @@
         img.onload = function() {
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
-          canvas.width = 120; canvas.height = 120;
-          ctx.drawImage(img, 0, 0, 120, 120);
-          const base64 = canvas.toDataURL('image/jpeg', 0.85);
+          // 自動正方形等比置中裁切 (Center Crop)，任何長寬比照片上傳均自動滿格不留白
+          const minSide = Math.min(img.width, img.height);
+          const sx = (img.width - minSide) / 2;
+          const sy = (img.height - minSide) / 2;
+          canvas.width = 160;
+          canvas.height = 160;
+          ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, 160, 160);
+          const base64 = canvas.toDataURL('image/jpeg', 0.88);
           document.getElementById('profileAvatarPreview').src = base64;
           window.tempAvatarBase64 = base64;
         };

@@ -70,6 +70,103 @@
       gap: 8px;
     }
 
+    /* 右上角精選文章導流區與下拉選單 */
+    .top-featured-articles-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .top-share-dropdown-btn {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid #f59e0b;
+      color: #fbbf24;
+      border-radius: 14px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .top-share-dropdown-btn:hover {
+      background: #f59e0b;
+      color: #0b0f17;
+    }
+    .top-share-admin-btn {
+      background: #1e293b;
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      border-radius: 14px;
+      padding: 3px 7px;
+      font-size: 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      font-weight: 700;
+    }
+    .top-share-admin-btn:hover {
+      background: #38bdf8;
+      color: #0b0f17;
+    }
+    .top-articles-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 320px;
+      max-width: 90vw;
+      background: #131b2c;
+      border: 1px solid #f59e0b;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      z-index: 100;
+      padding: 10px;
+    }
+    .top-articles-dropdown.show { display: block; }
+    .top-articles-dropdown-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #223048;
+      font-size: 12px;
+      font-weight: 700;
+      color: #f59e0b;
+    }
+    .top-articles-dropdown-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .top-article-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #162032;
+      border: 1px solid #223048;
+      border-radius: 6px;
+      padding: 8px 10px;
+      text-decoration: none;
+      color: #e2e8f0;
+      font-size: 12px;
+      line-height: 1.4;
+      transition: all 0.15s ease;
+    }
+    .top-article-item:hover {
+      background: #1e2c44;
+      border-color: #f59e0b;
+      color: #fef08a;
+    }
+
     /* 右上角強推分享連結 (日月光投控法說會解讀) */
     .top-share-link {
       display: inline-flex;
@@ -1122,12 +1219,29 @@
       <span class="short-title">🍱 火星人的地球便當</span>
     </div>
     <div class="top-right-group">
-      <!-- 右上角分享連結 (直接點擊導流方格子) -->
-      <a href="https://vocus.cc/article/6ae6e46dfd89780001c59f56?modal=likes" target="_blank" rel="noopener noreferrer" class="top-share-link" title="【Mars 觀測日誌】日月光投控（3711）第三季法說會解讀：空間卡位戰開打，封測天花板如何變成新地板？">
-        <span class="share-icon">🔥</span>
-        <span class="share-text-desktop">【Mars 觀測日誌】日月光法說解讀 ↗</span>
-        <span class="share-text-mobile">日月光法說 ↗</span>
-      </a>
+      <!-- 右上角精選文章導流區 (支援最多 5 篇自由新增/刪除 & 站長管理) -->
+      <div class="top-featured-articles-wrap" id="topFeaturedWrap">
+        <a href="https://vocus.cc/article/6ae6e46dfd89780001c59f56?modal=likes" target="_blank" rel="noopener noreferrer" class="top-share-link" id="topFeaturedMainLink" title="【Mars 觀測日誌】日月光投控（3711）第三季法說會解讀">
+          <span class="share-icon">🔥</span>
+          <span class="share-text-desktop" id="topFeaturedTextDesktop">【Mars 觀測日誌】日月光法說解讀 ↗</span>
+          <span class="share-text-mobile" id="topFeaturedTextMobile">日月光法說 ↗</span>
+        </a>
+        <button type="button" class="top-share-dropdown-btn" id="btnToggleTopArticles" onclick="toggleTopArticlesMenu(event)" title="展開精選文章清單 (上限5篇)">
+          <span id="topArticlesCountBadge">1</span>篇 ▾
+        </button>
+        <button type="button" class="top-share-admin-btn" id="btnAdminManageLinks" style="display:none;" onclick="openManageTopLinksModal(event)" title="站長管理右上角文章連結 (上限5篇)">⚙️</button>
+
+        <!-- 下拉式 5 篇文章浮動選單 -->
+        <div class="top-articles-dropdown" id="topArticlesDropdown">
+          <div class="top-articles-dropdown-header">
+            <span>🍱 火星人精選專欄 (最多 5 篇)</span>
+            <button onclick="closeTopArticlesMenu()" style="background:transparent; border:none; color:#94a3b8; cursor:pointer; font-size:14px;">✕</button>
+          </div>
+          <div id="topArticlesDropdownList" class="top-articles-dropdown-list">
+            <!-- Dynamic 1 to 5 links -->
+          </div>
+        </div>
+      </div>
 
       <div class="clocks-wrap">
         <div class="clock-item"><span class="clock-dot"></span> 台北: <span id="clock-tw">--:--:--</span></div>
@@ -1199,6 +1313,11 @@
             </div>
             <div class="honor-exp-text">
               EXP: <span id="honorExpCur">0</span> / <span id="honorExpMax">100</span>
+            </div>
+            <!-- 連續登入天數與獎勵狀態 -->
+            <div style="font-size:11px; color:#fbbf24; font-weight:600; margin-top:2px; display:flex; align-items:center; gap:5px;">
+              <span>🔥 連續登入: <b id="streakDaysCount">1</b> 天</span>
+              <span id="streakBonusTip" style="font-size:10px; background:rgba(245,158,11,0.25); color:#fef08a; padding:1px 5px; border-radius:4px;">滿7天+50分</span>
             </div>
             <!-- 大頭貼旁 Google 登入按鈕 -->
             <button class="sidebar-login-btn" id="sidebarLoginBtn" onclick="loginWithGoogle()">
@@ -1320,7 +1439,35 @@
 
   <div class="exp-toast" id="expToast">+5 EXP 知識累積中！</div>
 
-  <!-- 每日抽獎 Modal 彈窗 -->
+  <!-- 管理右上角精選連結 Modal 彈窗 (上限 5 篇) -->
+  <div class="modal-overlay" id="manageTopLinksModal" onclick="closeManageTopLinksModal(event)">
+    <div class="modal-box" style="max-width:620px;" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">⚙️ 站長管理：右上角精選文章連結 (上限 5 篇)</div>
+        <button class="modal-close" onclick="closeManageTopLinksModal()">✕</button>
+      </div>
+      <p style="font-size:12px; color:var(--text-sub); margin-bottom:12px;">
+        在此新增或刪除推薦給訪客閱讀的方格子文章，上限為 <b>5 篇</b>。更新後會自動同步於右上角下拉選單及首頁熱推橫幅！
+      </p>
+
+      <!-- 新增文章連結表單 -->
+      <div style="background:#0b0f17; border:1px solid #223048; border-radius:8px; padding:12px; margin-bottom:14px; display:flex; flex-direction:column; gap:8px;">
+        <div style="font-size:12.5px; font-weight:700; color:#f59e0b;">➕ 新增推薦文章 (目前 <span id="topLinksCountText">0</span>/5 篇)</div>
+        <input type="text" id="newLinkShortTitle" class="ask-input" placeholder="文章簡稱 (按鈕與手機顯示，例：日月光法說解讀、當沖八步驟)">
+        <input type="text" id="newLinkFullTitle" class="ask-input" placeholder="完整文章標題 (懸停與首頁橫幅顯示)">
+        <input type="text" id="newLinkUrl" class="ask-input" placeholder="方格子文章網址 (URL，如 https://vocus.cc/article/...)">
+        <button type="button" class="btn-checkin" id="btnAddTopLink" style="padding:7px; font-size:12px;" onclick="addNewTopLink()">➕ 新增文章連結</button>
+      </div>
+
+      <!-- 目前連結清單 -->
+      <div style="font-size:12px; font-weight:700; color:#94a3b8; margin-bottom:6px;">📑 目前已收錄文章 (可刪除或設為主要推薦)</div>
+      <div id="topLinksListContainer" style="display:flex; flex-direction:column; gap:8px; max-height:40vh; overflow-y:auto;">
+        <!-- Dynamic links list -->
+      </div>
+    </div>
+  </div>
+
+    <!-- 每日抽獎 Modal 彈窗 -->
   <div class="modal-overlay" id="lotteryModal" onclick="closeLotteryModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -1444,6 +1591,20 @@
         <input type="text" id="profileNameInput" class="ask-input" placeholder="輸入您的自訂名稱">
       </div>
       <button class="btn-checkin" style="width:100%; padding:8px;" onclick="saveProfileChanges()">💾 儲存修改</button>
+
+      <!-- 站長 Mars 專屬權限與分數自我救援盒 -->
+      <div id="adminRescueBox" style="margin-top:14px; background:#0b0f17; border:1px solid #f59e0b; border-radius:8px; padding:10px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <span style="font-size:12px; font-weight:700; color:#f59e0b;">👑 站長 Mars 分數手動修復 / 設定</span>
+          <button type="button" onclick="claimMarsAdmin()" style="background:transparent; border:none; color:#38bdf8; font-size:11px; cursor:pointer; text-decoration:underline;">啟用站長權限</button>
+        </div>
+        <div style="display:flex; gap:6px; align-items:center;">
+          <input type="number" id="manualExpInput" class="ask-input" placeholder="直接設定我的總 EXP (如 3000000)" style="flex:1;">
+          <button type="button" class="btn-checkin" style="background:#d97706; padding:6px 12px; font-size:11.5px; white-space:nowrap;" onclick="manualSetMyExp()">修復分數</button>
+        </div>
+        <div style="font-size:10px; color:#94a3b8; margin-top:4px;">💡 若遇瀏覽器快取清除或分數歸零，輸入數值後點擊修復即可立即生效。</div>
+      </div>
+
       <button class="btn-side-rule" id="btnLogoutBtn" style="width:100%; margin-top:8px; padding:6px; color:#f87171; display:none;" onclick="logout()">登出帳號</button>
     </div>
   </div>
@@ -1480,6 +1641,7 @@
           </thead>
           <tbody>
             <tr><td>📅 每日簽到</td><td style="color:#38bdf8; font-weight:700;">+50 EXP</td><td>每日 1 次</td><td>點擊左側榮譽卡片「每日簽到」領取。</td></tr>
+            <tr><td>🔥 連續登入獎勵</td><td style="color:#f59e0b; font-weight:700;">+50 EXP</td><td>每連續 7 天</td><td>天天上線打卡，每連續滿 7 天系統自動發放勤奮大紅包！</td></tr>
             <tr><td>🎁 每日盲盒抽獎</td><td style="color:#f59e0b; font-weight:700;">+20 ~ +100 EXP</td><td>每日 1 次</td><td>頂部點選抽獎開盲盒。</td></tr>
             <tr><td>💬 每日個股提問</td><td style="color:#34d399; font-weight:700;">+30 EXP</td><td>每日 1 次</td><td>左側提出 1 檔股票問題並送出。</td></tr>
             <tr><td>⏱️ 在線專注學習</td><td style="color:#c084fc; font-weight:700;">+5 EXP / 5分鐘</td><td>每滿 5 分鐘自動給予</td><td>保持網頁開啟，每停留 5 分鐘自動發放。</td></tr>

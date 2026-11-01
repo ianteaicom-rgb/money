@@ -78,6 +78,14 @@
     }
     .clock-item { display: flex; align-items: center; gap: 5px; }
     .clock-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+    .top-dwell-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #c084fc;
+      border-left: 1px solid #223048;
+      padding-left: 8px;
+    }
 
     /* 頂部快捷按鈕 */
     .top-action-btn {
@@ -93,6 +101,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
+      white-space: nowrap;
     }
     .top-action-btn:hover {
       border-color: var(--accent);
@@ -121,6 +130,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
+      white-space: nowrap;
     }
     .auth-btn:hover {
       background: #1d4ed8;
@@ -159,6 +169,7 @@
       font-weight: 700;
       padding: 1px 4px;
       border-radius: 4px;
+      white-space: nowrap;
     }
 
     /* 佈局容器 */
@@ -226,7 +237,7 @@
       line-height: 1.35;
     }
 
-    /* 觀賞者榮譽等級卡片 */
+    /* 觀賞者榮譽等級卡片 (Honor Rank System) - 排版升級 */
     .honor-card {
       background: linear-gradient(135deg, #162032 0%, #1a273e 100%);
       border: 1px solid #2e3e5c;
@@ -236,31 +247,67 @@
       flex-direction: column;
       gap: 8px;
     }
-    .honor-header {
+    .honor-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding-bottom: 2px;
     }
     .honor-tag {
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
       color: #38bdf8;
       background: rgba(56, 189, 248, 0.15);
-      padding: 2px 7px;
-      border-radius: 4px;
+      padding: 3px 8px;
+      border-radius: 6px;
       border: 1px solid rgba(56, 189, 248, 0.3);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
-    .honor-links {
-      display: flex;
-      gap: 8px;
+    .sidebar-dwell-badge {
       font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #c084fc;
+      background: rgba(168, 85, 247, 0.12);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      padding: 3px 7px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
     }
-    .honor-link-btn {
-      color: var(--accent);
-      background: transparent;
-      border: none;
+
+    /* 獨立排版工具列 (3 顆按鈕平均分配寬度，絕不折字) */
+    .honor-action-toolbar {
+      display: flex;
+      gap: 6px;
+      width: 100%;
+      margin: 2px 0;
+    }
+    .honor-tool-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      background: #111827;
+      color: #94a3b8;
+      border: 1px solid #223048;
+      border-radius: 6px;
+      padding: 6px 4px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
       cursor: pointer;
-      text-decoration: underline;
+      transition: all 0.15s ease;
+    }
+    .honor-tool-btn:hover {
+      background: #1e293b;
+      color: #38bdf8;
+      border-color: #38bdf8;
     }
 
     .honor-rank-row {
@@ -329,6 +376,36 @@
       transition: width 0.3s ease;
     }
 
+    /* 停留學習時間 & 5 分鐘獎勵進度盒 */
+    .dwell-box {
+      background: rgba(11, 15, 23, 0.65);
+      border: 1px solid #223048;
+      border-radius: 6px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .dwell-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+    }
+    .dwell-mini-bar {
+      width: 100%;
+      height: 4px;
+      background: #0b0f17;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .dwell-mini-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+      transition: width 0.3s ease;
+    }
+
     .honor-action-row {
       display: flex;
       gap: 6px;
@@ -340,12 +417,13 @@
       color: #fff;
       border: 1px solid #3b82f6;
       border-radius: 6px;
-      padding: 5px 8px;
-      font-size: 11px;
+      padding: 6px 8px;
+      font-size: 11.5px;
       font-weight: 600;
       cursor: pointer;
       text-align: center;
       transition: all 0.15s;
+      white-space: nowrap;
     }
     .btn-checkin:hover:not(:disabled) { background: #1d4ed8; }
     .btn-checkin:disabled {
@@ -359,14 +437,15 @@
       color: #94a3b8;
       border: 1px solid #334155;
       border-radius: 6px;
-      padding: 5px 8px;
+      padding: 6px 10px;
       font-size: 11px;
       font-weight: 500;
       cursor: pointer;
+      white-space: nowrap;
     }
     .btn-side-rule:hover { color: #fff; border-color: var(--accent); }
 
-    /* 星座專屬運勢卡片 (Zodiac Insight Card) */
+    /* 星座專屬運勢卡片 */
     .zodiac-card {
       background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(30, 27, 75, 0.4) 100%);
       border: 1px solid rgba(168, 85, 247, 0.3);
@@ -746,7 +825,7 @@
       background: #131b2c;
       border: 1px solid var(--border);
       border-radius: 12px;
-      max-width: 560px;
+      max-width: 580px;
       width: 100%;
       max-height: 84vh;
       overflow-y: auto;
@@ -910,6 +989,7 @@
       <div class="clocks-wrap">
         <div class="clock-item"><span class="clock-dot"></span> 台北: <span id="clock-tw">--:--:--</span></div>
         <div class="clock-item"><span class="clock-dot" style="background:#38bdf8;"></span> 紐約: <span id="clock-ny">--:--:--</span></div>
+        <div class="top-dwell-item"><span>⏱️ 停留:</span> <span id="topDwellClock" style="font-weight:700;">00:00</span></div>
       </div>
       <!-- 每日抽獎按鈕 -->
       <button class="top-action-btn btn-lottery" onclick="openLotteryModal()">🎁 每日抽獎</button>
@@ -939,16 +1019,22 @@
         <div class="salon-desc">個人文章、產業觀測、市場數據與心得筆記累積處。</div>
       </a>
 
-      <!-- 觀賞者榮譽等級卡片 (Honor Rank System) -->
+      <!-- 觀賞者榮譽等級卡片 (Honor Rank System) - 排版已優化絕不擠字 -->
       <div class="honor-card">
-        <div class="honor-header">
+        <!-- 第 1 排：標題與即時停留時長 -->
+        <div class="honor-header-row">
           <span class="honor-tag">🎖️ 榮譽殿堂</span>
-          <div class="honor-links">
-            <button class="honor-link-btn" onclick="openExpGuideModal()">📖 積分攻略</button>
-            <button class="honor-link-btn" onclick="openLeaderboardModal()">🏆 排行榜</button>
-            <button class="honor-link-btn" onclick="openHonorModal()">20 階 ➔</button>
-          </div>
+          <span class="sidebar-dwell-badge">⏱️ 在線: <b id="sidebarDwellClock">00:00</b></span>
         </div>
+
+        <!-- 第 2 排：獨立 3 顆功能按鈕（平均分配寬度，絕不折字） -->
+        <div class="honor-action-toolbar">
+          <button class="honor-tool-btn" onclick="openExpGuideModal()">📖 積分攻略</button>
+          <button class="honor-tool-btn" onclick="openLeaderboardModal()">🏆 排行榜</button>
+          <button class="honor-tool-btn" onclick="openHonorModal()">📜 20階表</button>
+        </div>
+
+        <!-- 第 3 排：頭像與等級進度 -->
         <div class="honor-rank-row">
           <div class="honor-avatar-wrap" onclick="openProfileModal()" title="點擊更換頭像與暱稱">
             <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='18' font-size='18'>🌱</text></svg>" class="honor-avatar-img" id="sidebarAvatar">
@@ -967,6 +1053,23 @@
         <div class="honor-progress-bar">
           <div class="honor-progress-fill" id="honorProgressFill"></div>
         </div>
+
+        <!-- 第 4 排：停留學習時間 & 5 分鐘 +5 點進度顯示區 -->
+        <div class="dwell-box">
+          <div class="dwell-info-row">
+            <span style="color:#cbd5e1; font-weight:500;">⏱️ 今日在線學習</span>
+            <span style="color:#38bdf8; font-weight:700; font-family:'JetBrains Mono',monospace;" id="dwellTotalText">00分00秒</span>
+          </div>
+          <div class="dwell-mini-bar">
+            <div class="dwell-mini-fill" id="dwellMiniFill"></div>
+          </div>
+          <div class="dwell-info-row" style="color:#64748b; font-size:10.5px;">
+            <span>每滿 5 分鐘自動 +5 EXP</span>
+            <span>距下輪還差 <b id="dwellCountdownText" style="color:#fbbf24; font-family:'JetBrains Mono',monospace;">05:00</b></span>
+          </div>
+        </div>
+
+        <!-- 第 5 排：每日簽到與資料更換按鈕 -->
         <div class="honor-action-row">
           <button class="btn-checkin" id="btnCheckin" onclick="dailyCheckIn()">📅 每日簽到 (+30)</button>
           <button class="btn-side-rule" onclick="openProfileModal()">頭像/資料</button>
@@ -1182,7 +1285,6 @@
     </div>
   </div>
 
-  
   <!-- 積分攻略 Modal 彈窗 -->
   <div class="modal-overlay" id="expGuideModal" onclick="closeExpGuideModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
@@ -1407,7 +1509,6 @@
       if (!user) return false;
       const email = (user.email || '').toLowerCase();
       const name = (data.displayName || user.displayName || '').toLowerCase();
-      // 符合 Mars 稱號、ianteai 信箱或指定管理員
       if (email.includes('ianteai') || email.includes('mars') || name === 'mars' || name.includes('火星人') || data.isAdmin === true) {
         return true;
       }
@@ -1481,305 +1582,13 @@
             await setDoc(userDocRef, localUserData);
           }
           saveLocal();
-      
-    // 積分攻略 Modal 開關
-    window.openExpGuideModal = function() {
-      document.getElementById('expGuideModal').classList.add('show');
-    };
-    window.closeExpGuideModal = function() {
-      document.getElementById('expGuideModal').classList.remove('show');
-    };
-
-    // 提問公布欄 Modal 與 Mars 回覆系統
-    window.openQuestionsBoardModal = async function() {
-      const modal = document.getElementById('questionsBoardModal');
-      const container = document.getElementById('questionsListContainer');
-      modal.classList.add('show');
-
-      if (!isFirebaseReady || !db) {
-        container.innerHTML = `
-          <div style="background:#162032; border:1px solid #223048; border-radius:8px; padding:12px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-              <span style="font-weight:700; color:#fff;">台積電 (2330)</span>
-              <span style="font-size:11px; color:#94a3b8;">示範提問</span>
-            </div>
-            <p style="font-size:12px; color:#cbd5e1; margin-bottom:8px;">「跌破季線時外資持續賣超，中長線投資人該如何分批應對？」</p>
-            <div style="background:#0b0f17; border:1px solid #10b981; border-radius:6px; padding:8px; font-size:11.5px; color:#34d399;">
-              🛡️ <b>Mars 解讀</b>：權值股遇總經升息或匯率震盪回檔屬健康洗盤，可參考本益比位階與大盤融資維持率分批佈局。
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = '<div style="text-align:center; padding:16px; color:#64748b;">正在取得提問與解讀...</div>';
-      try {
-        const q = query(collection(db, 'stock_questions'), orderBy('createdAt', 'desc'), limit(30));
-        const snap = await getDocs(q);
-
-        if (snap.empty) {
-          container.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">目前尚無提問，歡迎在左側提問區提出您的第一個個股問題！</div>';
-          return;
-        }
-
-        let html = '';
-        snap.forEach(docSnap => {
-          const item = docSnap.data();
-          const docId = docSnap.id;
-          const hasReply = !!item.reply;
-
-          html += `
-            <div style="background:#162032; border:1px solid #223048; border-radius:8px; padding:12px; display:flex; flex-direction:column; gap:8px;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <img src="${item.userPhoto || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + item.userName}" style="width:24px; height:24px; border-radius:50%; border:1px solid var(--accent);">
-                  <span style="font-size:12px; font-weight:600; color:#fff;">${item.userName || '投資訪客'}</span>
-                  <span style="background:rgba(245,158,11,0.2); color:#fbbf24; font-size:11px; font-weight:700; padding:1px 6px; border-radius:4px;">${item.stockCode}</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span style="font-size:11px; color:#64748b;">${item.date || ''}</span>
-                  ${localUserData.isAdmin ? `<button onclick="deleteQuestion('${docId}')" style="background:transparent; border:none; color:#f87171; cursor:pointer; font-size:11px;">🗑️ 刪除</button>` : ''}
-                </div>
-              </div>
-
-              <div style="font-size:12.5px; color:#e2e8f0; line-height:1.5;">
-                ${item.question}
-              </div>
-
-              ${hasReply ? `
-                <div style="background:linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(6,78,59,0.2) 100%); border:1px solid #10b981; border-radius:6px; padding:8px 10px; font-size:12px; color:#d1fae5; line-height:1.5;">
-                  <div style="font-weight:700; color:#34d399; margin-bottom:2px; display:flex; align-items:center; gap:4px;">
-                    🛡️ Mars 專業解讀：
-                  </div>
-                  <div>${item.reply}</div>
-                </div>
-              ` : `
-                ${localUserData.isAdmin ? `
-                  <div style="margin-top:4px; display:flex; gap:6px;">
-                    <input type="text" id="reply-input-${docId}" placeholder="身為 Mars，在此直接撰寫專業解讀..." style="flex:1; background:#0b0f17; border:1px solid #3b82f6; border-radius:6px; padding:6px 10px; color:#fff; font-size:12px; outline:none;">
-                    <button onclick="submitMarsReply('${docId}')" style="background:#2563eb; color:#fff; border:none; border-radius:6px; padding:6px 12px; font-size:12px; font-weight:600; cursor:pointer;">送出解讀</button>
-                  </div>
-                ` : `
-                  <div style="font-size:11px; color:#94a3b8; font-style:italic;">⏳ Mars 正在研讀盤勢，稍候將在此發布解讀...</div>
-                `}
-              `}
-            </div>
-          `;
-        });
-
-        container.innerHTML = html;
-      } catch(e) {
-        container.innerHTML = `<div style="text-align:center; color:#f87171; padding:16px;">讀取提問失敗：${e.message}</div>`;
-      }
-    };
-    window.closeQuestionsBoardModal = function() {
-      document.getElementById('questionsBoardModal').classList.remove('show');
-    };
-
-    // Mars 提交解讀
-    window.submitMarsReply = async function(docId) {
-      if (!localUserData.isAdmin) {
-        alert("權限不足：只有 Mars 才能發布官方解讀！");
-        return;
-      }
-      const inputEl = document.getElementById(`reply-input-${docId}`);
-      if (!inputEl) return;
-      const replyText = inputEl.value.trim();
-      if (!replyText) {
-        alert("請輸入回覆內容！");
-        return;
-      }
-
-      if (isFirebaseReady && db) {
-        try {
-          await updateDoc(doc(db, 'stock_questions', docId), {
-            reply: replyText,
-            repliedAt: serverTimestamp()
-          });
-          alert("✅ 已成功發布 Mars 解讀！");
-          openQuestionsBoardModal(); // 刷新公布欄
-        } catch(e) {
-          alert("發布失敗：" + e.message);
-        }
-      }
-    };
-
-    // 刪除違規提問
-    window.deleteQuestion = async function(docId) {
-      if (!localUserData.isAdmin) return;
-      if (!confirm("確定要刪除這筆提問嗎？")) return;
-      if (isFirebaseReady && db) {
-        try {
-          await deleteDoc(doc(db, 'stock_questions', docId));
-          openQuestionsBoardModal();
-        } catch(e) {
-          alert("刪除失敗：" + e.message);
-        }
-      }
-    };
-
-    // 停留 5 分鐘 +5 點積分功能 (每 300 秒自動判定入帳)
-    let dwellSeconds = 0;
-    setInterval(() => {
-      dwellSeconds++;
-      if (dwellSeconds > 0 && dwellSeconds % 300 === 0) {
-        addExp(5, "在線學習滿 5 分鐘獎勵");
-      }
-    }, 1000);
-
-    updateUI();
+          updateUI();
         } else {
           currentUser = null;
           document.getElementById('btnLogin').style.display = 'inline-flex';
           document.getElementById('userBadge').style.display = 'none';
           document.getElementById('btnLogoutBtn').style.display = 'none';
-      
-    // 積分攻略 Modal 開關
-    window.openExpGuideModal = function() {
-      document.getElementById('expGuideModal').classList.add('show');
-    };
-    window.closeExpGuideModal = function() {
-      document.getElementById('expGuideModal').classList.remove('show');
-    };
-
-    // 提問公布欄 Modal 與 Mars 回覆系統
-    window.openQuestionsBoardModal = async function() {
-      const modal = document.getElementById('questionsBoardModal');
-      const container = document.getElementById('questionsListContainer');
-      modal.classList.add('show');
-
-      if (!isFirebaseReady || !db) {
-        container.innerHTML = `
-          <div style="background:#162032; border:1px solid #223048; border-radius:8px; padding:12px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-              <span style="font-weight:700; color:#fff;">台積電 (2330)</span>
-              <span style="font-size:11px; color:#94a3b8;">示範提問</span>
-            </div>
-            <p style="font-size:12px; color:#cbd5e1; margin-bottom:8px;">「跌破季線時外資持續賣超，中長線投資人該如何分批應對？」</p>
-            <div style="background:#0b0f17; border:1px solid #10b981; border-radius:6px; padding:8px; font-size:11.5px; color:#34d399;">
-              🛡️ <b>Mars 解讀</b>：權值股遇總經升息或匯率震盪回檔屬健康洗盤，可參考本益比位階與大盤融資維持率分批佈局。
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = '<div style="text-align:center; padding:16px; color:#64748b;">正在取得提問與解讀...</div>';
-      try {
-        const q = query(collection(db, 'stock_questions'), orderBy('createdAt', 'desc'), limit(30));
-        const snap = await getDocs(q);
-
-        if (snap.empty) {
-          container.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">目前尚無提問，歡迎在左側提問區提出您的第一個個股問題！</div>';
-          return;
-        }
-
-        let html = '';
-        snap.forEach(docSnap => {
-          const item = docSnap.data();
-          const docId = docSnap.id;
-          const hasReply = !!item.reply;
-
-          html += `
-            <div style="background:#162032; border:1px solid #223048; border-radius:8px; padding:12px; display:flex; flex-direction:column; gap:8px;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <img src="${item.userPhoto || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + item.userName}" style="width:24px; height:24px; border-radius:50%; border:1px solid var(--accent);">
-                  <span style="font-size:12px; font-weight:600; color:#fff;">${item.userName || '投資訪客'}</span>
-                  <span style="background:rgba(245,158,11,0.2); color:#fbbf24; font-size:11px; font-weight:700; padding:1px 6px; border-radius:4px;">${item.stockCode}</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span style="font-size:11px; color:#64748b;">${item.date || ''}</span>
-                  ${localUserData.isAdmin ? `<button onclick="deleteQuestion('${docId}')" style="background:transparent; border:none; color:#f87171; cursor:pointer; font-size:11px;">🗑️ 刪除</button>` : ''}
-                </div>
-              </div>
-
-              <div style="font-size:12.5px; color:#e2e8f0; line-height:1.5;">
-                ${item.question}
-              </div>
-
-              ${hasReply ? `
-                <div style="background:linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(6,78,59,0.2) 100%); border:1px solid #10b981; border-radius:6px; padding:8px 10px; font-size:12px; color:#d1fae5; line-height:1.5;">
-                  <div style="font-weight:700; color:#34d399; margin-bottom:2px; display:flex; align-items:center; gap:4px;">
-                    🛡️ Mars 專業解讀：
-                  </div>
-                  <div>${item.reply}</div>
-                </div>
-              ` : `
-                ${localUserData.isAdmin ? `
-                  <div style="margin-top:4px; display:flex; gap:6px;">
-                    <input type="text" id="reply-input-${docId}" placeholder="身為 Mars，在此直接撰寫專業解讀..." style="flex:1; background:#0b0f17; border:1px solid #3b82f6; border-radius:6px; padding:6px 10px; color:#fff; font-size:12px; outline:none;">
-                    <button onclick="submitMarsReply('${docId}')" style="background:#2563eb; color:#fff; border:none; border-radius:6px; padding:6px 12px; font-size:12px; font-weight:600; cursor:pointer;">送出解讀</button>
-                  </div>
-                ` : `
-                  <div style="font-size:11px; color:#94a3b8; font-style:italic;">⏳ Mars 正在研讀盤勢，稍候將在此發布解讀...</div>
-                `}
-              `}
-            </div>
-          `;
-        });
-
-        container.innerHTML = html;
-      } catch(e) {
-        container.innerHTML = `<div style="text-align:center; color:#f87171; padding:16px;">讀取提問失敗：${e.message}</div>`;
-      }
-    };
-    window.closeQuestionsBoardModal = function() {
-      document.getElementById('questionsBoardModal').classList.remove('show');
-    };
-
-    // Mars 提交解讀
-    window.submitMarsReply = async function(docId) {
-      if (!localUserData.isAdmin) {
-        alert("權限不足：只有 Mars 才能發布官方解讀！");
-        return;
-      }
-      const inputEl = document.getElementById(`reply-input-${docId}`);
-      if (!inputEl) return;
-      const replyText = inputEl.value.trim();
-      if (!replyText) {
-        alert("請輸入回覆內容！");
-        return;
-      }
-
-      if (isFirebaseReady && db) {
-        try {
-          await updateDoc(doc(db, 'stock_questions', docId), {
-            reply: replyText,
-            repliedAt: serverTimestamp()
-          });
-          alert("✅ 已成功發布 Mars 解讀！");
-          openQuestionsBoardModal(); // 刷新公布欄
-        } catch(e) {
-          alert("發布失敗：" + e.message);
-        }
-      }
-    };
-
-    // 刪除違規提問
-    window.deleteQuestion = async function(docId) {
-      if (!localUserData.isAdmin) return;
-      if (!confirm("確定要刪除這筆提問嗎？")) return;
-      if (isFirebaseReady && db) {
-        try {
-          await deleteDoc(doc(db, 'stock_questions', docId));
-          openQuestionsBoardModal();
-        } catch(e) {
-          alert("刪除失敗：" + e.message);
-        }
-      }
-    };
-
-    // 停留 5 分鐘 +5 點積分功能 (每 300 秒自動判定入帳)
-    let dwellSeconds = 0;
-    setInterval(() => {
-      dwellSeconds++;
-      if (dwellSeconds > 0 && dwellSeconds % 300 === 0) {
-        addExp(5, "在線學習滿 5 分鐘獎勵");
-      }
-    }, 1000);
-
-    updateUI();
+          updateUI();
         }
       });
     }
@@ -1830,153 +1639,7 @@
     function addExp(pts, reason) {
       localUserData.totalExp += pts;
       syncToCloud();
-  
-    // 積分攻略 Modal 開關
-    window.openExpGuideModal = function() {
-      document.getElementById('expGuideModal').classList.add('show');
-    };
-    window.closeExpGuideModal = function() {
-      document.getElementById('expGuideModal').classList.remove('show');
-    };
-
-    // 提問公布欄 Modal 與 Mars 回覆系統
-    window.openQuestionsBoardModal = async function() {
-      const modal = document.getElementById('questionsBoardModal');
-      const container = document.getElementById('questionsListContainer');
-      modal.classList.add('show');
-
-      if (!isFirebaseReady || !db) {
-        container.innerHTML = `
-          <div style="background:#162032; border:1px solid #223048; border-radius:8px; padding:12px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-              <span style="font-weight:700; color:#fff;">台積電 (2330)</span>
-              <span style="font-size:11px; color:#94a3b8;">示範提問</span>
-            </div>
-            <p style="font-size:12px; color:#cbd5e1; margin-bottom:8px;">「跌破季線時外資持續賣超，中長線投資人該如何分批應對？」</p>
-            <div style="background:#0b0f17; border:1px solid #10b981; border-radius:6px; padding:8px; font-size:11.5px; color:#34d399;">
-              🛡️ <b>Mars 解讀</b>：權值股遇總經升息或匯率震盪回檔屬健康洗盤，可參考本益比位階與大盤融資維持率分批佈局。
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = '<div style="text-align:center; padding:16px; color:#64748b;">正在取得提問與解讀...</div>';
-      try {
-        const q = query(collection(db, 'stock_questions'), orderBy('createdAt', 'desc'), limit(30));
-        const snap = await getDocs(q);
-
-        if (snap.empty) {
-          container.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">目前尚無提問，歡迎在左側提問區提出您的第一個個股問題！</div>';
-          return;
-        }
-
-        let html = '';
-        snap.forEach(docSnap => {
-          const item = docSnap.data();
-          const docId = docSnap.id;
-          const hasReply = !!item.reply;
-
-          html += `
-            <div style="background:#162032; border:1px solid #223048; border-radius:8px; padding:12px; display:flex; flex-direction:column; gap:8px;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <img src="${item.userPhoto || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + item.userName}" style="width:24px; height:24px; border-radius:50%; border:1px solid var(--accent);">
-                  <span style="font-size:12px; font-weight:600; color:#fff;">${item.userName || '投資訪客'}</span>
-                  <span style="background:rgba(245,158,11,0.2); color:#fbbf24; font-size:11px; font-weight:700; padding:1px 6px; border-radius:4px;">${item.stockCode}</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span style="font-size:11px; color:#64748b;">${item.date || ''}</span>
-                  ${localUserData.isAdmin ? `<button onclick="deleteQuestion('${docId}')" style="background:transparent; border:none; color:#f87171; cursor:pointer; font-size:11px;">🗑️ 刪除</button>` : ''}
-                </div>
-              </div>
-
-              <div style="font-size:12.5px; color:#e2e8f0; line-height:1.5;">
-                ${item.question}
-              </div>
-
-              ${hasReply ? `
-                <div style="background:linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(6,78,59,0.2) 100%); border:1px solid #10b981; border-radius:6px; padding:8px 10px; font-size:12px; color:#d1fae5; line-height:1.5;">
-                  <div style="font-weight:700; color:#34d399; margin-bottom:2px; display:flex; align-items:center; gap:4px;">
-                    🛡️ Mars 專業解讀：
-                  </div>
-                  <div>${item.reply}</div>
-                </div>
-              ` : `
-                ${localUserData.isAdmin ? `
-                  <div style="margin-top:4px; display:flex; gap:6px;">
-                    <input type="text" id="reply-input-${docId}" placeholder="身為 Mars，在此直接撰寫專業解讀..." style="flex:1; background:#0b0f17; border:1px solid #3b82f6; border-radius:6px; padding:6px 10px; color:#fff; font-size:12px; outline:none;">
-                    <button onclick="submitMarsReply('${docId}')" style="background:#2563eb; color:#fff; border:none; border-radius:6px; padding:6px 12px; font-size:12px; font-weight:600; cursor:pointer;">送出解讀</button>
-                  </div>
-                ` : `
-                  <div style="font-size:11px; color:#94a3b8; font-style:italic;">⏳ Mars 正在研讀盤勢，稍候將在此發布解讀...</div>
-                `}
-              `}
-            </div>
-          `;
-        });
-
-        container.innerHTML = html;
-      } catch(e) {
-        container.innerHTML = `<div style="text-align:center; color:#f87171; padding:16px;">讀取提問失敗：${e.message}</div>`;
-      }
-    };
-    window.closeQuestionsBoardModal = function() {
-      document.getElementById('questionsBoardModal').classList.remove('show');
-    };
-
-    // Mars 提交解讀
-    window.submitMarsReply = async function(docId) {
-      if (!localUserData.isAdmin) {
-        alert("權限不足：只有 Mars 才能發布官方解讀！");
-        return;
-      }
-      const inputEl = document.getElementById(`reply-input-${docId}`);
-      if (!inputEl) return;
-      const replyText = inputEl.value.trim();
-      if (!replyText) {
-        alert("請輸入回覆內容！");
-        return;
-      }
-
-      if (isFirebaseReady && db) {
-        try {
-          await updateDoc(doc(db, 'stock_questions', docId), {
-            reply: replyText,
-            repliedAt: serverTimestamp()
-          });
-          alert("✅ 已成功發布 Mars 解讀！");
-          openQuestionsBoardModal(); // 刷新公布欄
-        } catch(e) {
-          alert("發布失敗：" + e.message);
-        }
-      }
-    };
-
-    // 刪除違規提問
-    window.deleteQuestion = async function(docId) {
-      if (!localUserData.isAdmin) return;
-      if (!confirm("確定要刪除這筆提問嗎？")) return;
-      if (isFirebaseReady && db) {
-        try {
-          await deleteDoc(doc(db, 'stock_questions', docId));
-          openQuestionsBoardModal();
-        } catch(e) {
-          alert("刪除失敗：" + e.message);
-        }
-      }
-    };
-
-    // 停留 5 分鐘 +5 點積分功能 (每 300 秒自動判定入帳)
-    let dwellSeconds = 0;
-    setInterval(() => {
-      dwellSeconds++;
-      if (dwellSeconds > 0 && dwellSeconds % 300 === 0) {
-        addExp(5, "在線學習滿 5 分鐘獎勵");
-      }
-    }, 1000);
-
-    updateUI();
+      updateUI();
       showToast(`+${pts} EXP ${reason}！`);
     }
 
@@ -2033,7 +1696,6 @@
         alert("今日已抽過獎囉！");
         return;
       }
-      // 隨機抽 10 到 80 積分
       const prizes = [10, 20, 30, 50, 60, 80];
       const winExp = prizes[Math.floor(Math.random() * prizes.length)];
 
@@ -2156,7 +1818,9 @@
       document.getElementById('askStockCode').value = '';
       document.getElementById('askQuestionText').value = '';
       alert("✅ 提問已成功送出！Mars 將會在專欄日誌中依序解讀。今日額度已使用。");
-  
+      updateUI();
+    };
+
     // 積分攻略 Modal 開關
     window.openExpGuideModal = function() {
       document.getElementById('expGuideModal').classList.add('show');
@@ -2272,7 +1936,7 @@
             repliedAt: serverTimestamp()
           });
           alert("✅ 已成功發布 Mars 解讀！");
-          openQuestionsBoardModal(); // 刷新公布欄
+          openQuestionsBoardModal();
         } catch(e) {
           alert("發布失敗：" + e.message);
         }
@@ -2293,17 +1957,39 @@
       }
     };
 
-    // 停留 5 分鐘 +5 點積分功能 (每 300 秒自動判定入帳)
+    // 停留時間計時器 (每秒即時更新畫面 + 每 300 秒自動加 5 分)
     let dwellSeconds = 0;
     setInterval(() => {
       dwellSeconds++;
+
+      const mins = Math.floor(dwellSeconds / 60);
+      const secs = dwellSeconds % 60;
+      const timeFormatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      const timeFull = `${mins}分${String(secs).padStart(2, '0')}秒`;
+
+      const cycleSecs = dwellSeconds % 300;
+      const remainSecs = 300 - (cycleSecs === 0 ? 300 : cycleSecs);
+      const remainMins = Math.floor(remainSecs / 60);
+      const remainSecsPart = remainSecs % 60;
+      const remainFormatted = `${String(remainMins).padStart(2, '0')}:${String(remainSecsPart).padStart(2, '0')}`;
+      const cyclePct = (cycleSecs / 300) * 100;
+
+      const sideClock = document.getElementById('sidebarDwellClock');
+      const topClock = document.getElementById('topDwellClock');
+      const totalText = document.getElementById('dwellTotalText');
+      const barFill = document.getElementById('dwellMiniFill');
+      const countdownText = document.getElementById('dwellCountdownText');
+
+      if (sideClock) sideClock.innerText = timeFormatted;
+      if (topClock) topClock.innerText = timeFormatted;
+      if (totalText) totalText.innerText = timeFull;
+      if (barFill) barFill.style.width = `${cyclePct}%`;
+      if (countdownText) countdownText.innerText = remainFormatted;
+
       if (dwellSeconds > 0 && dwellSeconds % 300 === 0) {
         addExp(5, "在線學習滿 5 分鐘獎勵");
       }
     }, 1000);
-
-    updateUI();
-    };
 
     // 更新介面狀態
     function updateUI() {
@@ -2316,7 +2002,6 @@
       document.getElementById('topUserAvatar').src = localUserData.photoURL;
       document.getElementById('sidebarAvatar').src = localUserData.photoURL;
 
-      // 管理員標籤
       if (localUserData.isAdmin) {
         document.getElementById('adminTag').style.display = 'inline-block';
       } else {
@@ -2406,153 +2091,7 @@
       if (newName) localUserData.displayName = newName;
       if (window.tempAvatarBase64) localUserData.photoURL = window.tempAvatarBase64;
       syncToCloud();
-  
-    // 積分攻略 Modal 開關
-    window.openExpGuideModal = function() {
-      document.getElementById('expGuideModal').classList.add('show');
-    };
-    window.closeExpGuideModal = function() {
-      document.getElementById('expGuideModal').classList.remove('show');
-    };
-
-    // 提問公布欄 Modal 與 Mars 回覆系統
-    window.openQuestionsBoardModal = async function() {
-      const modal = document.getElementById('questionsBoardModal');
-      const container = document.getElementById('questionsListContainer');
-      modal.classList.add('show');
-
-      if (!isFirebaseReady || !db) {
-        container.innerHTML = `
-          <div style="background:#162032; border:1px solid #223048; border-radius:8px; padding:12px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-              <span style="font-weight:700; color:#fff;">台積電 (2330)</span>
-              <span style="font-size:11px; color:#94a3b8;">示範提問</span>
-            </div>
-            <p style="font-size:12px; color:#cbd5e1; margin-bottom:8px;">「跌破季線時外資持續賣超，中長線投資人該如何分批應對？」</p>
-            <div style="background:#0b0f17; border:1px solid #10b981; border-radius:6px; padding:8px; font-size:11.5px; color:#34d399;">
-              🛡️ <b>Mars 解讀</b>：權值股遇總經升息或匯率震盪回檔屬健康洗盤，可參考本益比位階與大盤融資維持率分批佈局。
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = '<div style="text-align:center; padding:16px; color:#64748b;">正在取得提問與解讀...</div>';
-      try {
-        const q = query(collection(db, 'stock_questions'), orderBy('createdAt', 'desc'), limit(30));
-        const snap = await getDocs(q);
-
-        if (snap.empty) {
-          container.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">目前尚無提問，歡迎在左側提問區提出您的第一個個股問題！</div>';
-          return;
-        }
-
-        let html = '';
-        snap.forEach(docSnap => {
-          const item = docSnap.data();
-          const docId = docSnap.id;
-          const hasReply = !!item.reply;
-
-          html += `
-            <div style="background:#162032; border:1px solid #223048; border-radius:8px; padding:12px; display:flex; flex-direction:column; gap:8px;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <img src="${item.userPhoto || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + item.userName}" style="width:24px; height:24px; border-radius:50%; border:1px solid var(--accent);">
-                  <span style="font-size:12px; font-weight:600; color:#fff;">${item.userName || '投資訪客'}</span>
-                  <span style="background:rgba(245,158,11,0.2); color:#fbbf24; font-size:11px; font-weight:700; padding:1px 6px; border-radius:4px;">${item.stockCode}</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span style="font-size:11px; color:#64748b;">${item.date || ''}</span>
-                  ${localUserData.isAdmin ? `<button onclick="deleteQuestion('${docId}')" style="background:transparent; border:none; color:#f87171; cursor:pointer; font-size:11px;">🗑️ 刪除</button>` : ''}
-                </div>
-              </div>
-
-              <div style="font-size:12.5px; color:#e2e8f0; line-height:1.5;">
-                ${item.question}
-              </div>
-
-              ${hasReply ? `
-                <div style="background:linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(6,78,59,0.2) 100%); border:1px solid #10b981; border-radius:6px; padding:8px 10px; font-size:12px; color:#d1fae5; line-height:1.5;">
-                  <div style="font-weight:700; color:#34d399; margin-bottom:2px; display:flex; align-items:center; gap:4px;">
-                    🛡️ Mars 專業解讀：
-                  </div>
-                  <div>${item.reply}</div>
-                </div>
-              ` : `
-                ${localUserData.isAdmin ? `
-                  <div style="margin-top:4px; display:flex; gap:6px;">
-                    <input type="text" id="reply-input-${docId}" placeholder="身為 Mars，在此直接撰寫專業解讀..." style="flex:1; background:#0b0f17; border:1px solid #3b82f6; border-radius:6px; padding:6px 10px; color:#fff; font-size:12px; outline:none;">
-                    <button onclick="submitMarsReply('${docId}')" style="background:#2563eb; color:#fff; border:none; border-radius:6px; padding:6px 12px; font-size:12px; font-weight:600; cursor:pointer;">送出解讀</button>
-                  </div>
-                ` : `
-                  <div style="font-size:11px; color:#94a3b8; font-style:italic;">⏳ Mars 正在研讀盤勢，稍候將在此發布解讀...</div>
-                `}
-              `}
-            </div>
-          `;
-        });
-
-        container.innerHTML = html;
-      } catch(e) {
-        container.innerHTML = `<div style="text-align:center; color:#f87171; padding:16px;">讀取提問失敗：${e.message}</div>`;
-      }
-    };
-    window.closeQuestionsBoardModal = function() {
-      document.getElementById('questionsBoardModal').classList.remove('show');
-    };
-
-    // Mars 提交解讀
-    window.submitMarsReply = async function(docId) {
-      if (!localUserData.isAdmin) {
-        alert("權限不足：只有 Mars 才能發布官方解讀！");
-        return;
-      }
-      const inputEl = document.getElementById(`reply-input-${docId}`);
-      if (!inputEl) return;
-      const replyText = inputEl.value.trim();
-      if (!replyText) {
-        alert("請輸入回覆內容！");
-        return;
-      }
-
-      if (isFirebaseReady && db) {
-        try {
-          await updateDoc(doc(db, 'stock_questions', docId), {
-            reply: replyText,
-            repliedAt: serverTimestamp()
-          });
-          alert("✅ 已成功發布 Mars 解讀！");
-          openQuestionsBoardModal(); // 刷新公布欄
-        } catch(e) {
-          alert("發布失敗：" + e.message);
-        }
-      }
-    };
-
-    // 刪除違規提問
-    window.deleteQuestion = async function(docId) {
-      if (!localUserData.isAdmin) return;
-      if (!confirm("確定要刪除這筆提問嗎？")) return;
-      if (isFirebaseReady && db) {
-        try {
-          await deleteDoc(doc(db, 'stock_questions', docId));
-          openQuestionsBoardModal();
-        } catch(e) {
-          alert("刪除失敗：" + e.message);
-        }
-      }
-    };
-
-    // 停留 5 分鐘 +5 點積分功能 (每 300 秒自動判定入帳)
-    let dwellSeconds = 0;
-    setInterval(() => {
-      dwellSeconds++;
-      if (dwellSeconds > 0 && dwellSeconds % 300 === 0) {
-        addExp(5, "在線學習滿 5 分鐘獎勵");
-      }
-    }, 1000);
-
-    updateUI();
+      updateUI();
       closeProfileModal();
       showToast("個人資料已更新！");
     };
@@ -2571,7 +2110,7 @@
         try {
           await deleteDoc(doc(db, 'users', targetUid));
           alert(`✅ 已成功剔除「${targetName}」！`);
-          openLeaderboardModal(); // 刷新排行
+          openLeaderboardModal();
         } catch(e) {
           alert("剔除失敗：" + e.message);
         }
@@ -2676,152 +2215,6 @@
     window.closeHonorModal = function() {
       document.getElementById('honorModal').classList.remove('show');
     };
-
-
-    // 積分攻略 Modal 開關
-    window.openExpGuideModal = function() {
-      document.getElementById('expGuideModal').classList.add('show');
-    };
-    window.closeExpGuideModal = function() {
-      document.getElementById('expGuideModal').classList.remove('show');
-    };
-
-    // 提問公布欄 Modal 與 Mars 回覆系統
-    window.openQuestionsBoardModal = async function() {
-      const modal = document.getElementById('questionsBoardModal');
-      const container = document.getElementById('questionsListContainer');
-      modal.classList.add('show');
-
-      if (!isFirebaseReady || !db) {
-        container.innerHTML = `
-          <div style="background:#162032; border:1px solid #223048; border-radius:8px; padding:12px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-              <span style="font-weight:700; color:#fff;">台積電 (2330)</span>
-              <span style="font-size:11px; color:#94a3b8;">示範提問</span>
-            </div>
-            <p style="font-size:12px; color:#cbd5e1; margin-bottom:8px;">「跌破季線時外資持續賣超，中長線投資人該如何分批應對？」</p>
-            <div style="background:#0b0f17; border:1px solid #10b981; border-radius:6px; padding:8px; font-size:11.5px; color:#34d399;">
-              🛡️ <b>Mars 解讀</b>：權值股遇總經升息或匯率震盪回檔屬健康洗盤，可參考本益比位階與大盤融資維持率分批佈局。
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = '<div style="text-align:center; padding:16px; color:#64748b;">正在取得提問與解讀...</div>';
-      try {
-        const q = query(collection(db, 'stock_questions'), orderBy('createdAt', 'desc'), limit(30));
-        const snap = await getDocs(q);
-
-        if (snap.empty) {
-          container.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">目前尚無提問，歡迎在左側提問區提出您的第一個個股問題！</div>';
-          return;
-        }
-
-        let html = '';
-        snap.forEach(docSnap => {
-          const item = docSnap.data();
-          const docId = docSnap.id;
-          const hasReply = !!item.reply;
-
-          html += `
-            <div style="background:#162032; border:1px solid #223048; border-radius:8px; padding:12px; display:flex; flex-direction:column; gap:8px;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <img src="${item.userPhoto || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + item.userName}" style="width:24px; height:24px; border-radius:50%; border:1px solid var(--accent);">
-                  <span style="font-size:12px; font-weight:600; color:#fff;">${item.userName || '投資訪客'}</span>
-                  <span style="background:rgba(245,158,11,0.2); color:#fbbf24; font-size:11px; font-weight:700; padding:1px 6px; border-radius:4px;">${item.stockCode}</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <span style="font-size:11px; color:#64748b;">${item.date || ''}</span>
-                  ${localUserData.isAdmin ? `<button onclick="deleteQuestion('${docId}')" style="background:transparent; border:none; color:#f87171; cursor:pointer; font-size:11px;">🗑️ 刪除</button>` : ''}
-                </div>
-              </div>
-
-              <div style="font-size:12.5px; color:#e2e8f0; line-height:1.5;">
-                ${item.question}
-              </div>
-
-              ${hasReply ? `
-                <div style="background:linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(6,78,59,0.2) 100%); border:1px solid #10b981; border-radius:6px; padding:8px 10px; font-size:12px; color:#d1fae5; line-height:1.5;">
-                  <div style="font-weight:700; color:#34d399; margin-bottom:2px; display:flex; align-items:center; gap:4px;">
-                    🛡️ Mars 專業解讀：
-                  </div>
-                  <div>${item.reply}</div>
-                </div>
-              ` : `
-                ${localUserData.isAdmin ? `
-                  <div style="margin-top:4px; display:flex; gap:6px;">
-                    <input type="text" id="reply-input-${docId}" placeholder="身為 Mars，在此直接撰寫專業解讀..." style="flex:1; background:#0b0f17; border:1px solid #3b82f6; border-radius:6px; padding:6px 10px; color:#fff; font-size:12px; outline:none;">
-                    <button onclick="submitMarsReply('${docId}')" style="background:#2563eb; color:#fff; border:none; border-radius:6px; padding:6px 12px; font-size:12px; font-weight:600; cursor:pointer;">送出解讀</button>
-                  </div>
-                ` : `
-                  <div style="font-size:11px; color:#94a3b8; font-style:italic;">⏳ Mars 正在研讀盤勢，稍候將在此發布解讀...</div>
-                `}
-              `}
-            </div>
-          `;
-        });
-
-        container.innerHTML = html;
-      } catch(e) {
-        container.innerHTML = `<div style="text-align:center; color:#f87171; padding:16px;">讀取提問失敗：${e.message}</div>`;
-      }
-    };
-    window.closeQuestionsBoardModal = function() {
-      document.getElementById('questionsBoardModal').classList.remove('show');
-    };
-
-    // Mars 提交解讀
-    window.submitMarsReply = async function(docId) {
-      if (!localUserData.isAdmin) {
-        alert("權限不足：只有 Mars 才能發布官方解讀！");
-        return;
-      }
-      const inputEl = document.getElementById(`reply-input-${docId}`);
-      if (!inputEl) return;
-      const replyText = inputEl.value.trim();
-      if (!replyText) {
-        alert("請輸入回覆內容！");
-        return;
-      }
-
-      if (isFirebaseReady && db) {
-        try {
-          await updateDoc(doc(db, 'stock_questions', docId), {
-            reply: replyText,
-            repliedAt: serverTimestamp()
-          });
-          alert("✅ 已成功發布 Mars 解讀！");
-          openQuestionsBoardModal(); // 刷新公布欄
-        } catch(e) {
-          alert("發布失敗：" + e.message);
-        }
-      }
-    };
-
-    // 刪除違規提問
-    window.deleteQuestion = async function(docId) {
-      if (!localUserData.isAdmin) return;
-      if (!confirm("確定要刪除這筆提問嗎？")) return;
-      if (isFirebaseReady && db) {
-        try {
-          await deleteDoc(doc(db, 'stock_questions', docId));
-          openQuestionsBoardModal();
-        } catch(e) {
-          alert("刪除失敗：" + e.message);
-        }
-      }
-    };
-
-    // 停留 5 分鐘 +5 點積分功能 (每 300 秒自動判定入帳)
-    let dwellSeconds = 0;
-    setInterval(() => {
-      dwellSeconds++;
-      if (dwellSeconds > 0 && dwellSeconds % 300 === 0) {
-        addExp(5, "在線學習滿 5 分鐘獎勵");
-      }
-    }, 1000);
 
     updateUI();
   </script>

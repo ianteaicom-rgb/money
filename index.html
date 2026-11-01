@@ -26,6 +26,7 @@
       --amber-border: rgba(245, 158, 11, 0.35);
       --green: #10b981;
       --purple: #a855f7;
+      --red: #ef4444;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,11 +64,11 @@
     .top-right-group {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
     .clocks-wrap {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       background: #0b0f17;
@@ -78,7 +79,35 @@
     .clock-item { display: flex; align-items: center; gap: 5px; }
     .clock-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
 
-    /* 登入區塊按鈕 */
+    /* 頂部快捷按鈕 */
+    .top-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .top-action-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .top-action-btn.btn-lottery {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.3));
+      border-color: #f59e0b;
+      color: #fbbf24;
+    }
+    .top-action-btn.btn-lottery:hover {
+      background: #f59e0b;
+      color: #0b0f17;
+    }
+
     .auth-btn {
       display: inline-flex;
       align-items: center;
@@ -118,10 +147,18 @@
       font-size: 12px;
       font-weight: 600;
       color: #fff;
-      max-width: 100px;
+      max-width: 90px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+    .badge-admin {
+      background: #ef4444;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
     }
 
     /* 佈局容器 */
@@ -133,7 +170,7 @@
 
     /* 左側清單目錄 (Sidebar) */
     aside.sidebar {
-      width: 320px;
+      width: 330px;
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border);
       position: fixed;
@@ -329,6 +366,60 @@
     }
     .btn-side-rule:hover { color: #fff; border-color: var(--accent); }
 
+    /* 星座專屬運勢卡片 (Zodiac Insight Card) */
+    .zodiac-card {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(30, 27, 75, 0.4) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .zodiac-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .zodiac-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #c084fc;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .zodiac-select {
+      background: #0b0f17;
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-size: 11px;
+      outline: none;
+      cursor: pointer;
+    }
+    .zodiac-body {
+      font-size: 11.5px;
+      color: #e2e8f0;
+      line-height: 1.4;
+      background: rgba(11, 15, 23, 0.6);
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px dashed rgba(168, 85, 247, 0.25);
+    }
+    .zodiac-stars { color: #f59e0b; font-weight: 700; margin-bottom: 2px; }
+    .zodiac-share-btn {
+      align-self: flex-end;
+      background: transparent;
+      border: none;
+      color: #c084fc;
+      font-size: 11px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .zodiac-share-btn:hover { color: #e9d5ff; }
+
     /* 每日個股提問卡片 (Stock Question Box) */
     .ask-card {
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
@@ -373,7 +464,7 @@
     }
     .ask-textarea {
       width: 100%;
-      height: 52px;
+      height: 48px;
       background: #0b0f17;
       border: 1px solid var(--border);
       border-radius: 6px;
@@ -402,6 +493,38 @@
       color: #64748b;
       border-color: #334155;
       cursor: not-allowed;
+    }
+
+    /* 推薦好站入口卡片 */
+    .recommend-card {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 78, 59, 0.25) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .recommend-card:hover {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.18);
+    }
+    .rec-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .rec-title { font-size: 12px; font-weight: 700; color: #34d399; }
+    .rec-desc { font-size: 10.5px; color: #94a3b8; }
+    .rec-badge {
+      background: #10b981;
+      color: #0b0f17;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
     }
 
     /* 側欄搜尋與導航清單 */
@@ -458,7 +581,7 @@
 
     /* 右側主區域 */
     main.content {
-      margin-left: 320px;
+      margin-left: 330px;
       flex: 1;
       padding: 20px 28px 60px;
       min-height: calc(100vh - 52px);
@@ -623,9 +746,9 @@
       background: #131b2c;
       border: 1px solid var(--border);
       border-radius: 12px;
-      max-width: 540px;
+      max-width: 560px;
       width: 100%;
-      max-height: 82vh;
+      max-height: 84vh;
       overflow-y: auto;
       padding: 20px;
       color: #fff;
@@ -651,7 +774,7 @@
     .lb-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13px;
+      font-size: 12.5px;
     }
     .lb-table th, .lb-table td {
       padding: 8px 10px;
@@ -673,6 +796,63 @@
     .rank-num-1 { color: #f59e0b; font-weight: 700; }
     .rank-num-2 { color: #94a3b8; font-weight: 700; }
     .rank-num-3 { color: #d97706; font-weight: 700; }
+
+    .btn-kick {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #ef4444;
+      color: #f87171;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn-kick:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    /* 抽獎輪盤/卡牌樣式 */
+    .lottery-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0;
+      text-align: center;
+    }
+    .lottery-cards-wrap {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .lottery-box {
+      width: 90px;
+      height: 120px;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 2px dashed #f59e0b;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+    .lottery-box:hover:not(.opened) {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
+      border-style: solid;
+    }
+    .lottery-box.opened {
+      background: #1e3a5f;
+      border-color: #38bdf8;
+      border-style: solid;
+      cursor: default;
+    }
 
     /* 修改個人資料 / 頭像彈窗樣式 */
     .avatar-preview-box {
@@ -731,6 +911,11 @@
         <div class="clock-item"><span class="clock-dot"></span> 台北: <span id="clock-tw">--:--:--</span></div>
         <div class="clock-item"><span class="clock-dot" style="background:#38bdf8;"></span> 紐約: <span id="clock-ny">--:--:--</span></div>
       </div>
+      <!-- 每日抽獎按鈕 -->
+      <button class="top-action-btn btn-lottery" onclick="openLotteryModal()">🎁 每日抽獎</button>
+      <!-- 推薦好站按鈕 -->
+      <button class="top-action-btn" onclick="openRecommendModal()">💡 推薦好站 (+100)</button>
+
       <!-- 登入按鈕 / 已登入個人徽章 -->
       <button class="auth-btn" id="btnLogin" onclick="loginWithGoogle()">
         <svg width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
@@ -739,6 +924,7 @@
       <div class="user-profile-badge" id="userBadge" onclick="openProfileModal()">
         <img src="" id="topUserAvatar" class="user-avatar-img">
         <span class="user-name-text" id="topUserName">投資訪客</span>
+        <span class="badge-admin" id="adminTag" style="display:none;">管理員 Mars</span>
       </div>
     </div>
   </div>
@@ -784,6 +970,41 @@
           <button class="btn-checkin" id="btnCheckin" onclick="dailyCheckIn()">📅 每日簽到 (+30)</button>
           <button class="btn-side-rule" onclick="openProfileModal()">頭像/資料</button>
         </div>
+      </div>
+
+      <!-- 星座專屬投資運勢卡片 (每日個人化分享) -->
+      <div class="zodiac-card">
+        <div class="zodiac-head">
+          <div class="zodiac-title">🔮 星座投資運勢</div>
+          <select id="zodiacSelect" class="zodiac-select" onchange="changeZodiac(this.value)">
+            <option value="aries">♈ 牡羊座</option>
+            <option value="taurus">♉ 金牛座</option>
+            <option value="gemini">♊ 雙子座</option>
+            <option value="cancer">♋ 巨蟹座</option>
+            <option value="leo">♌ 獅子座</option>
+            <option value="virgo">♍ 處女座</option>
+            <option value="libra">♎ 天秤座</option>
+            <option value="scorpio">♏ 天蠍座</option>
+            <option value="sagittarius">♐ 射手座</option>
+            <option value="capricorn">♑ 魔羯座</option>
+            <option value="aquarius">♒ 水瓶座</option>
+            <option value="pisces">♓ 雙魚座</option>
+          </select>
+        </div>
+        <div class="zodiac-body" id="zodiacInsightText">
+          <div class="zodiac-stars" id="zodiacStars">★★★★★ 財富指數</div>
+          <div id="zodiacDetail">載入今日星座投資分析中...</div>
+        </div>
+        <button class="zodiac-share-btn" onclick="copyZodiacShare()">📋 複製我的今日投資運勢分享給朋友</button>
+      </div>
+
+      <!-- 推薦好站入口卡片 -->
+      <div class="recommend-card" onclick="openRecommendModal()">
+        <div class="rec-left">
+          <span class="rec-title">💡 推薦優質財經網站</span>
+          <span class="rec-desc">推薦好站經審核或提交即贈 +100 EXP</span>
+        </div>
+        <span class="rec-badge">+100分</span>
       </div>
 
       <!-- 每日 1 次股票提問卡片 -->
@@ -836,16 +1057,74 @@
   <!-- 浮動獲得經驗值 Toast -->
   <div class="exp-toast" id="expToast">+5 EXP 知識累積中！</div>
 
-  <!-- 排行榜 Modal 彈窗 -->
+  <!-- 每日抽獎 Modal 彈窗 -->
+  <div class="modal-overlay" id="lotteryModal" onclick="closeLotteryModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">🎁 每日登入盲盒抽獎</div>
+        <button class="modal-close" onclick="closeLotteryModal()">✕</button>
+      </div>
+      <div class="lottery-container">
+        <p style="font-size:13px; color:var(--text-sub);">
+          每位投資人每天可免費開寶盒 1 次！隨機獲得 <b>10 ~ 80 EXP</b> 成長積分！
+        </p>
+        <div class="lottery-cards-wrap">
+          <div class="lottery-box" id="lbox-1" onclick="drawLottery(1)">
+            <span style="font-size:28px;">📦</span>
+            <span style="font-size:11px; color:#fbbf24; font-weight:700;">盲盒 1</span>
+          </div>
+          <div class="lottery-box" id="lbox-2" onclick="drawLottery(2)">
+            <span style="font-size:28px;">🎁</span>
+            <span style="font-size:11px; color:#fbbf24; font-weight:700;">盲盒 2</span>
+          </div>
+          <div class="lottery-box" id="lbox-3" onclick="drawLottery(3)">
+            <span style="font-size:28px;">🪙</span>
+            <span style="font-size:11px; color:#fbbf24; font-weight:700;">盲盒 3</span>
+          </div>
+        </div>
+        <div id="lotteryResultMsg" style="font-size:13px; font-weight:700; color:#38bdf8; min-height:20px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 推薦好站 Modal 彈窗 -->
+  <div class="modal-overlay" id="recommendModal" onclick="closeRecommendModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">💡 推薦優質財經好站 (+100 EXP)</div>
+        <button class="modal-close" onclick="closeRecommendModal()">✕</button>
+      </div>
+      <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
+        分享您常用的冷門神級網站或即時看盤工具！送出後即可獲贈 <b>+100 EXP</b>，管理員 Mars 將會親自審核並收錄至導航站！
+      </p>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div>
+          <label style="font-size:12px; color:var(--text-sub); display:block; margin-bottom:4px;">網站名稱：</label>
+          <input type="text" id="recSiteName" class="ask-input" placeholder="例如：Finviz 美股篩選器、臺灣集中保管庫...">
+        </div>
+        <div>
+          <label style="font-size:12px; color:var(--text-sub); display:block; margin-bottom:4px;">網站網址 (URL)：</label>
+          <input type="text" id="recSiteUrl" class="ask-input" placeholder="https://...">
+        </div>
+        <div>
+          <label style="font-size:12px; color:var(--text-sub); display:block; margin-bottom:4px;">推薦理由與特色說明：</label>
+          <textarea id="recSiteReason" class="ask-textarea" placeholder="例如：這家網站看主力籌碼非常準，每天下午4點更新..."></textarea>
+        </div>
+        <button class="btn-checkin" style="padding:8px; font-size:13px;" onclick="submitSiteRecommendation()">🚀 提交推薦並領取 100 積分</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 排行榜 Modal 彈窗 (含 Mars 管理員剔除灌水帳號功能) -->
   <div class="modal-overlay" id="leaderboardModal" onclick="closeLeaderboardModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <div class="modal-header">
         <div class="modal-title">🏆 觀賞者全體榮譽排行榜 (Top 50)</div>
         <button class="modal-close" onclick="closeLeaderboardModal()">✕</button>
       </div>
-      <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
-        登入 Google 帳號後，您的簽到與每日點擊經驗將自動同步至雲端排行榜！
-      </p>
+      <div id="adminNoticeBar" style="display:none; background:rgba(239,68,68,0.15); border:1px solid #ef4444; color:#f87171; padding:6px 10px; border-radius:6px; font-size:11px; margin-bottom:10px;">
+        🛡️ 管理員 Mars 巡查模式已啟動：點擊「剔除」可直接將灌水或虛假帳號移出排行榜。
+      </div>
       <table class="lb-table">
         <thead>
           <tr>
@@ -853,6 +1132,7 @@
             <th>投資人</th>
             <th>階級稱號</th>
             <th>累積 EXP</th>
+            <th id="thAdminAction" style="display:none;">管理操作</th>
           </tr>
         </thead>
         <tbody id="lbTableBody">
@@ -904,11 +1184,9 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, collection, query, orderBy, limit, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // ==========================================
-    // ⚙️ 請在此處填入您的 Firebase 設定金鑰
-    // ==========================================
+    // 您的專屬 Firebase 設定金鑰
     const firebaseConfig = {
       apiKey: "AIzaSyBtz0DB1sXsW5bGQuES9Iwn-jADSmLkTgk",
       authDomain: "money-hub-35c75.firebaseapp.com",
@@ -925,14 +1203,12 @@
     let isFirebaseReady = false;
 
     try {
-      if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
-        app = initializeApp(firebaseConfig);
-        auth = getAuth(app);
-        db = getFirestore(app);
-        isFirebaseReady = true;
-      }
+      app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+      isFirebaseReady = true;
     } catch(e) {
-      console.warn("Firebase 初始化提示：尚未填入完整金鑰，目前以本機 LocalStorage 離線模式運行。");
+      console.warn("Firebase 初始化提示：", e);
     }
 
     // 20 階榮譽等級定義表
@@ -959,26 +1235,106 @@
       { lvl: 20, name: "股市知識王",     expReq: 15000, icon: "👑" }
     ];
 
-    // 本機預設資料 (離線/未登入或未配金鑰時運作)
+    // 星座投資運勢智庫
+    const zodiacDatabase = {
+      aries: {
+        name: "牡羊座", stars: "★★★★☆ (85分)",
+        luckAsset: "半導體強勢股、AI概念",
+        tip: "執行力旺盛！遇到早盤急殺拉回時適合逢低布局，切忌追高隔日沖。"
+      },
+      taurus: {
+        name: "金牛座", stars: "★★★★★ (95分)",
+        luckAsset: "高股息ETF、傳產獲利龍頭",
+        tip: "財運亨通，穩扎穩打發揮護城河優勢，領息與複利效果極佳。"
+      },
+      gemini: {
+        name: "雙子座", stars: "★★★★☆ (80分)",
+        luckAsset: "科技題材、海外美股期指",
+        tip: "資訊敏銳度爆棚！但消息紛亂時多看少做，避免頻繁換股磨損手續費。"
+      },
+      cancer: {
+        name: "巨蟹座", stars: "★★★☆☆ (75分)",
+        luckAsset: "公債ETF、防禦性民生消費",
+        tip: "風險意識強烈，適合將資金放在安心的資產上，給自己心理平靜。"
+      },
+      leo: {
+        name: "獅子座", stars: "★★★★★ (90分)",
+        luckAsset: "大型權值股 (台積電/聯發科)",
+        tip: "氣勢如虹，有王者風範！專注核心持股，不被盤中雜訊誘惑。"
+      },
+      virgo: {
+        name: "處女座", stars: "★★★★☆ (88分)",
+        luckAsset: "高ROE績優股、被動元件",
+        tip: "財報分析功力發揮極致，細心比對毛利與本益比河流圖，能挖到被低估的寶藏。"
+      },
+      libra: {
+        name: "天秤座", stars: "★★★☆☆ (78分)",
+        luckAsset: "股債平衡型配置、指數型ETF",
+        tip: "平衡才是硬道理！遇到進出場猶豫時，按原定紀律分批加減碼最安心。"
+      },
+      scorpio: {
+        name: "天蠍座", stars: "★★★★★ (92分)",
+        luckAsset: "轉機波段股、跌深反彈標的",
+        tip: "洞察力敏銳，擅長逆勢超前部署。等待市場恐慌拋售的絕佳出擊點。"
+      },
+      sagittarius: {
+        name: "射手座", stars: "★★★★☆ (82分)",
+        luckAsset: "航運、跨國原油與海外大宗",
+        tip: "放眼全球宏觀視野，跟隨國際資金潮流，享受大波段的奔馳。"
+      },
+      capricorn: {
+        name: "魔羯座", stars: "★★★★★ (96分)",
+        luckAsset: "定期定額、長期成長股",
+        tip: "自律與耐心的化身！時間是魔羯最強大的盟友，堅定持有必見豐收。"
+      },
+      aquarius: {
+        name: "水瓶座", stars: "★★★★☆ (84分)",
+        luckAsset: "綠能環保、創新科技與新材料",
+        tip: "眼光領先市場半步，敢於投資大家尚未看懂的趨勢潛力股。"
+      },
+      pisces: {
+        name: "雙魚座", stars: "★★★☆☆ (72分)",
+        luckAsset: "防守型現金流、公用事業",
+        tip: "盤勢震盪時易受情緒牽動，務必嚴格設定停損停利點，讓紀律保護資產。"
+      }
+    };
+
+    // 本機預設資料
     let currentUser = null;
-    let localUserData = JSON.parse(localStorage.getItem('mars_viewer_v3')) || {
+    let localUserData = JSON.parse(localStorage.getItem('mars_viewer_v4')) || {
       uid: 'guest',
       displayName: '股市投資人',
       photoURL: "https://api.dicebear.com/7.x/bottts/svg?seed=MarsGuest",
+      zodiac: 'aries',
       totalExp: 0,
       lastCheckinDate: "",
       lastClickDate: "",
-      lastQuestionDate: ""
+      lastQuestionDate: "",
+      lastLotteryDate: "",
+      lastRecommendDate: "",
+      isAdmin: false
     };
 
     function saveLocal() {
-      localStorage.setItem('mars_viewer_v3', JSON.stringify(localUserData));
+      localStorage.setItem('mars_viewer_v4', JSON.stringify(localUserData));
+    }
+
+    // 管理員判定邏輯（Mars 具備後台權限）
+    function checkIsAdmin(user, data) {
+      if (!user) return false;
+      const email = (user.email || '').toLowerCase();
+      const name = (data.displayName || user.displayName || '').toLowerCase();
+      // 符合 Mars 稱號、ianteai 信箱或指定管理員
+      if (email.includes('ianteai') || email.includes('mars') || name === 'mars' || name.includes('火星人') || data.isAdmin === true) {
+        return true;
+      }
+      return false;
     }
 
     // Google 登入
     window.loginWithGoogle = async function() {
       if (!isFirebaseReady) {
-        alert("提示：尚未在程式碼中填入 Firebase 金鑰！目前正在使用本機模擬模式。請先建立 Firebase 專案並填入 apiKey。");
+        alert("Firebase 尚未就緒，請檢查連線。");
         return;
       }
       const provider = new GoogleAuthProvider();
@@ -986,7 +1342,7 @@
         await signInWithPopup(auth, provider);
       } catch(err) {
         console.error(err);
-        alert("登入失敗：" + err.message);
+        alert("登入提示：" + err.message);
       }
     };
 
@@ -1006,7 +1362,6 @@
           document.getElementById('userBadge').style.display = 'flex';
           document.getElementById('btnLogoutBtn').style.display = 'block';
 
-          // 從 Firestore 讀取或建立使用者資料
           const userDocRef = doc(db, 'users', user.uid);
           const snap = await getDoc(userDocRef);
 
@@ -1016,20 +1371,29 @@
               uid: user.uid,
               displayName: data.displayName || user.displayName || '股市投資人',
               photoURL: data.photoURL || user.photoURL,
+              zodiac: data.zodiac || localUserData.zodiac || 'aries',
               totalExp: data.totalExp || 0,
               lastCheckinDate: data.lastCheckinDate || "",
               lastClickDate: data.lastClickDate || "",
-              lastQuestionDate: data.lastQuestionDate || ""
+              lastQuestionDate: data.lastQuestionDate || "",
+              lastLotteryDate: data.lastLotteryDate || "",
+              lastRecommendDate: data.lastRecommendDate || "",
+              isAdmin: checkIsAdmin(user, data)
             };
           } else {
+            const isAdmin = checkIsAdmin(user, { displayName: user.displayName });
             localUserData = {
               uid: user.uid,
               displayName: user.displayName || '股市投資人',
               photoURL: user.photoURL || "https://api.dicebear.com/7.x/bottts/svg?seed=" + user.uid,
+              zodiac: 'aries',
               totalExp: 0,
               lastCheckinDate: "",
               lastClickDate: "",
-              lastQuestionDate: ""
+              lastQuestionDate: "",
+              lastLotteryDate: "",
+              lastRecommendDate: "",
+              isAdmin: isAdmin
             };
             await setDoc(userDocRef, localUserData);
           }
@@ -1045,7 +1409,6 @@
       });
     }
 
-    // 同步資料至 Firestore (若已登入)
     async function syncToCloud() {
       saveLocal();
       if (isFirebaseReady && currentUser && db) {
@@ -1054,10 +1417,14 @@
           await updateDoc(userDocRef, {
             displayName: localUserData.displayName,
             photoURL: localUserData.photoURL,
+            zodiac: localUserData.zodiac,
             totalExp: localUserData.totalExp,
             lastCheckinDate: localUserData.lastCheckinDate,
             lastClickDate: localUserData.lastClickDate,
-            lastQuestionDate: localUserData.lastQuestionDate
+            lastQuestionDate: localUserData.lastQuestionDate,
+            lastLotteryDate: localUserData.lastLotteryDate,
+            lastRecommendDate: localUserData.lastRecommendDate,
+            isAdmin: localUserData.isAdmin
           });
         } catch(e) {
           console.error("同步至雲端失敗", e);
@@ -1107,11 +1474,128 @@
     window.onSiteClick = function(name) {
       const today = new Date().toISOString().slice(0, 10);
       if (localUserData.lastClickDate === today) {
-        // 今日已經領過 +5 分，純開網頁不加分
         return;
       }
       localUserData.lastClickDate = today;
       addExp(5, `今日首次查閱站點（${name.split(' ')[0]}）`);
+    };
+
+    // 每日抽獎
+    window.openLotteryModal = function() {
+      const today = new Date().toISOString().slice(0, 10);
+      const resMsg = document.getElementById('lotteryResultMsg');
+      const boxes = document.querySelectorAll('.lottery-box');
+
+      boxes.forEach(b => {
+        b.classList.remove('opened');
+        b.style.pointerEvents = 'auto';
+      });
+
+      if (localUserData.lastLotteryDate === today) {
+        resMsg.innerText = "✅ 您今日已經抽過盲盒囉！明天 00:00 重新開放。";
+        boxes.forEach(b => {
+          b.classList.add('opened');
+          b.style.pointerEvents = 'none';
+        });
+      } else {
+        resMsg.innerText = "點擊上方任一盲盒開獎！";
+      }
+      document.getElementById('lotteryModal').classList.add('show');
+    };
+    window.closeLotteryModal = function() {
+      document.getElementById('lotteryModal').classList.remove('show');
+    };
+
+    window.drawLottery = function(boxIndex) {
+      const today = new Date().toISOString().slice(0, 10);
+      if (localUserData.lastLotteryDate === today) {
+        alert("今日已抽過獎囉！");
+        return;
+      }
+      // 隨機抽 10 到 80 積分
+      const prizes = [10, 20, 30, 50, 60, 80];
+      const winExp = prizes[Math.floor(Math.random() * prizes.length)];
+
+      localUserData.lastLotteryDate = today;
+      const targetBox = document.getElementById(`lbox-${boxIndex}`);
+      targetBox.classList.add('opened');
+      targetBox.innerHTML = `<span style="font-size:24px;">🎉</span><span style="font-size:12px; color:#38bdf8; font-weight:700;">+${winExp} EXP</span>`;
+
+      document.querySelectorAll('.lottery-box').forEach(b => {
+        b.style.pointerEvents = 'none';
+      });
+
+      document.getElementById('lotteryResultMsg').innerText = `🎊 恭喜抽中【+${winExp} EXP】大獎！已存入您的榮譽等級！`;
+      addExp(winExp, `盲盒抽獎獲贈`);
+    };
+
+    // 星座切換與運勢分享
+    window.changeZodiac = function(sign) {
+      localUserData.zodiac = sign;
+      syncToCloud();
+      renderZodiacText(sign);
+    };
+
+    function renderZodiacText(sign) {
+      const data = zodiacDatabase[sign] || zodiacDatabase['aries'];
+      document.getElementById('zodiacSelect').value = sign;
+      document.getElementById('zodiacStars').innerText = `${data.stars} · 幸運標的：${data.luckAsset}`;
+      document.getElementById('zodiacDetail').innerText = data.tip;
+    }
+
+    window.copyZodiacShare = function() {
+      const sign = localUserData.zodiac || 'aries';
+      const data = zodiacDatabase[sign];
+      const today = new Date().toLocaleDateString('zh-TW');
+      const shareText = `【${today} 火星人的便當 · ${data.name} 今日投資運勢】\n⭐ 財富指數：${data.stars}\n🎯 幸運標的：${data.luckAsset}\n💡 操作心態：${data.tip}\n🚀 來看即時台美股導航站：https://ianteaicom-rgb.github.io/money/`;
+
+      navigator.clipboard.writeText(shareText).then(() => {
+        alert("✅ 已成功複製今日星座投資運勢卡！可直接貼在 LINE 或社群分享給朋友！");
+      }).catch(() => {
+        alert(shareText);
+      });
+    };
+
+    // 好站推薦 (+100 EXP)
+    window.openRecommendModal = function() {
+      document.getElementById('recommendModal').classList.add('show');
+    };
+    window.closeRecommendModal = function() {
+      document.getElementById('recommendModal').classList.remove('show');
+    };
+
+    window.submitSiteRecommendation = async function() {
+      const name = document.getElementById('recSiteName').value.trim();
+      const url = document.getElementById('recSiteUrl').value.trim();
+      const reason = document.getElementById('recSiteReason').value.trim();
+
+      if (!name || !url) {
+        alert("請至少填寫網站名稱與網址！");
+        return;
+      }
+
+      if (isFirebaseReady && db) {
+        try {
+          await addDoc(collection(db, 'site_recommendations'), {
+            uid: currentUser ? currentUser.uid : 'guest',
+            userName: localUserData.displayName,
+            siteName: name,
+            siteUrl: url,
+            reason: reason,
+            createdAt: serverTimestamp()
+          });
+        } catch(e) {
+          console.error(e);
+        }
+      }
+
+      document.getElementById('recSiteName').value = '';
+      document.getElementById('recSiteUrl').value = '';
+      document.getElementById('recSiteReason').value = '';
+      closeRecommendModal();
+
+      addExp(100, "推薦好站獎勵");
+      alert("🎉 感謝您的寶貴推薦！+100 EXP 獎勵已入帳！管理員 Mars 將會評估收錄。");
     };
 
     // 每日提問 1 次
@@ -1165,6 +1649,13 @@
       document.getElementById('topUserAvatar').src = localUserData.photoURL;
       document.getElementById('sidebarAvatar').src = localUserData.photoURL;
 
+      // 管理員標籤
+      if (localUserData.isAdmin) {
+        document.getElementById('adminTag').style.display = 'inline-block';
+      } else {
+        document.getElementById('adminTag').style.display = 'none';
+      }
+
       const curExpEl = document.getElementById('honorExpCur');
       const maxExpEl = document.getElementById('honorExpMax');
       const fillEl = document.getElementById('honorProgressFill');
@@ -1192,7 +1683,6 @@
         btnCheckin.innerText = "📅 每日簽到 (+30)";
       }
 
-      // 提問狀態更新
       const askBadge = document.getElementById('askStatusBadge');
       const btnAsk = document.getElementById('btnSubmitAsk');
       if (localUserData.lastQuestionDate === today) {
@@ -1206,9 +1696,11 @@
         btnAsk.disabled = false;
         btnAsk.innerText = "送出提問 (每日限 1 次)";
       }
+
+      renderZodiacText(localUserData.zodiac || 'aries');
     }
 
-    // 處理自訂上傳頭像檔案 (壓縮成 Base64)
+    // 處理自訂上傳頭像檔案
     window.handleAvatarFile = function(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -1217,7 +1709,6 @@
       reader.onload = function(evt) {
         const img = new Image();
         img.onload = function() {
-          // 透過 Canvas 壓縮為 120x120 JPEG
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
           canvas.width = 120;
@@ -1253,23 +1744,58 @@
       showToast("個人資料已更新！");
     };
 
+    // 管理員剔除灌水帳號功能
+    window.kickUser = async function(targetUid, targetName) {
+      if (!localUserData.isAdmin) {
+        alert("權限不足：只有管理員 Mars 才能執行剔除作業！");
+        return;
+      }
+      if (!confirm(`確定要剔除帳號「${targetName}」並從排行榜移除嗎？此動作將清除其違規數據。`)) {
+        return;
+      }
+
+      if (isFirebaseReady && db) {
+        try {
+          await deleteDoc(doc(db, 'users', targetUid));
+          alert(`✅ 已成功剔除「${targetName}」！`);
+          openLeaderboardModal(); // 刷新排行
+        } catch(e) {
+          alert("剔除失敗：" + e.message);
+        }
+      }
+    };
+
     // 載入全體排行榜 (Top 50)
     window.openLeaderboardModal = async function() {
       const modal = document.getElementById('leaderboardModal');
       const tbody = document.getElementById('lbTableBody');
+      const thAdmin = document.getElementById('thAdminAction');
+      const adminNotice = document.getElementById('adminNoticeBar');
+
       modal.classList.add('show');
 
+      if (localUserData.isAdmin) {
+        thAdmin.style.display = 'table-cell';
+        adminNotice.style.display = 'block';
+      } else {
+        thAdmin.style.display = 'none';
+        adminNotice.style.display = 'none';
+      }
+
       if (!isFirebaseReady || !db) {
-        // 未設定金鑰時展示離線排行榜
         tbody.innerHTML = `
-          <tr><td class="rank-num-1">🥇 1</td><td><div class="lb-user-cell"><img src="${localUserData.photoURL}" class="lb-avatar">${localUserData.displayName} (您)</div></td><td>Lv.01 股市小白</td><td>${localUserData.totalExp} EXP</td></tr>
-          <tr><td class="rank-num-2">🥈 2</td><td><div class="lb-user-cell"><img src="https://api.dicebear.com/7.x/bottts/svg?seed=Sample1" class="lb-avatar">波段領航員</div></td><td>Lv.12 趨勢掌舵手</td><td>4,250 EXP</td></tr>
-          <tr><td class="rank-num-3">🥉 3</td><td><div class="lb-user-cell"><img src="https://api.dicebear.com/7.x/bottts/svg?seed=Sample2" class="lb-avatar">ETF存股達人</div></td><td>Lv.08 財報研讀生</td><td>1,980 EXP</td></tr>
+          <tr>
+            <td class="rank-num-1">🥇 1</td>
+            <td><div class="lb-user-cell"><img src="${localUserData.photoURL}" class="lb-avatar">${localUserData.displayName} (您)</div></td>
+            <td>Lv.01 股市小白</td>
+            <td>${localUserData.totalExp} EXP</td>
+            ${localUserData.isAdmin ? '<td>--</td>' : ''}
+          </tr>
         `;
         return;
       }
 
-      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:16px;">正在取得即時排行榜...</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:16px;">正在取得即時排行榜...</td></tr>';
       try {
         const q = query(collection(db, 'users'), orderBy('totalExp', 'desc'), limit(50));
         const snap = await getDocs(q);
@@ -1278,6 +1804,7 @@
 
         snap.forEach(docSnap => {
           const u = docSnap.data();
+          const uid = docSnap.id;
           const rClass = rank === 1 ? 'rank-num-1' : (rank === 2 ? 'rank-num-2' : (rank === 3 ? 'rank-num-3' : ''));
           const medal = rank === 1 ? '🥇 ' : (rank === 2 ? '🥈 ' : (rank === 3 ? '🥉 ' : ''));
           
@@ -1300,14 +1827,15 @@
               </td>
               <td>${title}</td>
               <td style="font-family:'JetBrains Mono',monospace;">${(u.totalExp || 0).toLocaleString()} EXP</td>
+              ${localUserData.isAdmin ? `<td><button class="btn-kick" onclick="kickUser('${uid}', '${u.displayName || '訪客'}')">🗑️ 剔除</button></td>` : ''}
             </tr>
           `;
           rank++;
         });
 
-        tbody.innerHTML = html || '<tr><td colspan="4" style="text-align:center; padding:16px;">暫無排行資料</td></tr>';
+        tbody.innerHTML = html || '<tr><td colspan="5" style="text-align:center; padding:16px;">暫無排行資料</td></tr>';
       } catch(e) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#f87171; padding:16px;">讀取排行榜失敗：${e.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#f87171; padding:16px;">讀取排行榜失敗：${e.message}</td></tr>`;
       }
     };
     window.closeLeaderboardModal = function() {
@@ -1336,7 +1864,6 @@
       document.getElementById('honorModal').classList.remove('show');
     };
 
-    // 初始 UI 繪製
     updateUI();
   </script>
 
